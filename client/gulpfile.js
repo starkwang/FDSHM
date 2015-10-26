@@ -18,11 +18,11 @@ gulp.task('default', ['clean', 'watch', 'sass:watch', 'sass', 'webpack']);
 
 gulp.task('sass:watch', function() {
     gulp.watch('src/style/*.scss', ['sass']);
+    gulp.watch('src/style/module/*.scss', ['sass']);
 });
 gulp.task('sass', function() {
     gulp.src(['src/style/*.scss'])
         .pipe(sass.sync().on('error', sass.logError))
-        .pipe(concat('base.css'))
         .pipe(minifycss())
         .pipe(gulp.dest('build/css'));
 });
