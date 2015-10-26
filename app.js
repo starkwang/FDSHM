@@ -7,6 +7,7 @@ var promise = require('bluebird');
 app.set('view engine', 'jade');
 app.set('views', './client/template');
 
+app.use('/static', express.static('client/build/'));
 app.get('/', function(req, res) {
     res.render('index',{pageTitle:'fasjkfha'});
 });
