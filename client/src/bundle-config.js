@@ -1,2 +1,1 @@
-require('angular');
-require('./js/index.js');
+require('./js/app.js');

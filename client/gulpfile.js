@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-//var sass = require('gulp-sass'),
-    var autoprefixer = require('gulp-autoprefixer'),
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
@@ -14,18 +14,18 @@ var gulp = require('gulp');
     connect = require('gulp-connect');
 var webpack = require('gulp-webpack');
 var webpackConfig = require('./webpack.config');
-gulp.task('default', ['clean','watch','webpack']);
+gulp.task('default', ['clean', 'watch', 'sass:watch', 'sass', 'webpack']);
 
-// gulp.task('sass:watch', function() {
-//     gulp.watch('src/style/*.scss', ['sass']);
-// });
-// gulp.task('sass', function() {
-//     gulp.src(['src/style/*.scss'])
-//         .pipe(sass.sync().on('error', sass.logError))
-//         .pipe(concat('base.css'))
-//         .pipe(minifycss())
-//         .pipe(gulp.dest('build/css'));
-// });
+gulp.task('sass:watch', function() {
+    gulp.watch('src/style/*.scss', ['sass']);
+});
+gulp.task('sass', function() {
+    gulp.src(['src/style/*.scss'])
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(concat('base.css'))
+        .pipe(minifycss())
+        .pipe(gulp.dest('build/css'));
+});
 gulp.task('clean', function() {
     return gulp.src(['build/js', 'build/css'], {
             read: false
@@ -36,6 +36,7 @@ gulp.task("webpack", function() {
     return gulp
         .src('./')
         .pipe(webpack(webpackConfig))
+        .pipe(uglify())
         .pipe(gulp.dest('./build/js'));
 });
 gulp.task('watch', function() {
