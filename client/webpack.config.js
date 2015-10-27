@@ -1,7 +1,9 @@
 module.exports = {
-    entry: './src/bundle-config.js',
+    entry: {
+        'index/index': './src/pages/index/index.js'
+    },
     output: {
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         loaders: [{

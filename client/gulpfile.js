@@ -17,17 +17,17 @@ var webpackConfig = require('./webpack.config');
 gulp.task('default', ['clean', 'watch', 'sass:watch', 'sass', 'webpack']);
 
 gulp.task('sass:watch', function() {
-    gulp.watch('src/style/*.scss', ['sass']);
-    gulp.watch('src/style/module/*.scss', ['sass']);
+    gulp.watch('src/pages/*/*.scss', ['sass']);
+    gulp.watch('src/components/*/*.scss', ['sass']);
 });
 gulp.task('sass', function() {
-    gulp.src(['src/style/*.scss'])
+    gulp.src(['src/pages/**/*.scss'])
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(minifycss())
-        .pipe(gulp.dest('build/css'));
+        .pipe(gulp.dest('build/pages'));
 });
 gulp.task('clean', function() {
-    return gulp.src(['build/js', 'build/css'], {
+    return gulp.src(['build/pages'], {
             read: false
         })
         .pipe(clean());
@@ -36,9 +36,10 @@ gulp.task("webpack", function() {
     return gulp
         .src('./')
         .pipe(webpack(webpackConfig))
-        .pipe(uglify())
-        .pipe(gulp.dest('./build/js'));
+        //.pipe(uglify())
+        .pipe(gulp.dest('./build/pages'));
 });
 gulp.task('watch', function() {
-    gulp.watch('src/js/*.js', ['webpack']);
+    gulp.watch('src/components/*/*.js', ['webpack']);
+    gulp.watch('src/pages/*/*.js', ['webpack']);
 });
