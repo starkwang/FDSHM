@@ -1,6 +1,7 @@
 html(ng-app="starkAPP")
     head
-        link(rel='stylesheet',href='/static/css/index.css')
-        script(type='text/javascript',src='/static/js/index.bundle.js')
+        link(rel='stylesheet',href='/static/pages/index/index.css')
+        script(type='text/javascript',src='/static/pages/index/index.bundle.js')
     body(ng-view)
         include ../components/header/header.jade
+        include ../components/sidebar/sidebar.jade

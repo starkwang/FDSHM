@@ -11,7 +11,7 @@ var service = {
 };
 
 app.set('view engine', 'jade');
-app.set('views', './client/template');
+app.set('views', './client/src/template');
 
 app.use('/static', express.static('client/build/'));
 
