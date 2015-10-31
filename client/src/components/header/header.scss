@@ -80,4 +80,47 @@ $base-orange:rgb(253, 171, 64);
             box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
         }
     }
+    .head-category {
+        border: 1px solid #ddd;
+        height:50px;
+        >div {
+            width: 910px;
+            margin: 0 auto;
+            >div {
+                width: 94px;
+                font-size:14px;
+                padding: 18px;
+                float: left;
+                list-style-type: none;
+                text-align: center;
+                cursor: pointer;
+                position: relative;
+                display: block;
+                .detail {
+                    position: absolute;
+                    text-align: center;
+                    width:130px;
+                    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+                    top:50px;
+                    left: 0;
+                    li{
+                        border:1px solid #ddd;
+                        padding:10px 0;
+                        font-size: 14px;
+                    }
+                    background:#fff;
+                    display: none;
+                    li:hover{
+                        background:#eee;
+                    }
+                }
+                .detail:hover{
+                    display: block
+                }
+            }
+            >div:hover >.detail{
+                display: block;
+            }
+        }
+    }
 }

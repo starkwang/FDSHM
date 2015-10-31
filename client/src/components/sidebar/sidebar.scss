@@ -1,2 +1,17 @@
 .sidebar{
+    display: none;
+    background: #ddd;
+    position: fixed;
+    top: 300px;
+    left:100px;
+    font-size: 20px;
+    width:160px;
+    li{
+        padding: 5px;
+        list-style-type: none;
+        text-align: center;
+        display: block;
+        cursor: pointer;
+
+    }
 }
