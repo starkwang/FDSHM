@@ -67,7 +67,7 @@ $base-orange:rgb(253, 171, 64);
                 text-align: center;
             }
         }
-        .publish {
+        button.publish{
             border: 0;
             outline: 0;
             width: 100px;
@@ -122,5 +122,14 @@ $base-orange:rgb(253, 171, 64);
                 display: block;
             }
         }
+    }
+    div.publish{
+        position:absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background:rgba(0,0,0,0.5);
+        z-index: 99;
     }
 }
