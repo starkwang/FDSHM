@@ -192,9 +192,26 @@ hr {
 
 html {
     overflow-y: scroll;
-    height:100%;
+    height: 100%;
 }
-body{
+
+body {
     font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', 'Helvetica', 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', 'STHeiti', 'WenQuanYi Micro Hei', 'SimSun', 'sans-serif'!important;
-    height:100%;
+    height: 100%;
+}
+
+.ng-hide-add {
+    -webkit-animation: 0.5s fadeOut;
+    -moz-animation: 0.5s fadeOut;
+    -o-animation: 0.5s fadeOut;
+    animation: 0.5s fadeOut;
+    z-index: 10;
+}
+
+.ng-hide-remove {
+    -webkit-animation: 0.7s fadeIn;
+    -moz-animation: 0.7s fadeIn;
+    -o-animation: 0.7s fadeIn;
+    animation: 0.7s fadeIn;
+    z-index: 95;
 }

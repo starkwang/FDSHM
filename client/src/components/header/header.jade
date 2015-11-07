@@ -1,4 +1,4 @@
-div.header(ng-controller="headerController")
+div.header.z-depth-1(ng-controller="headerController")
     div.head-bar
         a 用户名
         a 学邮认证
@@ -8,42 +8,99 @@ div.header(ng-controller="headerController")
         div.search-bar
             input
             button 搜索
-        button.publish 我要发布
+        button.waves-effect.waves-light.btn#change-show(ng-click="changePublishShow($event)") 我要发布
     div.head-category
         div
             div 闲置数码
-                div.detail 
-                    li 手机
-                    li 电脑
-                    li 移动电子
+                div.detail.z-depth-1
+                    li.hoverable 手机
+                    li.hoverable 电脑
+                    li.hoverable 移动电子
             div 校园代步
-                div.detail 
-                    li 自行车
-                    li 电动车
-                    li 滑板轮滑
+                div.detail.z-depth-1
+                    li.hoverable 自行车
+                    li.hoverable 电动车
+                    li.hoverable 滑板轮滑
             div 电器日用
-                div.detail 
-                    li 小家电
-                    li 洗衣机
-                    li 日用品
+                div.detail.z-depth-1 
+                    li.hoverable 小家电
+                    li.hoverable 洗衣机
+                    li.hoverable 日用品
             div 图书教材
-                div.detail 
-                    li GER/托福
-                    li 小说
-                    li 教科书
+                div.detail.z-depth-1 
+                    li.hoverable GER/托福
+                    li.hoverable 小说
+                    li.hoverable 教科书
             div 美妆衣物
-                div.detail 
-                    li 化妆品
-                    li 衣物鞋帽
-                    li 箱包
+                div.detail.z-depth-1
+                    li.hoverable 化妆品
+                    li.hoverable 衣物鞋帽
+                    li.hoverable 箱包
             div 运动棋牌
-                div.detail 
-                    li 运动健身
-                    li 乐器
-                    li 棋牌
+                div.detail.z-depth-1
+                    li.hoverable 运动健身
+                    li.hoverable 乐器
+                    li.hoverable 棋牌
             div 票券小物
-                div.detail 
-                    li 票务卡券
-                    li 食品
-                    li 小物品
-    div.publish
+                div.detail.z-depth-1
+                    li.hoverable 票务卡券
+                    li.hoverable 食品
+                    li.hoverable 小物品
+    div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
+        div.publish-box.z-depth-4
+            div.row
+                div.col.s12.title
+                    h1 发布商品
+                div.input-field.col.s12
+                    input#item-name.validate(type="text")
+                    label(for="item-name") 商品名称
+                div.input-field.col.s12
+                    textarea#item-detail.materialize-textarea
+                    label(for="item-detail") 商品详情
+                div.input-field.col.s6
+                    select.browser-default
+                        option(value="",disabled,selected) 交易地点
+                        option(value="") 本部
+                        option(value="") 江湾
+                        option(value="") 枫林
+                        option(value="") 张江
+                div.input-field.col.s6
+                    input#item-price.validate(type="text")
+                    label(for="item-price") 商品价格（元）
+                div.input-field.col.s6
+                    select.browser-default
+                        option(value="",disabled,selected) 商品类型
+                        option(value="") 类型1
+                        option(value="") 类型2
+                        option(value="") 类型3
+                        option(value="") 类型4
+                div.switch.col.s6
+                    label 可讲价
+                        input(type="checkbox")
+                        span.lever
+                        不可讲价
+                
+                div.col.s12.tags
+                    p 标签
+                    button.waves-effect.waves-light.btn 标签1
+                    button.waves-effect.waves-light.btn 标签2
+                    button.waves-effect.waves-light.btn 标签3
+                    button.waves-effect.waves-light.btn 标签4
+                p.contact 联系方式（至少填一项）
+                div.input-field.col.s6
+                    input#item-contact-phone.validate(type="text")
+                    label(for="item-contact") 手机
+                div.input-field.col.s6
+                    input#item-contact-qq.validate(type="text")
+                    label(for="item-contact") QQ
+                div.file-field.input-field.col.s12
+                    div.btn
+                        span 商品图片
+                        input(type="file",multiple)
+                    div.file-path-wrapper
+                        input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
+                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1
+                    i.material-icons.left done_all
+                    马上发布
+
+

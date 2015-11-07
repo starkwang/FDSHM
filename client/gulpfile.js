@@ -40,6 +40,6 @@ gulp.task("webpack", function() {
         .pipe(gulp.dest('./build/pages'));
 });
 gulp.task('watch', function() {
-    gulp.watch('src/components/*/*.js', ['webpack']);
-    gulp.watch('src/pages/*/*.js', ['webpack']);
+    gulp.watch('src/components/**/*.js', ['webpack']);
+    gulp.watch('src/pages/**/*.js', ['webpack']);
 });
