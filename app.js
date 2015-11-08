@@ -4,7 +4,8 @@ var alphabet = require('alphabetjs');
 var promise = require('bluebird');
 var session = require('express-session');
 var render = {
-    index: require('./src/render/indexRender')
+    index: require('./src/render/indexRender'),
+    detail: require('./src/render/detailRender')
 };
 var service = {
     login: require('./src/module/login')
@@ -25,10 +26,12 @@ app.use(session({
 
 
 app.get('/', render.index);
+app.get('/item/', render.detail);
+
 app.post('/login', service.login);
-app.get('/item/collection', function(req, res) {
+app.get('/api/item/collection', function(req, res) {
     var result = [];
-    for (var i = 0; i < 15; i++) {
+    for (var i = 0; i < 30; i++) {
         var tmp = Math.floor(Math.random() * 3);
         result.push({
             image: '/img/' + tmp + '.png',
@@ -37,7 +40,6 @@ app.get('/item/collection', function(req, res) {
             id: '2134534'
         });
     }
-
     res.send(result);
     res.end();
 

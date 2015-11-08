@@ -1,6 +1,9 @@
 .waterfoo {
     width: 960px;
     margin: 10px auto;
+    .item-wrapper{
+
+    }
     .card {
         margin: 10px;
         width: 300px;
@@ -9,5 +12,9 @@
         .card-title {
             background: rgba(0, 0, 0, 0.5);
         }
+    }
+    .progress{
+        margin-top: 20px;
+        float: left;
     }
 }

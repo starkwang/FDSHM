@@ -23,7 +23,7 @@ angular.module('baseService', [])
                         start: start,
                         amount: amount
                     }
-                    return GET('/item/collection', params);
+                    return GET('/api/item/collection', params);
                 }
             };
             return {

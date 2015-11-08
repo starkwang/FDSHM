@@ -1,4 +1,5 @@
 div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",infinite-scroll-distance="1",infinite-scroll-disabled="isBusy")
+    div.item-wrapper
         div.card.col(ng-repeat="item in items")
             div.card-image
                 img(ng-src="{{item.image}}")
@@ -7,3 +8,5 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
                 p {{item.content}}
             div.card-action
                 a {{item.link}}
+    div.progress(ng-show="isBusy")
+        div.indeterminate
