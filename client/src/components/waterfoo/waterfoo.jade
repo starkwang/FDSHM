@@ -1,1 +1,9 @@
-div.waterfoo
+div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",infinite-scroll-distance="1",infinite-scroll-disabled="isBusy")
+        div.card.col(ng-repeat="item in items")
+            div.card-image
+                img(ng-src="{{item.image}}")
+                span.card-title ￥{{item.price}}
+            div.card-content
+                p {{item.content}}
+            div.card-action
+                a {{item.link}}

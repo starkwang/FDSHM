@@ -1,0 +1,13 @@
+.waterfoo {
+    width: 960px;
+    margin: 10px auto;
+    .card {
+        margin: 10px;
+        width: 300px;
+    }
+    .card-image {
+        .card-title {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

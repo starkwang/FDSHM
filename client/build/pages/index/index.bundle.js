@@ -53,10 +53,14 @@
 
 	var angular = __webpack_require__(2);
 	__webpack_require__(4);
+	__webpack_require__(5);
 	var starkAPP = angular.module('starkAPP', [
-	    'ngAnimate'
+	    'ngAnimate',
+	    'baseService',
+	    'infinite-scroll'
 	]);
-	starkAPP.controller('headerController', __webpack_require__(5));
+	starkAPP.controller('headerController', __webpack_require__(6));
+	starkAPP.controller('waterfooController', __webpack_require__(7));
 	module.exports = starkAPP;
 
 
@@ -29038,6 +29042,45 @@
 
 /***/ },
 /* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	angular = __webpack_require__(2);
+	angular.module('baseService', [])
+	    .factory('BaseService', ['$rootScope', '$http', '$q',
+	        function($rootScope, $http) {
+	            function GET(url, params) {
+	                return $http({
+	                    method: 'GET',
+	                    url: url,
+	                    params: params
+	                });
+	            }
+
+	            function POST(url, data) {
+	                return $http({
+	                    method: 'POST',
+	                    url: url,
+	                    data: data
+	                })
+	            }
+	            var waterfoo = {
+	                getItem: function(start, amount) {
+	                    var params = {
+	                        start: start,
+	                        amount: amount
+	                    }
+	                    return GET('/item/collection', params);
+	                }
+	            };
+	            return {
+	                waterfoo: waterfoo
+	            };
+	        }
+	    ])
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = ['$scope', function($scope) {
@@ -29050,6 +29093,102 @@
 	    };
 	}]
 
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(8);
+	module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
+
+	    $scope.items = [];
+	    var now = 0;
+	    var everyPullAmount = 20;
+	    $scope.isBusy = false;
+	    $scope.getItem = function() {
+	        $scope.isBusy = true;
+	        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount).then(function(result) {
+	            console.log('pull!');
+	            $scope.items = $scope.items.concat(result.data);
+	            $scope.isBusy = false;
+	        });
+	        now++;
+	    }
+	    $scope.getItem();
+
+	}]
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* ng-infinite-scroll - v1.0.0 - 2013-02-23 */
+
+	angular = __webpack_require__(2);
+	var mod;
+
+	mod = angular.module('infinite-scroll', []);
+
+	mod.directive('infiniteScroll', [
+	  '$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
+
+	    return {
+	      link: function(scope, elem, attrs) {
+	        var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
+	        $window = $($window);
+	        elem = $(elem);
+	        scrollDistance = 0;
+	        if (attrs.infiniteScrollDistance != null) {
+	          scope.$watch(attrs.infiniteScrollDistance, function(value) {
+	            return scrollDistance = parseInt(value, 10);
+	          });
+	        }
+	        scrollEnabled = true;
+	        checkWhenEnabled = false;
+	        if (attrs.infiniteScrollDisabled != null) {
+	          scope.$watch(attrs.infiniteScrollDisabled, function(value) {
+	            scrollEnabled = !value;
+	            if (scrollEnabled && checkWhenEnabled) {
+	              checkWhenEnabled = false;
+	              return handler();
+	            }
+	          });
+	        }
+	        handler = function() {
+	          var elementBottom, remaining, shouldScroll, windowBottom;
+	          windowBottom = $window.height() + $window.scrollTop();
+	          elementBottom = elem.offset().top + elem.height();
+	          remaining = elementBottom - windowBottom;
+	          shouldScroll = remaining <= $window.height() * scrollDistance;
+	          //console.log(windowBottom,elementBottom,remaining,shouldScroll,scrollDistance,$window.height());
+	          if (shouldScroll && scrollEnabled) {
+	            if ($rootScope.$$phase) {
+	              return scope.$eval(attrs.infiniteScroll);
+	            } else {
+	              return scope.$apply(attrs.infiniteScroll);
+	            }
+	          } else if (shouldScroll) {
+	            return checkWhenEnabled = true;
+	          }
+	        };
+	        $window.on('scroll', handler);
+	        scope.$on('$destroy', function() {
+	          return $window.off('scroll', handler);
+	        });
+	        return $timeout((function() {
+	          if (attrs.infiniteScrollImmediateCheck) {
+	            if (scope.$eval(attrs.infiniteScrollImmediateCheck)) {
+	              return handler();
+	            }
+	          } else {
+	            return handler();
+	          }
+	        }), 0);
+	      }
+	    };
+	  }
+	]);
 
 /***/ }
 /******/ ]);

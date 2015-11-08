@@ -14,6 +14,7 @@ app.set('view engine', 'jade');
 app.set('views', './client/src/template');
 
 app.use('/static', express.static('client/build/'));
+app.use('/img', express.static('img'));
 
 app.use(session({
     secret: 'wangweijia',
@@ -25,6 +26,22 @@ app.use(session({
 
 app.get('/', render.index);
 app.post('/login', service.login);
+app.get('/item/collection', function(req, res) {
+    var result = [];
+    for (var i = 0; i < 15; i++) {
+        var tmp = Math.floor(Math.random() * 3);
+        result.push({
+            image: '/img/' + tmp + '.png',
+            price: Math.floor(Math.random() * 1000),
+            content: '商品标题商品标题商品标题',
+            id: '2134534'
+        });
+    }
+
+    res.send(result);
+    res.end();
+
+});
 
 
 app.listen(3000);
