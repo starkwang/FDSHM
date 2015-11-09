@@ -61,6 +61,7 @@
 	]);
 	starkAPP.controller('headerController', __webpack_require__(6));
 	starkAPP.controller('waterfooController', __webpack_require__(7));
+	starkAPP.controller('detailBoxController', __webpack_require__(9));
 	module.exports = starkAPP;
 
 
@@ -29189,6 +29190,15 @@
 	    };
 	  }
 	]);
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = ['$scope', function($scope) {
+	    $('.slider').slider({full_width: true});
+	}]
+
 
 /***/ }
 /******/ ]);

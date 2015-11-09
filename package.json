@@ -6,7 +6,8 @@
     "bluebird": "^2.10.2",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "redis": "^2.3.0"
   },
   "devDependencies": {}
 }
