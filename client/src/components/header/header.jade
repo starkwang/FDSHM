@@ -49,58 +49,71 @@ div.header.z-depth-1(ng-controller="headerController")
     div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
         div.publish-box.z-depth-4
             div.row
+                div.col.s12.loader(ng-show="showPublishLoader")
+                    div.preloader-wrapper.big.active
+                        div.spinner-layer.spinner-red-only
+                            div.circle-clipper.left
+                                div.circle
+                            div.gap-patch
+                                div.circle
+                            div.circle-clipper.right
+                                div.circle
                 div.col.s12.title
                     h1 发布商品
                 div.input-field.col.s12
-                    input#item-name.validate(type="text")
+                    input#item-name.validate(type="text",ng-model="item.name")
                     label(for="item-name") 商品名称
                 div.input-field.col.s12
-                    textarea#item-detail.materialize-textarea
+                    textarea#item-detail.materialize-textarea(ng-model="item.detail")
                     label(for="item-detail") 商品详情
                 div.input-field.col.s6
-                    select.browser-default
+                    select.browser-default(ng-model="item.location")
                         option(value="",disabled,selected) 交易地点
-                        option(value="") 本部
-                        option(value="") 江湾
-                        option(value="") 枫林
-                        option(value="") 张江
+                        option(value="本部") 本部
+                        option(value="江湾") 江湾
+                        option(value="枫林") 枫林
+                        option(value="张江") 张江
                 div.input-field.col.s6
-                    input#item-price.validate(type="text")
+                    input#item-price.validate(type="text",ng-model="item.price")
                     label(for="item-price") 商品价格（元）
                 div.input-field.col.s6
-                    select.browser-default
+                    select.browser-default(ng-model="item.category")
                         option(value="",disabled,selected) 商品类型
-                        option(value="") 类型1
-                        option(value="") 类型2
-                        option(value="") 类型3
-                        option(value="") 类型4
+                        option(value="类型1") 类型1
+                        option(value="类型2") 类型2
+                        option(value="类型3") 类型3
+                        option(value="类型4") 类型4
                 div.switch.col.s6
                     label 
                         em 可讲价
-                        input(type="checkbox")
+                        input(type="checkbox",ng-model="item.noBargain")
                         span.lever
                         em 不可讲价
                 
-                div.col.s12.tags
-                    p 标签
-                    button.waves-effect.waves-light.btn 标签1
-                    button.waves-effect.waves-light.btn 标签2
-                    button.waves-effect.waves-light.btn 标签3
-                    button.waves-effect.waves-light.btn 标签4
+                //- div.col.s12.tags
+                //-     p 标签
+                //-     button.waves-effect.waves-light.btn 标签1
+                //-     button.waves-effect.waves-light.btn 标签2
+                //-     button.waves-effect.waves-light.btn 标签3
+                //-     button.waves-effect.waves-light.btn 标签4
                 p.contact 联系方式（至少填一项）
                 div.input-field.col.s6
-                    input#item-contact-phone.validate(type="text")
+                    input#item-contact-phone.validate(type="text",ng-model="item.tel")
                     label(for="item-contact") 手机
                 div.input-field.col.s6
-                    input#item-contact-qq.validate(type="text")
+                    input#item-contact-qq.validate(type="text",ng-model="item.qq")
                     label(for="item-contact") QQ
-                div.file-field.input-field.col.s12
+                div.file-field.input-field.col.s12(ng-repeat="img in imgs track by $index")
                     div.btn
                         span 商品图片
-                        input(type="file",multiple)
+                        input.upload-img(type="file",accept="image/*")
+                        button.btn-floating.btn-small.waves-effect.waves-light.delete(ng-show="$index",ng-click="deleteImg($index)")
+                            i.material-icons delete
                     div.file-path-wrapper
                         input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
-                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1
+                button.btn-floating.btn-small.waves-effect.waves-light.add(ng-click="addImg()")
+                    i.material-icons add
+                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
                     i.material-icons.left done_all
                     em 马上发布
 

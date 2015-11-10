@@ -17,6 +17,19 @@ angular.module('baseService', [])
                     data: data
                 })
             }
+            var item = {
+                publish: function(params) {
+                    return POST('/api/item/publish', params);
+                },
+                uploadImg: function(file, callback) {
+                    var fd = new FormData();
+                    fd.append("file", file);
+                    var xhr = new XMLHttpRequest();
+                    xhr.addEventListener("load", callback, false);
+                    xhr.open("POST", "/api/upload");
+                    xhr.send(fd);
+                }
+            }
             var waterfoo = {
                 getItem: function(start, amount) {
                     var params = {
@@ -27,7 +40,8 @@ angular.module('baseService', [])
                 }
             };
             return {
-                waterfoo: waterfoo
+                waterfoo: waterfoo,
+                item: item
             };
         }
     ])

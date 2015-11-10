@@ -2,7 +2,9 @@
   "name": "fdu-secondhand-market-client",
   "version": "0.0.1",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "ng-file-upload": "^9.1.2"
+  },
   "devDependencies": {
     "css-loader": "^0.21.0",
     "gulp": "^3.9.0",

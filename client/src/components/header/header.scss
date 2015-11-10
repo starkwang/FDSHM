@@ -136,6 +136,22 @@ $base-orange:rgb(253, 171, 64);
                 padding:10px;
                 font-size: 24px;
             }
+            .loader{
+                position:absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color:rgba(0,0,0,0.5);
+                z-index: 999;
+                .preloader-wrapper{
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -32px;
+                    margin-left: -32px;
+                }
+            }
             div.s6{
                 height: 50px;
             }
@@ -160,7 +176,15 @@ $base-orange:rgb(253, 171, 64);
             .publish-btn{
                 float: left;
                 margin-top: 20px;
-                margin-left:160px;
+                margin-left:90px;
+            }
+            .add{
+                float: left;
+                margin-left: 50px;
+            }
+            .delete{
+                position:absolute;
+                right: 20px;
             }
         }
     }

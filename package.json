@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "dependencies": {
     "alphabetjs": "^0.1.3",
+    "avoscloud-sdk": "^0.6.4",
     "bluebird": "^2.10.2",
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "jade": "^1.11.0",
+    "multer": "^1.1.0",
     "redis": "^2.3.0"
   },
   "devDependencies": {}

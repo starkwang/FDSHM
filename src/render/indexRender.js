@@ -4,10 +4,12 @@ function render(req, res) {
         res.render('index', {
             pageTitle: 'success'
         });
-    }else{
+        console.log('login');
+    } else {
         res.render('index', {
             pageTitle: 'not login'
         });
+        console.log('not login');
     }
 }
 module.exports = render;

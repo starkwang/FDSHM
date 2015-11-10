@@ -2,7 +2,7 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
     div.item-wrapper
         div.card.col(ng-repeat="item in items")
             div.card-image
-                img(ng-src="{{item.image}}")
+                img(ng-src="{{item.image[0]}}")
                 span.card-title ￥{{item.price}}
             div.card-content
                 p {{item.content}}

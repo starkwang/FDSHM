@@ -29063,6 +29063,19 @@
 	                    data: data
 	                })
 	            }
+	            var item = {
+	                publish: function(params) {
+	                    return POST('/api/item/publish', params);
+	                },
+	                uploadImg: function(file, callback) {
+	                    var fd = new FormData();
+	                    fd.append("file", file);
+	                    var xhr = new XMLHttpRequest();
+	                    xhr.addEventListener("load", callback, false);
+	                    xhr.open("POST", "/api/upload");
+	                    xhr.send(fd);
+	                }
+	            }
 	            var waterfoo = {
 	                getItem: function(start, amount) {
 	                    var params = {
@@ -29073,7 +29086,8 @@
 	                }
 	            };
 	            return {
-	                waterfoo: waterfoo
+	                waterfoo: waterfoo,
+	                item: item
 	            };
 	        }
 	    ])
@@ -29083,14 +29097,66 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = ['$scope', function($scope) {
+	module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
 	    console.log('aaaaaaaaa');
 	    $scope.publishIsShow = false;
+	    $scope.item = {};
+	    $scope.imgs = [0];
 	    $scope.changePublishShow = function($event) {
 	        if ($event.target.id == "change-show") {
 	            $scope.publishIsShow = !$scope.publishIsShow;
 	        }
 	    };
+	    $scope.publish = function() {
+	        var second = function() {
+	            BaseService.item.publish($scope.item).then(function(result) {
+	                console.log(result);
+	                if(result.data.success){
+	                    alert('商品发布成功！');
+	                }
+	                $scope.showPublishLoader = false;
+	            });
+	        }
+
+	        var total = $(".upload-img").length;
+	        var complete = 0;
+	        for(var i = 0; i < total; i++){
+	            
+	            var file = $(".upload-img")[i].files[0];
+	            console.log(file);
+	            if(file == undefined){
+	                alert('图片不能为空！');
+	                return;
+	            }
+	        }
+
+	        $scope.showPublishLoader = true;
+	        $scope.item.imgPaths = [];
+	        for (var i = 0; i < total; i++) {
+	            var file = $(".upload-img")[i].files[0];
+	            BaseService.item.uploadImg(file, function(evt) {
+	                var result = JSON.parse(evt.target.responseText);
+	                if (result.success) {
+	                    $scope.item.imgPaths.push(result.path);
+	                    complete++;
+	                    if (complete == total) {
+	                        second();
+	                    }
+	                } else {
+	                    alert('图片上传失败!');
+	                }
+	            });
+	        }
+	    }
+
+	    $scope.addImg = function() {
+	        $scope.imgs.push($scope.imgs.length);
+	    }
+
+	    $scope.deleteImg = function($index){
+	        console.log(this,$index);
+	        $scope.imgs.splice($index,1);
+	    }
 	}]
 
 
