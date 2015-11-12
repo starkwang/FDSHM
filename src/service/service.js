@@ -15,6 +15,11 @@ var item = {
         itemQuery.skip(params.start);
         itemQuery.limit(params.amount);
         return itemQuery.find();
+    },
+    get:function(id){
+        var itemQuery = new AV.Query(Item);
+        itemQuery.equalTo("objectId", id);
+        return itemQuery.find();
     }
 }
 

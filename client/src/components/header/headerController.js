@@ -1,4 +1,4 @@
-module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
+module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
     console.log('aaaaaaaaa');
     $scope.publishIsShow = false;
     $scope.item = {};
@@ -12,20 +12,22 @@ module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
         var second = function() {
             BaseService.item.publish($scope.item).then(function(result) {
                 console.log(result);
-                if(result.data.success){
+                if (result.data.success) {
                     alert('商品发布成功！');
                 }
                 $scope.showPublishLoader = false;
+                $scope.publishIsShow = false;
+                $rootScope.$broadcast('item-publish');
             });
         }
 
         var total = $(".upload-img").length;
         var complete = 0;
-        for(var i = 0; i < total; i++){
-            
+        for (var i = 0; i < total; i++) {
+
             var file = $(".upload-img")[i].files[0];
             console.log(file);
-            if(file == undefined){
+            if (file == undefined) {
                 alert('图片不能为空！');
                 return;
             }
@@ -51,11 +53,10 @@ module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
     }
 
     $scope.addImg = function() {
-        $scope.imgs.push($scope.imgs.length);
+        $scope.imgs.push(0);
     }
 
-    $scope.deleteImg = function($index){
-        console.log(this,$index);
-        $scope.imgs.splice($index,1);
+    $scope.deleteImg = function() {
+        $scope.imgs.length = $scope.imgs.length - 1;
     }
 }]

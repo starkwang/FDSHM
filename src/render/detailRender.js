@@ -1,13 +1,21 @@
+service = require('../service/service');
+
 function render(req, res) {
-    var sess = req.session
-    if (sess.views) {
+    service.item.get(req.params.id).then(function(result) {
+        console.log(result);
+        var item = result[0];
         res.render('detail', {
-            pageTitle: 'success'
+            detailBox: {
+                images: item.get('imgPaths'),
+                name: item.get('name'),
+                tel: item.get('tel'),
+                location: item.get('location'),
+                price: item.get('price'),
+                detail: item.get('detail'),
+                pubTime: item.createdAt.toLocaleDateString()+'  '+item.createdAt.toLocaleTimeString()
+            }
+
         });
-    }else{
-        res.render('detail', {
-            pageTitle: 'not login'
-        });
-    }
+    });
 }
 module.exports = render;

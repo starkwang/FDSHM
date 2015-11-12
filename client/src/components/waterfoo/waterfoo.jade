@@ -1,12 +1,13 @@
 div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",infinite-scroll-distance="1",infinite-scroll-disabled="isBusy")
     div.item-wrapper
         div.card.col(ng-repeat="item in items")
-            div.card-image
-                img(ng-src="{{item.image[0]}}")
-                span.card-title ￥{{item.price}}
-            div.card-content
-                p {{item.content}}
-            div.card-action
-                a {{item.link}}
+            a(ng-href="/item/{{item.id||0}}")
+                div.card-image
+                    img(ng-src="{{item.image[0]}}")
+                    span.card-title ￥{{item.price}}
+                div.card-content
+                    p {{item.content}}
+                div.card-action
+                    a {{item.link}}
     div.progress(ng-show="isBusy")
         div.indeterminate

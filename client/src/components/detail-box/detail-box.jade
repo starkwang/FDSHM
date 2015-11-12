@@ -1,19 +1,48 @@
-div.detail-box.z-depth-2.row(ng-controller="detailBoxController")
+div.detail-box.z-depth-1.row(ng-controller="detailBoxController")
     div.col.s6
         div.slider
             ul.slides
-                li
-                    img(src="/img/0.png")
-                    div.caption.center-align
-                        h3 Test
-                li
-                    img(src="/img/1.png")
-                    div.caption.center-align
-                        h3 Test
-                li
-                    img(src="/img/2.png")
-                    div.caption.center-align
-                        h3 Test
+                - for (var i = 0; i < detailBox.images.length; i++) {
+                    li
+                        img(src="#{detailBox.images[i]}")
+                        div.caption.center-align
+                            h3 Test
+                - }
+                
     div.col.s6
+        h1.item-name #{detailBox.name}
+        h2.item-price #{detailBox.price}
+        - if (detailBox.noBargain)
+            p.bargain 不可讲价
+        - else
+            p.bargain 可讲价
+        table
+            tr
+                td.attr 价格
+                td
+                    h1.item-price #{detailBox.price}
+            tr
+                td.attr 交易地点
+                td
+                    h1.item-location #{detailBox.location}
+            - if (detailBox.tel)
+                tr
+                    td.attr 手机
+                    td
+                        h1.item-tel #{detailBox.tel}
+            - if (detailBox.qq)
+                tr
+                    td.attr QQ
+                    td
+                        h1.item-qq #{detailBox.qq}
+            tr
+                td.attr 发布时间
+                td
+                    h1.item-pub-time #{detailBox.pubTime}
+div.detail-box.z-depth-1.row
+    h1 商品详情
+    p #{detailBox.detail}
+        
+
         
 

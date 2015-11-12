@@ -29097,7 +29097,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
+	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
 	    console.log('aaaaaaaaa');
 	    $scope.publishIsShow = false;
 	    $scope.item = {};
@@ -29111,20 +29111,22 @@
 	        var second = function() {
 	            BaseService.item.publish($scope.item).then(function(result) {
 	                console.log(result);
-	                if(result.data.success){
+	                if (result.data.success) {
 	                    alert('商品发布成功！');
 	                }
 	                $scope.showPublishLoader = false;
+	                $scope.publishIsShow = false;
+	                $rootScope.$broadcast('item-publish');
 	            });
 	        }
 
 	        var total = $(".upload-img").length;
 	        var complete = 0;
-	        for(var i = 0; i < total; i++){
-	            
+	        for (var i = 0; i < total; i++) {
+
 	            var file = $(".upload-img")[i].files[0];
 	            console.log(file);
-	            if(file == undefined){
+	            if (file == undefined) {
 	                alert('图片不能为空！');
 	                return;
 	            }
@@ -29150,12 +29152,11 @@
 	    }
 
 	    $scope.addImg = function() {
-	        $scope.imgs.push($scope.imgs.length);
+	        $scope.imgs.push(0);
 	    }
 
-	    $scope.deleteImg = function($index){
-	        console.log(this,$index);
-	        $scope.imgs.splice($index,1);
+	    $scope.deleteImg = function() {
+	        $scope.imgs.length = $scope.imgs.length - 1;
 	    }
 	}]
 
@@ -29167,10 +29168,11 @@
 	__webpack_require__(8);
 	module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
 
-	    $scope.items = [];
+
 	    var now = 0;
 	    var everyPullAmount = 20;
-	    $scope.isBusy = false;
+	    $scope.items = [];
+
 	    $scope.getItem = function() {
 	        $scope.isBusy = true;
 	        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount).then(function(result) {
@@ -29179,9 +29181,24 @@
 	            $scope.isBusy = false;
 	        });
 	        now++;
+	        console.log($scope.items);
 	    }
-	    $scope.getItem();
 
+
+	    function init() {
+	        $scope.items = [];
+	        now = 0;
+	        everyPullAmount = 20;
+	        $scope.isBusy = false;
+	        $scope.getItem();
+	    }
+
+	    init();
+
+
+	    $scope.$on('item-publish', function() {
+	        init();
+	    });
 	}]
 
 

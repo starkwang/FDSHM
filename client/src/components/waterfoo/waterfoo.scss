@@ -1,20 +1,25 @@
 .waterfoo {
     width: 960px;
     margin: 10px auto;
-    .item-wrapper{
-
-    }
+    .item-wrapper {}
     .card {
         margin: 10px;
         width: 300px;
+        padding: 0;
+        transition: all 0.3s;
+        background: #f9f9f9;
+    }
+    .card:hover {
+        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background: #fff;
     }
     .card-image {
-        height:300px;
+        height: 300px;
         .card-title {
             background: rgba(0, 0, 0, 0.5);
         }
     }
-    .progress{
+    .progress {
         margin-top: 20px;
         float: left;
     }

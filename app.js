@@ -5,13 +5,12 @@ var alphabet = require('alphabetjs');
 var bodyParser = require('body-parser');
 var promise = require('bluebird');
 var session = require('express-session');
-var service = require('./src/service/service');
+
 var render = {
     index: require('./src/render/indexRender'),
     detail: require('./src/render/detailRender')
 };
-
-
+var api = require('./src/api/api');
 
 app.set('view engine', 'jade');
 app.set('views', './client/src/template');
@@ -33,55 +32,13 @@ app.use(bodyParser());
 
 //渲染
 app.get('/', render.index);
-app.get('/item/', render.detail);
+app.get('/item/:id', render.detail);
 
 
 //API
 //app.get('/login', service.login);
-app.get('/api/item/collection', function(req, res) {
-
-    var params = {
-        amount: req.body.amount,
-        start: req.body.start,
-    }
-    service.item.collection(params).then(function(results) {
-        var items = [];
-        for (var i = 0; i < results.length; i++) {
-            var object = results[i];
-            items.push({
-                image: object.get('imgPaths'),
-                price: object.get('price'),
-                content: object.get('name'),
-                id: object.id
-            })
-        }
-
-        res.send(items.reverse());
-        res.end();
-    });
-    // var result = [];
-    // for (var i = 0; i < 30; i++) {
-    //     var tmp = Math.floor(Math.random() * 3);
-    //     result.push({
-    //         image: '/img/' + tmp + '.png',
-    //         price: Math.floor(Math.random() * 1000),
-    //         content: '商品标题商品标题商品标题',
-    //         id: '2134534'
-    //     });
-    // }
-    // res.send(result);
-    // res.end();
-
-});
-app.post('/api/item/publish', function(req, res) {
-    service.item.publish(req.body).then(function(result) {
-        console.log(result);
-        res.send({
-            success: true,
-            id: result.id
-        })
-    })
-});
+app.get('/api/item/collection', api.item.collection);
+app.post('/api/item/publish', api.item.publish);
 
 
 
@@ -107,7 +64,20 @@ app.post('/api/upload', upload.single('file'), function(req, res, next) {
         success: true,
         path: '/' + req.file.path
     });
-})
+});
+
+// AV.Cloud.requestSmsCode({
+//     mobilePhoneNumber: '13316919664',
+//     name: 'FDSHM',
+//     op: '某种操作',
+//     ttl: 10
+// }).then(function(result) {
+//     //发送成功
+//     console.log(result);
+// }, function(err) {
+//     //发送失败
+//     console.log(err);
+// });
 
 
 app.listen(3000);

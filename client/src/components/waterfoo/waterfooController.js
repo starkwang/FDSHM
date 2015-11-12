@@ -1,10 +1,11 @@
 require('../waterfoo/ng-infinite-scroll.min.js');
 module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
 
-    $scope.items = [];
+
     var now = 0;
     var everyPullAmount = 20;
-    $scope.isBusy = false;
+    $scope.items = [];
+
     $scope.getItem = function() {
         $scope.isBusy = true;
         BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount).then(function(result) {
@@ -13,7 +14,22 @@ module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
             $scope.isBusy = false;
         });
         now++;
+        console.log($scope.items);
     }
-    $scope.getItem();
 
+
+    function init() {
+        $scope.items = [];
+        now = 0;
+        everyPullAmount = 20;
+        $scope.isBusy = false;
+        $scope.getItem();
+    }
+
+    init();
+
+
+    $scope.$on('item-publish', function() {
+        init();
+    });
 }]
