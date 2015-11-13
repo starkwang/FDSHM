@@ -31,10 +31,11 @@ angular.module('baseService', [])
                 }
             }
             var waterfoo = {
-                getItem: function(start, amount) {
+                getItem: function(start, amount, category) {
                     var params = {
                         start: start,
-                        amount: amount
+                        amount: amount,
+                        category: category
                     }
                     return GET('/api/item/collection', params);
                 }

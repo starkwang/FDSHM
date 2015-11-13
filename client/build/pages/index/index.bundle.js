@@ -29078,10 +29078,11 @@
 	                }
 	            }
 	            var waterfoo = {
-	                getItem: function(start, amount) {
+	                getItem: function(start, amount, category) {
 	                    var params = {
 	                        start: start,
-	                        amount: amount
+	                        amount: amount,
+	                        category: category
 	                    }
 	                    return GET('/api/item/collection', params);
 	                }
@@ -29119,8 +29120,12 @@
 	                $scope.publishIsShow = false;
 	                $rootScope.$broadcast('item-publish');
 	            });
-	        }
 
+	        }
+	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel && $scope.item.stuNo)) {
+	            alert('发布失败，好像有重要信息缺失哦？');
+	            $scope.showPublishLoader = false;
+	        }
 	        var total = $(".upload-img").length;
 	        var complete = 0;
 	        for (var i = 0; i < total; i++) {
@@ -29129,6 +29134,7 @@
 	            console.log(file);
 	            if (file == undefined) {
 	                alert('图片不能为空！');
+	                //second();
 	                return;
 	            }
 	        }
@@ -29167,22 +29173,59 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
-	module.exports = ['$scope', 'BaseService', function($scope, BaseService) {
-
+	module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseService, $location) {
 
 	    var now = 0;
 	    var everyPullAmount = 20;
 	    $scope.items = [];
 
+	    //不同页的瀑布流不一样
+	    //闲置数码 - digital
+	    //校园代步 - ride
+	    //电器日用 - commodity
+	    //图书教材 - book
+	    //美妆衣物 - makeup
+	    //运动棋牌 - sport
+	    //票券小物 - smallthing
+	    var category;
+	    switch (window.location.pathname) {
+	        case '/category/digital':
+	            category = '闲置数码'
+	            break;
+	        case '/category/ride':
+	            category = '校园代步'
+	            break;
+	        case '/category/commodity':
+	            category = '电器日用'
+	            break;
+	        case '/category/book':
+	            category = '图书教材'
+	            break;
+	        case '/category/makeup':
+	            category = '美妆衣物'
+	            break;
+	        case '/category/sport':
+	            category = '运动棋牌'
+	            break;
+	        case '/category/smallthing':
+	            category = '票券小物'
+	            break;
+	        default:
+	            category = 'all'
+	    }
+
 	    $scope.getItem = function() {
-	        $scope.isBusy = true;
-	        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount).then(function(result) {
-	            console.log('pull!');
-	            $scope.items = $scope.items.concat(result.data);
-	            $scope.isBusy = false;
+	        $scope.isBusy = $scope.loaderShow = true;
+	        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount, category).then(function(result) {
+	            if (result.data.length === 0) {
+	                $scope.isBusy = true;
+	                $scope.loaderShow = false;
+	            } else {
+	                $scope.items = $scope.items.concat(result.data);
+	                $scope.isBusy = $scope.loaderShow = false;
+	            }
 	        });
 	        now++;
-	        console.log($scope.items);
 	    }
 
 

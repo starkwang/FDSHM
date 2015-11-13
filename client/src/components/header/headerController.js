@@ -19,8 +19,12 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
                 $scope.publishIsShow = false;
                 $rootScope.$broadcast('item-publish');
             });
-        }
 
+        }
+        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel && $scope.item.stuNo)) {
+            alert('发布失败，好像有重要信息缺失哦？');
+            $scope.showPublishLoader = false;
+        }
         var total = $(".upload-img").length;
         var complete = 0;
         for (var i = 0; i < total; i++) {
@@ -29,6 +33,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             console.log(file);
             if (file == undefined) {
                 alert('图片不能为空！');
+                //second();
                 return;
             }
         }

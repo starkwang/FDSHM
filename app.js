@@ -8,7 +8,8 @@ var session = require('express-session');
 
 var render = {
     index: require('./src/render/indexRender'),
-    detail: require('./src/render/detailRender')
+    detail: require('./src/render/detailRender'),
+    category: require('./src/render/categoryRender')
 };
 var api = require('./src/api/api');
 
@@ -33,7 +34,7 @@ app.use(bodyParser());
 //渲染
 app.get('/', render.index);
 app.get('/item/:id', render.detail);
-
+app.get('/category/:category', render.category)
 
 //API
 //app.get('/login', service.login);

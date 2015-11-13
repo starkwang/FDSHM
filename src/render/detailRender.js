@@ -12,6 +12,9 @@ function render(req, res) {
                 location: item.get('location'),
                 price: item.get('price'),
                 detail: item.get('detail'),
+                qq:item.get('qq'),
+                wechat:item.get('wechat'),
+                stuNo:item.get('stuNo'),
                 pubTime: item.createdAt.toLocaleDateString()+'  '+item.createdAt.toLocaleTimeString()
             }
 

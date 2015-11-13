@@ -9,5 +9,5 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
                     p {{item.content}}
                 div.card-action
                     a {{item.link}}
-    div.progress(ng-show="isBusy")
+    div.progress(ng-show="loaderShow")
         div.indeterminate

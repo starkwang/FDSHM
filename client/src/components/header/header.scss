@@ -1,11 +1,16 @@
 $base-blue:rgb(95, 173, 212);
 $base-orange:rgb(253, 171, 64);
+$depth-2:0 8px 17px 0 rgba(0, 0, 0, 0.2),
+0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
+0 2px 10px 0 rgba(0, 0, 0, 0.12);
 .header {
-    
+    background-color:#f9f9f9;
     .head-bar {
         background: #ddd;
         width: 100%;
         height: 20px;
+        display: none;
         a {
             float: left;
             margin-left: 30px;
@@ -32,6 +37,15 @@ $base-orange:rgb(253, 171, 64);
             font-size: 50px;
             color: #fff;
             background: #ddd;
+            position:relative;
+            a{
+                display: block;
+                position:absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+            }
         }
         .logo:before {
             content: 'LOGO';
@@ -68,64 +82,87 @@ $base-orange:rgb(253, 171, 64);
                 margin-top: -30px;
             }
         }
-        >button{
+        >button {
             margin-top: 20px;
         }
     }
     .head-category {
-        border: 1px solid #ddd;
-        height:50px;
+        border-top: 1px solid #ddd;
+        height: 50px;
         >div {
             width: 910px;
             margin: 0 auto;
+            >div:last-child{
+                border-right:1px solid #ddd;
+            }
             >div {
                 width: 130px;
-                font-size:14px;
-                padding: 18px;
+                font-size: 16px;
+                padding: 16px;
                 float: left;
                 list-style-type: none;
                 text-align: center;
                 cursor: pointer;
                 position: relative;
                 display: block;
+                -webkit-transition: all .3s ease-out;
+                -moz-transition: all .3s ease-out;
+                -o-transition: all .3s ease-out;
+                -ms-transition: all .3s ease-out;
+                transition: all .3s ease-out;
+                position:relative;
+                border-left:1px solid #ddd;
+                >i{
+                    margin-right: 5px;
+                }
+                >a{
+                    position:absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                }
                 .detail {
                     position: absolute;
                     text-align: center;
-                    width:130px;
-                    top:50px;
+                    width: 130px;
+                    top: 50px;
                     left: 0;
                     z-index: 999;
-                    li{
-                        border:1px solid #ddd;
-                        padding:10px 0;
+                    li {
+                        border: 1px solid #ddd;
+                        padding: 10px 0;
                         font-size: 14px;
                     }
                     background:#fff;
                     display: none;
-                    li:hover{
-                        background:#eee;
+                    li:hover {
+                        background: #eee;
                     }
                 }
-                .detail:hover{
+                .detail:hover {
                     display: block
                 }
             }
-            >div:hover >.detail{
+            >div:hover {
+                box-shadow: $depth-2;
+                background-color:#fff;
                 display: block;
             }
         }
     }
-    div.publish{
-        position:absolute;
+    div.publish {
+        position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
-        background:rgba(0,0,0,0);
+        background: rgba(0, 0, 0, 0);
         z-index: 99;
-        .publish-box{
-            >.row{
-                padding-bottom:70px;
+        .publish-box {
+            >.row {
+                padding-bottom: 70px;
             }
             width: 500px;
             position:absolute;
@@ -133,21 +170,21 @@ $base-orange:rgb(253, 171, 64);
             margin-left: -250px;
             top: 5%;
             background:#fff;
-            .title{
-                background:#26a69a;
+            .title {
+                background: #26a69a;
                 color: #fff;
-                padding:10px;
+                padding: 10px;
                 font-size: 24px;
             }
-            .loader{
-                position:absolute;
+            .loader {
+                position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color:rgba(0,0,0,0.5);
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 999;
-                .preloader-wrapper{
+                .preloader-wrapper {
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -155,37 +192,38 @@ $base-orange:rgb(253, 171, 64);
                     margin-left: -32px;
                 }
             }
-            div.s6{
+            div.s6 {
                 height: 50px;
             }
-            div.switch{
-                padding-top:30px;
+            div.switch {
+                padding-top: 30px;
             }
-            div.tags{
+            div.tags {
                 margin-top: 20px;
-                p{
+                p {
                     margin-bottom: 10px;
                 }
-                button{
-                    margin:10px;
+                button {
+                    margin: 10px;
                 }
             }
-            p.contact{
+            p.contact {
                 float: left;
                 width: 100%;
-                box-sizing:border-box;
-                padding:10px;
+                box-sizing: border-box;
+                padding: 10px;
             }
-            .publish-btn{
+            .publish-btn {
                 position: absolute;
-                bottom:20px;
+                bottom: 20px;
                 left: 50%;
                 margin-left: -75px;
             }
-            .publish-btn:hover{
-                background-color:lighten(#EF5350,5%) !important;
+            .publish-btn:hover {
+                background-color: lighten(#EF5350, 5%) !important;
             }
-            .add,.delete{
+            .add,
+            .delete {
                 float: left;
                 margin-left: 20px;
             }

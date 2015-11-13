@@ -2,11 +2,7 @@ service = require('../service/service');
 var item = {
     // '/api/item/collection' GET
     collection: function(req, res) {
-        var params = {
-            amount: req.body.amount,
-            start: req.body.start,
-        }
-        service.item.collection(params).then(function(results) {
+        service.item.collection(req.query).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {
                 var object = results[i];
@@ -24,13 +20,21 @@ var item = {
 
     // '/api/item/publish' POST
     publish: function(req, res) {
-        service.item.publish(req.body).then(function(result) {
-            console.log(result);
-            res.send({
-                success: true,
-                id: result.id
+        console.log(req.body);
+        if (req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.stuNo && req.body.category && req.body.imgPaths.length > 0) {
+            service.item.publish(req.body).then(function(result) {
+                console.log(result);
+                res.send({
+                    success: true,
+                    //id: result.id
+                })
             })
-        })
+        } else {
+            res.send({
+                success: false,
+            })
+        }
+
     }
 }
 module.exports = {
