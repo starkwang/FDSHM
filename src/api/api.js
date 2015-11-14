@@ -10,7 +10,7 @@ var item = {
                     image: object.get('imgPaths'),
                     price: object.get('price'),
                     content: object.get('name'),
-                    id: object.id
+                    pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
             res.send(items.reverse());
@@ -36,7 +36,51 @@ var item = {
         }
 
     }
-}
+};
+
+var user = {
+    signup: function(req, res) {
+        service.user.signup(req.body.username, req.body.email, req.body.password).then(function(result) {
+            if (result) {
+                res.send({
+                    success: true
+                });
+            }
+        }, function(err) {
+            console.log(err);
+            res.send({
+                success: false
+            });
+        })
+    },
+    login: function(req, res) {
+        service.user.login(req.body.username, req.body.password).then(function(result) {
+            console.log(result);
+            //service.user.login('starkwang', '123456').then(function(result) {
+            req.session.regenerate(function() {
+                req.session.login = true;
+                req.session.username = result.attributes.username;
+                req.session.userid = result.attributes.timeStamp;
+                res.send({
+                    success: true
+                });
+            });
+
+        }, function(err) {
+            res.send({
+                success: false
+            });
+        })
+    },
+    logout: function(req, res) {
+        res.clearCookie('connect.sid');
+        res.send({
+            success: true
+        })
+    }
+};
+
 module.exports = {
-    item: item
+    item: item,
+    user: user
 }

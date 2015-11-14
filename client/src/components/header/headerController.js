@@ -24,6 +24,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel && $scope.item.stuNo)) {
             alert('发布失败，好像有重要信息缺失哦？');
             $scope.showPublishLoader = false;
+            return;
         }
         var total = $(".upload-img").length;
         var complete = 0;
@@ -63,5 +64,20 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
 
     $scope.deleteImg = function() {
         $scope.imgs.length = $scope.imgs.length - 1;
+    }
+    $scope.test = function() {
+        BaseService.user.login('starkwang', '123456').then(function(result) {
+            console.log(result);
+        });
+    }
+    $scope.test2 = function() {
+        BaseService.user.signup('starkwang', '123456', '13307130321@fudan.edu.cn').then(function(result) {
+            console.log(result);
+        });
+    }
+    $scope.test3 = function() {
+        BaseService.user.logout().then(function(result) {
+            console.log(result);
+        });
     }
 }]

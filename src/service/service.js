@@ -8,7 +8,8 @@ var Item = AV.Object.extend('Item');
 var item = {
     publish: function(params) {
         var item = new Item();
-        params.randomStamp = Math.random() * 10000000000000000;
+        params.randomStamp = Math.floor(Math.random() * 10000000000000000);
+        params.pubTimeStamp = new Date().getTime();
         params.isVertified = false;
         return item.save(params);
     },
@@ -23,18 +24,32 @@ var item = {
         itemQuery.limit(params.amount);
         return itemQuery.find();
     },
-    get: function(id) {
+    get: function(pubTimeStamp) {
+        console.log(pubTimeStamp);
         var itemQuery = new AV.Query(Item);
-        itemQuery.equalTo("objectId", id);
+        itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
         return itemQuery.find();
     }
-}
+};
 
-
+var user = {
+    signup: function(username, email, password) {
+        var user = new AV.User();
+        user.set("username", username);
+        user.set("password", password);
+        user.set("email", email);
+        user.set('timeStamp',new Date().getTime());
+        return user.signUp();
+    },
+    login: function(username,password) {
+        return AV.User.logIn(username, password);
+    }
+};
 
 
 module.exports = {
     item: item,
     login: login,
-    mail: mail
+    mail: mail,
+    user:user
 }

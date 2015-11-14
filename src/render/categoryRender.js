@@ -25,8 +25,8 @@ function render(req, res) {
             break;
     }
     res.render('category', {
-        category: category,
-        pageTitle: 'success'
+        session: req.session ? req.session : {},
+        category: category
     });
 }
 module.exports = render;

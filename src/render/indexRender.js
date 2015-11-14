@@ -1,15 +1,6 @@
 function render(req, res) {
-    var sess = req.session
-    if (sess.views) {
-        res.render('index', {
-            pageTitle: 'success'
-        });
-        console.log('login');
-    } else {
-        res.render('index', {
-            pageTitle: 'not login'
-        });
-        console.log('not login');
-    }
+    res.render('index', {
+        session: req.session ? req.session : {}
+    });
 }
 module.exports = render;

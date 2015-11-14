@@ -3,9 +3,9 @@ html(ng-app="starkAPP")
         title 复旦二手市场
         link(rel='stylesheet',href='/static/pages/index/index.css')
         script(type='text/javascript',src='/static/pages/index/index.bundle.js')
-        script(type='text/javascript',src='http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js')
+        script(type='text/javascript',src='/static/base/jquery.js')
         script(type='text/javascript',src='/static/base/materialize.min.js')
-        link(rel="stylesheet",href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet",href="/static/base/materialize-icon.css")
     body(ng-view)
         include ../components/header/header.jade
         include ../components/waterfoo/waterfoo.jade

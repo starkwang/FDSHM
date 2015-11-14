@@ -5,6 +5,7 @@ var alphabet = require('alphabetjs');
 var bodyParser = require('body-parser');
 var promise = require('bluebird');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var render = {
     index: require('./src/render/indexRender'),
@@ -23,23 +24,27 @@ app.use('/img', express.static('img'));
 
 //一些中间件
 app.use(session({
-    secret: 'wangweijia',
-    cookie: {
-        maxAge: 60000
-    }
+    store: new RedisStore({
+        "host": "127.0.0.1",
+        "port": "6379",
+        "ttl": 60 * 60 * 24 * 30, //Session的有效期为30天
+    }),
+    secret: 'wangweijia'
 }));
 app.use(bodyParser());
 
 
 //渲染
 app.get('/', render.index);
-app.get('/item/:id', render.detail);
+app.get('/item/:pubTimeStamp', render.detail);
 app.get('/category/:category', render.category)
 
 //API
-//app.get('/login', service.login);
 app.get('/api/item/collection', api.item.collection);
 app.post('/api/item/publish', api.item.publish);
+app.post('/api/user/signup', api.user.signup);
+app.post('/api/user/login', api.user.login);
+app.post('/api/user/logout', api.user.logout);
 
 
 

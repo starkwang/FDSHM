@@ -29086,9 +29086,28 @@
 	                    return GET('/api/item/collection', params);
 	                }
 	            };
+	            var user = {
+	                login: function(username, password) {
+	                    return POST('/api/user/login', {
+	                        username: 'starkwang',
+	                        password: '123456'
+	                    })
+	                },
+	                signup: function(username, password, email) {
+	                    return POST('/api/user/signup', {
+	                        username: username,
+	                        password: password,
+	                        email: email
+	                    })
+	                },
+	                logout: function() {
+	                    return POST('/api/user/logout');
+	                },
+	            }
 	            return {
 	                waterfoo: waterfoo,
-	                item: item
+	                item: item,
+	                user: user
 	            };
 	        }
 	    ])
@@ -29124,6 +29143,7 @@
 	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel && $scope.item.stuNo)) {
 	            alert('发布失败，好像有重要信息缺失哦？');
 	            $scope.showPublishLoader = false;
+	            return;
 	        }
 	        var total = $(".upload-img").length;
 	        var complete = 0;
@@ -29163,6 +29183,21 @@
 
 	    $scope.deleteImg = function() {
 	        $scope.imgs.length = $scope.imgs.length - 1;
+	    }
+	    $scope.test = function() {
+	        BaseService.user.login('starkwang', '123456').then(function(result) {
+	            console.log(result);
+	        });
+	    }
+	    $scope.test2 = function() {
+	        BaseService.user.signup('starkwang', '123456', '13307130321@fudan.edu.cn').then(function(result) {
+	            console.log(result);
+	        });
+	    }
+	    $scope.test3 = function() {
+	        BaseService.user.logout().then(function(result) {
+	            console.log(result);
+	        });
 	    }
 	}]
 

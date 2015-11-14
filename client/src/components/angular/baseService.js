@@ -40,9 +40,28 @@ angular.module('baseService', [])
                     return GET('/api/item/collection', params);
                 }
             };
+            var user = {
+                login: function(username, password) {
+                    return POST('/api/user/login', {
+                        username: 'starkwang',
+                        password: '123456'
+                    })
+                },
+                signup: function(username, password, email) {
+                    return POST('/api/user/signup', {
+                        username: username,
+                        password: password,
+                        email: email
+                    })
+                },
+                logout: function() {
+                    return POST('/api/user/logout');
+                },
+            }
             return {
                 waterfoo: waterfoo,
-                item: item
+                item: item,
+                user: user
             };
         }
     ])
