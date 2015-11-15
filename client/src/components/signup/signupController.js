@@ -21,9 +21,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
             if (result.data.success) {
                 alert('注册成功！');
-                $scope.signupIsShow = false;
-                $scope.user.username = $scope.signupInfo.email;
-                $scope.loginIsShow = true;
             } else {
                 alert('注册失败');
             }

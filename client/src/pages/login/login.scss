@@ -1,0 +1,26 @@
+@import '../../components/login/login.scss';
+@import '../../components/signup/signup.scss';
+@import '../../components/base/base.scss';
+@import '../../components/base/animate.scss';
+@import '../../components/material.css';
+.login-page{
+    background: url('/static/img/login_bg.jpg');
+    background-size: cover;
+
+    >h1{
+        width: 560px;
+        padding: 20px;
+        text-align: center;
+        margin:0 auto;
+        margin-top: 50px;
+        color: #fff;
+        font-size: 80px;
+        font-weight:600;
+        top: 30px;
+        background:rgba(0,0,0,0.5);
+    }
+    >div>div.login{
+        background:rgba(0,0,0,0);
+        top:100px;
+    }
+}
