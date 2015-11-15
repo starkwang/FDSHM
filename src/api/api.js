@@ -21,7 +21,8 @@ var item = {
     // '/api/item/publish' POST
     publish: function(req, res) {
         console.log(req.body);
-        if (req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.stuNo && req.body.category && req.body.imgPaths.length > 0) {
+        if (req.session.login && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
+            req.body.userid = req.session.userid;
             service.item.publish(req.body).then(function(result) {
                 console.log(result);
                 res.send({
@@ -40,7 +41,7 @@ var item = {
 
 var user = {
     signup: function(req, res) {
-        service.user.signup(req.body.username, req.body.email, req.body.password).then(function(result) {
+        service.user.signup(req.body.username, req.body.email, req.body.password, req.body.name).then(function(result) {
             if (result) {
                 res.send({
                     success: true
@@ -59,7 +60,8 @@ var user = {
             //service.user.login('starkwang', '123456').then(function(result) {
             req.session.regenerate(function() {
                 req.session.login = true;
-                req.session.username = result.attributes.username;
+                req.session.name = result.attributes.name;
+                req.session.email = result.attributes.email;
                 req.session.userid = result.attributes.timeStamp;
                 res.send({
                     success: true

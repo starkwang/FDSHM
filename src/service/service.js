@@ -33,11 +33,12 @@ var item = {
 };
 
 var user = {
-    signup: function(username, email, password) {
+    signup: function(username, email, password,name) {
         var user = new AV.User();
         user.set("username", username);
         user.set("password", password);
         user.set("email", email);
+        user.set("name", name);
         user.set('timeStamp',new Date().getTime());
         return user.signUp();
     },

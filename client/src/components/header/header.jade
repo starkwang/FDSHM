@@ -1,12 +1,12 @@
 div.header.z-depth-1(ng-controller="headerController")
     - if(session.login)
         div.head-bar
-            a #{session.username}
-            a 退出
+            a(href="/user/#{session.userid}") #{session.name}
+            a(ng-click="logout()") 退出
     - else
         div.head-bar
-            a 登陆
-            a 注册
+            a#change-show(ng-click="changeLoginShow($event)") 登陆
+            a#change-show(ng-click="changeSignupShow($event)") 注册
     div.head-main
         button(ng-click="test()") login
         button(ng-click="test2()") signup
@@ -16,7 +16,10 @@ div.header.z-depth-1(ng-controller="headerController")
         div.search-bar
             input
             button 搜索
-        button.waves-effect.waves-light.btn#change-show(ng-click="changePublishShow($event)") 我要发布
+        - if(session.login)
+            button.waves-effect.waves-light.btn#change-show(ng-click="changePublishShow($event)") 我要发布
+        - else
+            button.waves-effect.waves-light.btn#change-show(ng-click="changeLoginShow($event)") 我要发布
     div.head-category
         div
             div 
@@ -78,7 +81,7 @@ div.header.z-depth-1(ng-controller="headerController")
     div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
         div.publish-box.z-depth-4
             div.row
-                div.col.s12.loader(ng-show="showPublishLoader")
+                div.col.s12.loader(ng-show="publishLoaderIsShow")
                     div.preloader-wrapper.big.active
                         div.spinner-layer.spinner-red-only
                             div.circle-clipper.left
@@ -132,9 +135,11 @@ div.header.z-depth-1(ng-controller="headerController")
                 div.input-field.col.s6
                     input#item-contact-phone.validate(type="text",ng-model="item.tel",required,pattern="[0-9]{11}")
                     label(for="item-contact") 手机（必填）
-                div.input-field.col.s6
-                    input#item-contact-stuNo.validate(type="text",ng-model="item.stuNo",required,pattern="[0-9]{11}")
-                    label(for="item-contact") 学号（必填）
+                div.email.input-field.col.s6
+                    //- input#item-contact-stuNo.validate(type="text",ng-model="item.stuNo",required,pattern="[0-9]{11}")
+                    //- label(for="item-contact") 学号（必填）
+                    h1 邮箱
+                    p #{session.email}
                 div.input-field.col.s6
                     input#item-contact-qq.validate(type="text",ng-model="item.qq")
                     label(for="item-contact") QQ
@@ -155,5 +160,36 @@ div.header.z-depth-1(ng-controller="headerController")
                 button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
                     i.material-icons.left done_all
                     em 马上发布
+    div.login#change-show(ng-show="loginIsShow",ng-click="changeLoginShow($event)")
+        div.publish-box.z-depth-4
+            div.row
+                div.col.s12.title
+                    h1 登陆
+                div.input-field.col.s12
+                    input.validate(type="text",ng-model="user.username",required,pattern="[0-9]{11}@fudan.edu.cn")
+                    label(for="item-name") 复旦邮箱
+                div.input-field.col.s12
+                    input.validate(type="password",ng-model="user.password",required)
+                    label(for="item-detail") 密码
+                button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="login()")
+                    i.material-icons.left send
+                    em 登陆
+    div.login#change-show(ng-show="signupIsShow",ng-click="changeSignupShow($event)")
+        div.publish-box.z-depth-4
+            div.row
+                div.col.s12.title
+                    h1 注册
+                div.input-field.col.s12
+                    input.validate(type="text",ng-model="signupInfo.email",required,pattern="[0-9]{11}@fudan.edu.cn")
+                    label(for="item-name") 复旦邮箱
+                div.input-field.col.s12
+                    input.validate(type="password",ng-model="signupInfo.password",required)
+                    label(for="item-detail") 密码
+                div.input-field.col.s12
+                    input.validate(type="text",ng-model="signupInfo.name",required)
+                    label(for="item-detail") 昵称
+                button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="signup()")
+                    i.material-icons.left assignment_ind
+                    em 注册
 
 

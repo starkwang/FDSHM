@@ -29090,15 +29090,18 @@
 	            var user = {
 	                login: function(username, password) {
 	                    return POST('/api/user/login', {
-	                        username: 'starkwang',
-	                        password: '123456'
+	                        username: username,
+	                        password: password
 	                    })
 	                },
-	                signup: function(username, password, email) {
+	                signup: function(name, password, email) {
+	                    //username为账户名，和email一致
+	                    //name为昵称
 	                    return POST('/api/user/signup', {
-	                        username: username,
+	                        username: email,
 	                        password: password,
-	                        email: email
+	                        email: email,
+	                        name: name
 	                    })
 	                },
 	                logout: function() {
@@ -29120,7 +29123,7 @@
 
 	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
 	    console.log('aaaaaaaaa');
-	    $scope.publishIsShow = false;
+	    $scope.publishIsShow = $scope.loginIsShow = $scope.signupIsShow = false;
 	    $scope.item = {};
 	    $scope.imgs = [0];
 	    $scope.changePublishShow = function($event) {
@@ -29135,15 +29138,15 @@
 	                if (result.data.success) {
 	                    alert('商品发布成功！');
 	                }
-	                $scope.showPublishLoader = false;
+	                $scope.publishLoaderIsShow = false;
 	                $scope.publishIsShow = false;
 	                $rootScope.$broadcast('item-publish');
 	            });
 
 	        }
-	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel && $scope.item.stuNo)) {
+	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
 	            alert('发布失败，好像有重要信息缺失哦？');
-	            $scope.showPublishLoader = false;
+	            $scope.publishLoaderIsShow = false;
 	            return;
 	        }
 	        var total = $(".upload-img").length;
@@ -29159,7 +29162,7 @@
 	            }
 	        }
 
-	        $scope.showPublishLoader = true;
+	        $scope.publishLoaderIsShow = true;
 	        $scope.item.imgPaths = [];
 	        for (var i = 0; i < total; i++) {
 	            var file = $(".upload-img")[i].files[0];
@@ -29186,7 +29189,7 @@
 	        $scope.imgs.length = $scope.imgs.length - 1;
 	    }
 	    $scope.test = function() {
-	        BaseService.user.login('starkwang', '123456').then(function(result) {
+	        BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {
 	            console.log(result);
 	        });
 	    }
@@ -29198,6 +29201,53 @@
 	    $scope.test3 = function() {
 	        BaseService.user.logout().then(function(result) {
 	            console.log(result);
+	        });
+	    }
+	    $scope.changeLoginShow = function($event) {
+	        console.log($event);
+	        if ($event.target.id == "change-show") {
+	            $scope.loginIsShow = !$scope.loginIsShow;
+	        }
+	    }
+	    $scope.login = function(){
+	        BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
+	            console.log(result);
+	            if(result.data.success){
+	                window.location.reload();
+	            }else{
+	                alert('账号不存在，或者密码错误！');
+	                $scope.loginIsShow = false;
+	            }
+	        });
+	    }
+	    $scope.logout = function(){
+	        BaseService.user.logout().then(function(result) {
+	            window.location.reload();
+	        });
+	    }
+	    $scope.changeSignupShow = function($event){
+	        if ($event.target.id == "change-show") {
+	            $scope.signupIsShow = !$scope.signupIsShow;
+	        }
+	    }
+	    $scope.signup = function(){
+	        if(!$scope.signupInfo.email){
+	            alert('请填入正确的复旦邮箱！');
+	            return;
+	        }
+	        if(!$scope.signupInfo.password||!$scope.signupInfo.name){
+	            alert('密码或用户名不能为空！');
+	            return;
+	        }
+	        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
+	            if(result.data.success){
+	                alert('注册成功！');
+	                $scope.signupIsShow = false;
+	                $scope.user.username = $scope.signupInfo.email;
+	                $scope.loginIsShow = true;
+	            }else{
+	                alert('注册失败');
+	            }
 	        });
 	    }
 	}]

@@ -43,15 +43,18 @@ angular.module('baseService', [])
             var user = {
                 login: function(username, password) {
                     return POST('/api/user/login', {
-                        username: 'starkwang',
-                        password: '123456'
+                        username: username,
+                        password: password
                     })
                 },
-                signup: function(username, password, email) {
+                signup: function(name, password, email) {
+                    //username为账户名，和email一致
+                    //name为昵称
                     return POST('/api/user/signup', {
-                        username: username,
+                        username: email,
                         password: password,
-                        email: email
+                        email: email,
+                        name: name
                     })
                 },
                 logout: function() {
