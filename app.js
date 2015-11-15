@@ -12,7 +12,7 @@ var render = {
     detail: require('./src/render/detailRender'),
     category: require('./src/render/categoryRender'),
     login:require('./src/render/loginRender'),
-    usermanage:require('./src/render/usermanage')
+    //usermanage:require('./src/render/usermanage')
 };
 var api = require('./src/api/api');
 
@@ -41,7 +41,7 @@ app.get('/', render.index);
 app.get('/login', render.login);
 app.get('/item/:pubTimeStamp', render.detail);
 app.get('/category/:category', render.category);
-app.get('/usermanage/', render.usermanage);
+//app.get('/usermanage/', render.usermanage);
 
 
 //API

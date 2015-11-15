@@ -1,0 +1,15 @@
+div(ng-controller="loginController")
+    div.login#change-show(ng-show="loginIsShow",ng-click="changeLoginShow($event)")
+            div.publish-box.z-depth-4
+                div.row
+                    div.col.s12.title
+                        h1 登陆
+                    div.input-field.col.s12
+                        input.validate(type="text",ng-model="user.username",required,pattern="[0-9]{11}@fudan.edu.cn")
+                        label(for="item-name") 复旦邮箱
+                    div.input-field.col.s12
+                        input.validate(type="password",ng-model="user.password",required)
+                        label(for="item-detail") 密码
+                    button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="login()")
+                        i.material-icons.left send
+                        em 登陆

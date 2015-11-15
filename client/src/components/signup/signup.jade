@@ -1,0 +1,18 @@
+div(ng-controller="signupController")
+    div.signup#change-show(ng-show="signupIsShow",ng-click="changeSignupShow($event)")
+            div.publish-box.z-depth-4
+                div.row
+                    div.col.s12.title
+                        h1 注册
+                    div.input-field.col.s12
+                        input.validate(type="text",ng-model="signupInfo.email",required,pattern="[0-9]{11}@fudan.edu.cn")
+                        label(for="item-name") 复旦邮箱
+                    div.input-field.col.s12
+                        input.validate(type="password",ng-model="signupInfo.password",required)
+                        label(for="item-detail") 密码
+                    div.input-field.col.s12
+                        input.validate(type="text",ng-model="signupInfo.name",required)
+                        label(for="item-detail") 昵称
+                    button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="signup()")
+                        i.material-icons.left assignment_ind
+                        em 注册

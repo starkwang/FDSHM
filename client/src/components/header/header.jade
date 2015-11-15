@@ -7,8 +7,8 @@ div.header.z-depth-1(ng-controller="headerController")
             
     - else
         div.head-bar
-            a#change-show(ng-click="changeLoginShow($event)") 登陆
-            a#change-show(ng-click="changeSignupShow($event)") 注册
+            a#change-show(ng-click="showLogin($event)") 登陆
+            a#change-show(ng-click="showSignup($event)") 注册
     div.head-main
         button(ng-click="test()") login
         button(ng-click="test2()") signup
@@ -21,7 +21,7 @@ div.header.z-depth-1(ng-controller="headerController")
         - if(session.login)
             button.waves-effect.waves-light.btn#change-show(ng-click="showPublish($event)") 我要发布
         - else
-            button.waves-effect.waves-light.btn#change-show(ng-click="changeLoginShow($event)") 我要发布
+            button.waves-effect.waves-light.btn#change-show(ng-click="showLogin($event)") 我要发布
     div.head-category
         div
             div 
@@ -163,36 +163,7 @@ div.header.z-depth-1(ng-controller="headerController")
                     i.material-icons.left done_all
                     em 马上发布
     include ../publish/publish.jade
-    div.login#change-show(ng-show="loginIsShow",ng-click="changeLoginShow($event)")
-        div.publish-box.z-depth-4
-            div.row
-                div.col.s12.title
-                    h1 登陆
-                div.input-field.col.s12
-                    input.validate(type="text",ng-model="user.username",required,pattern="[0-9]{11}@fudan.edu.cn")
-                    label(for="item-name") 复旦邮箱
-                div.input-field.col.s12
-                    input.validate(type="password",ng-model="user.password",required)
-                    label(for="item-detail") 密码
-                button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="login()")
-                    i.material-icons.left send
-                    em 登陆
-    div.login#change-show(ng-show="signupIsShow",ng-click="changeSignupShow($event)")
-        div.publish-box.z-depth-4
-            div.row
-                div.col.s12.title
-                    h1 注册
-                div.input-field.col.s12
-                    input.validate(type="text",ng-model="signupInfo.email",required,pattern="[0-9]{11}@fudan.edu.cn")
-                    label(for="item-name") 复旦邮箱
-                div.input-field.col.s12
-                    input.validate(type="password",ng-model="signupInfo.password",required)
-                    label(for="item-detail") 密码
-                div.input-field.col.s12
-                    input.validate(type="text",ng-model="signupInfo.name",required)
-                    label(for="item-detail") 昵称
-                button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="signup()")
-                    i.material-icons.left assignment_ind
-                    em 注册
+    include ../login/login.jade
+    include ../signup/signup.jade
 
 

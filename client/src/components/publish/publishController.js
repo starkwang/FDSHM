@@ -3,7 +3,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.item = {};
     $scope.imgs = [0];
     $scope.$on('showPublish',function(){
-        console.log('message');
         $scope.publishIsShow = true;
     })
     $scope.changePublishShow = function($event) {
