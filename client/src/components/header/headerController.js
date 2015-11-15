@@ -3,6 +3,9 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.publishIsShow = $scope.loginIsShow = $scope.signupIsShow = false;
     $scope.item = {};
     $scope.imgs = [0];
+    $scope.showPublish = function(){
+        $rootScope.$broadcast('showPublish');
+    }
     $scope.changePublishShow = function($event) {
         if ($event.target.id == "change-show") {
             $scope.publishIsShow = !$scope.publishIsShow;
@@ -87,10 +90,13 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         }
     }
     $scope.login = function(){
+        if(!$scope.user.username||!$scope.user.password){
+            return;
+        }
         BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
             console.log(result);
             if(result.data.success){
-                window.location.reload();
+                window.location.pathname = '/';
             }else{
                 alert('账号不存在，或者密码错误！');
                 $scope.loginIsShow = false;
@@ -99,10 +105,11 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.logout = function(){
         BaseService.user.logout().then(function(result) {
-            window.location.reload();
+            window.location.pathname = '/';
         });
     }
     $scope.changeSignupShow = function($event){
+        console.log($event);
         if ($event.target.id == "change-show") {
             $scope.signupIsShow = !$scope.signupIsShow;
         }

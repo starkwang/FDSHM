@@ -1,0 +1,45 @@
+html(ng-app="starkAPP")
+    head
+        title 登陆 - 复旦二手市场
+        link(rel='stylesheet',href='/static/pages/index/index.css')
+        script(type='text/javascript',src='/static/pages/index/index.bundle.js')
+        script(type='text/javascript',src='/static/base/jquery.js')
+        script(type='text/javascript',src='/static/base/materialize.min.js')
+        link(rel="stylesheet",href="/static/base/materialize-icon.css")
+    body(ng-view).login-page
+        div(ng-controller="headerController")
+            h1 复旦二手市场
+            div.login
+                div.publish-box.z-depth-4
+                    div.row
+                        div.col.s12.title
+                            h1 登陆
+                        div.input-field.col.s12
+                            input.validate(type="text",ng-model="user.username",required,pattern="[0-9]{11}@fudan.edu.cn")
+                            label(for="item-name") 复旦邮箱
+                        div.input-field.col.s12
+                            input.validate(type="password",ng-model="user.password",required)
+                            label(for="item-detail") 密码
+                        button.waves-effect.waves-light.btn.login-btn.red.lighten-1(ng-click="login()")
+                            i.material-icons.left send
+                            em 登陆
+                        button#change-show.waves-effect.waves-light.btn.signup-btn.red.lighten-1(ng-click="changeSignupShow($event)")
+                            i#change-show.material-icons.left assignment_ind
+                            em#change-show 注册
+            div.signup#change-show(ng-show="signupIsShow",ng-click="changeSignupShow($event)")
+                div.publish-box.z-depth-4
+                    div.row
+                        div.col.s12.title
+                            h1 注册
+                        div.input-field.col.s12
+                            input.validate(type="text",ng-model="signupInfo.email",required,pattern="[0-9]{11}@fudan.edu.cn")
+                            label(for="item-name") 复旦邮箱
+                        div.input-field.col.s12
+                            input.validate(type="password",ng-model="signupInfo.password",required)
+                            label(for="item-detail") 密码
+                        div.input-field.col.s12
+                            input.validate(type="text",ng-model="signupInfo.name",required)
+                            label(for="item-detail") 昵称
+                        button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="signup()")
+                            i.material-icons.left assignment_ind
+                            em 注册

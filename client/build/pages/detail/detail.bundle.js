@@ -61,6 +61,7 @@
 	starkAPP.controller('headerController', __webpack_require__(6));
 	starkAPP.controller('waterfooController', __webpack_require__(7));
 	starkAPP.controller('detailBoxController', __webpack_require__(9));
+	starkAPP.controller('publishController', __webpack_require__(10));
 	module.exports = starkAPP;
 
 
@@ -29125,6 +29126,9 @@
 	    $scope.publishIsShow = $scope.loginIsShow = $scope.signupIsShow = false;
 	    $scope.item = {};
 	    $scope.imgs = [0];
+	    $scope.showPublish = function(){
+	        $rootScope.$broadcast('showPublish');
+	    }
 	    $scope.changePublishShow = function($event) {
 	        if ($event.target.id == "change-show") {
 	            $scope.publishIsShow = !$scope.publishIsShow;
@@ -29209,10 +29213,13 @@
 	        }
 	    }
 	    $scope.login = function(){
+	        if(!$scope.user.username||!$scope.user.password){
+	            return;
+	        }
 	        BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
 	            console.log(result);
 	            if(result.data.success){
-	                window.location.reload();
+	                window.location.pathname = '/';
 	            }else{
 	                alert('账号不存在，或者密码错误！');
 	                $scope.loginIsShow = false;
@@ -29221,10 +29228,11 @@
 	    }
 	    $scope.logout = function(){
 	        BaseService.user.logout().then(function(result) {
-	            window.location.reload();
+	            window.location.pathname = '/';
 	        });
 	    }
 	    $scope.changeSignupShow = function($event){
+	        console.log($event);
 	        if ($event.target.id == "change-show") {
 	            $scope.signupIsShow = !$scope.signupIsShow;
 	        }
@@ -29407,6 +29415,85 @@
 
 	module.exports = ['$scope', function($scope) {
 	    $('.slider').slider({full_width: true});
+	}]
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    $scope.publishIsShow = false;
+	    $scope.item = {};
+	    $scope.imgs = [0];
+	    $scope.$on('showPublish',function(){
+	        console.log('message');
+	        $scope.publishIsShow = true;
+	    })
+	    $scope.changePublishShow = function($event) {
+	        if ($event.target.id == "change-show") {
+	            $scope.publishIsShow = !$scope.publishIsShow;
+	        }
+	    };
+	    $scope.publish = function() {
+	        var second = function() {
+	            BaseService.item.publish($scope.item).then(function(result) {
+	                console.log(result);
+	                if (result.data.success) {
+	                    alert('商品发布成功！');
+	                }
+	                $scope.publishLoaderIsShow = false;
+	                $scope.publishIsShow = false;
+	                $rootScope.$broadcast('item-publish');
+	            });
+
+	        }
+	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
+	            alert('发布失败，好像有重要信息缺失哦？');
+	            $scope.publishLoaderIsShow = false;
+	            return;
+	        }
+	        var total = $(".upload-img").length;
+	        var complete = 0;
+	        for (var i = 0; i < total; i++) {
+
+	            var file = $(".upload-img")[i].files[0];
+	            console.log(file);
+	            if (file == undefined) {
+	                alert('图片不能为空！');
+	                //second();
+	                return;
+	            }
+	        }
+
+	        $scope.publishLoaderIsShow = true;
+	        $scope.item.imgPaths = [];
+	        for (var i = 0; i < total; i++) {
+	            var file = $(".upload-img")[i].files[0];
+	            BaseService.item.uploadImg(file, function(evt) {
+	                var result = JSON.parse(evt.target.responseText);
+	                if (result.success) {
+	                    $scope.item.imgPaths.push(result.path);
+	                    complete++;
+	                    if (complete == total) {
+	                        second();
+	                    }
+	                } else {
+	                    alert('图片上传失败!');
+	                }
+	            });
+	        }
+	    }
+
+	    $scope.addImg = function() {
+	        $scope.imgs.push(0);
+	    }
+
+	    $scope.deleteImg = function() {
+	        $scope.imgs.length = $scope.imgs.length - 1;
+	    }
+
+
 	}]
 
 

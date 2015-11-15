@@ -1,8 +1,10 @@
 div.header.z-depth-1(ng-controller="headerController")
     - if(session.login)
         div.head-bar
-            a(href="/user/#{session.userid}") #{session.name}
             a(ng-click="logout()") 退出
+            a(href="/usermanage/") 我发布的商品
+            a(href="/user/#{session.userid}") #{session.name}
+            
     - else
         div.head-bar
             a#change-show(ng-click="changeLoginShow($event)") 登陆
@@ -17,7 +19,7 @@ div.header.z-depth-1(ng-controller="headerController")
             input
             button 搜索
         - if(session.login)
-            button.waves-effect.waves-light.btn#change-show(ng-click="changePublishShow($event)") 我要发布
+            button.waves-effect.waves-light.btn#change-show(ng-click="showPublish($event)") 我要发布
         - else
             button.waves-effect.waves-light.btn#change-show(ng-click="changeLoginShow($event)") 我要发布
     div.head-category
@@ -160,6 +162,7 @@ div.header.z-depth-1(ng-controller="headerController")
                 button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
                     i.material-icons.left done_all
                     em 马上发布
+    include ../publish/publish.jade
     div.login#change-show(ng-show="loginIsShow",ng-click="changeLoginShow($event)")
         div.publish-box.z-depth-4
             div.row
