@@ -29,13 +29,15 @@ var item = {
         console.log(pubTimeStamp);
         //使用缓存
         if (itemGetCache[pubTimeStamp]) {
-            console.log('use cache');
-            return itemGetCache[pubTimeStamp];
+            console.log('use cache:' + itemGetCache[pubTimeStamp]);
+            return Promise.resolve(itemGetCache[pubTimeStamp]);
         } else {
             console.log('use api');
             var itemQuery = new AV.Query(Item);
             itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
-            itemGetCache[pubTimeStamp] = itemQuery.find();
+            itemQuery.find().then(function(result) {
+                itemGetCache[pubTimeStamp] = result;
+            });
             return itemQuery.find();
         }
     },
@@ -48,8 +50,26 @@ var item = {
         itemQuery.limit(config.amount);
         return itemQuery.find();
     },
-    update:function(params){
+    update: function(objectId, params, itemTimeStamp) {
 
+        var item = AV.Object.createWithoutData('Item', objectId);
+        item.set('name', params.name);
+        item.set('category', params.category);
+        item.set('noBargain', params.noBargain);
+        item.set('tel', params.tel);
+        item.set('qq', params.qq);
+        item.set('location', params.location);
+        item.set('price', params.price);
+        if (params.detail.join) {
+            item.set('detail', params.detail.join('\n'));
+        } else {
+            item.set('detail', params.detail);
+        }
+
+        item.set('wechat', params.wechat);
+        return item.save().then(function() {
+            itemGetCache[itemTimeStamp] = null;
+        });
     }
 };
 

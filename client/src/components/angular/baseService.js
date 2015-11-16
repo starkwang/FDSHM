@@ -18,6 +18,12 @@ angular.module('baseService', [])
                 })
             }
             var item = {
+                get: function(id) {
+                    var params = {
+                        id: id
+                    };
+                    return GET('/api/item/get', params);
+                },
                 publish: function(params) {
                     return POST('/api/item/publish', params);
                 },
@@ -31,6 +37,12 @@ angular.module('baseService', [])
                 },
                 equalTo: function(params, start, amount, category) {
                     return POST('/api/item/equal_to')
+                },
+                update: function(itemTimeStamp, params) {
+                    return POST('/api/item/update', {
+                        itemTimeStamp: itemTimeStamp,
+                        params: params
+                    });
                 }
             }
             var waterfoo = {
@@ -42,7 +54,7 @@ angular.module('baseService', [])
                     }
                     return GET('/api/item/collection', params);
                 },
-                getItemInUsermanage : function(start, amount, category) {
+                getItemInUsermanage: function(start, amount, category) {
                     var params = {
                         start: start,
                         amount: amount,

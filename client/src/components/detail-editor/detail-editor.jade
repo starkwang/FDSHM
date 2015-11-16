@@ -13,12 +13,14 @@ div(ng-controller="detailEditorController")
                                 div.circle
                 div.col.s12.title
                     h1 修改商品信息
-                div.input-field.col.s12
-                    input#item-name.validate(type="text",ng-model="item.name",required)
+                div.input.col.s12
                     label(for="item-name") 商品名称（必填）
-                div.input-field.col.s12
-                    textarea#item-detail.materialize-textarea(ng-model="item.detail",required)
+                    input#item-name.validate(type="text",ng-model="item.name",required)
+                    
+                div.input.col.s12
                     label(for="item-detail") 商品详情（必填）
+                    textarea#item-detail.materialize-textarea(ng-model="item.detail",required)
+                    
                 div.input-field.col.s6
                     select.browser-default(ng-model="item.location")
                         option(value="",disabled,selected) 交易地点
@@ -27,9 +29,10 @@ div(ng-controller="detailEditorController")
                         option(value="江湾校区") 江湾校区
                         option(value="枫林校区") 枫林校区
                         option(value="张江校区") 张江校区
-                div.input-field.col.s6
-                    input#item-price.validate(type="text",ng-model="item.price",pattern="[0-9]*",required)
+                div.input.col.s6
                     label(for="item-price") 商品价格（必填）（元）
+                    input#item-price.validate(type="text",ng-model="item.price",pattern="[0-9]*",required)
+                    
                 div.input-field.col.s6
                     select.browser-default(ng-model="item.category",required)
                         option(value="",disabled,selected) 商品类型（必填）
@@ -54,20 +57,23 @@ div(ng-controller="detailEditorController")
                 //-     button.waves-effect.waves-light.btn 标签3
                 //-     button.waves-effect.waves-light.btn 标签4
                 p.contact 联系方式
-                div.input-field.col.s6
+                div.email.input-field.col.s6
+                    h1(for="item-contact-phone") 手机（必填）
                     input#item-contact-phone.validate(type="text",ng-model="item.tel",required,pattern="[0-9]{11}")
-                    label(for="item-contact-phone") 手机（必填）
+                    
                 div.email.input-field.col.s6
                     //- input#item-contact-stuNo.validate(type="text",ng-model="item.stuNo",required,pattern="[0-9]{11}")
                     //- label(for="item-contact") 学号（必填）
                     h1 邮箱
                     p #{session.email}
-                div.input-field.col.s6
+                div.email.col.s6.input-field 
+                    h1(for="item-contact-qq") QQ
                     input#item-contact-qq.validate(type="text",ng-model="item.qq")
-                    label(for="item-contact-qq") QQ
-                div.input-field.col.s6
+                    
+                div.email.input-field.col.s6
+                    h1(for="item-contact-wechat") 微信号
                     input#item-contact-wechat.validate(type="text",ng-model="item.wechat")
-                    label(for="item-contact-wechat") 微信号
-                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
+                    
+                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="update()")
                     i.material-icons.left done_all
                     em 马上发布
