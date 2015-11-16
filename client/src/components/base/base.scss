@@ -126,10 +126,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
 abbr[title],
 acronym[title] {
     /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */

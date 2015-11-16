@@ -1,169 +1,63 @@
-div.header.z-depth-1(ng-controller="headerController")
-    - if(session.login)
-        div.head-bar
-            a(ng-click="logout()") 退出
-            a(href="/usermanage/") 我发布的商品
-            a(href="/user/#{session.userid}") #{session.name}
-            
-    - else
-        div.head-bar
-            a#change-show(ng-click="showLogin($event)") 登陆
-            a#change-show(ng-click="showSignup($event)") 注册
-    div.head-main
-        button(ng-click="test()") login
-        button(ng-click="test2()") signup
-        button(ng-click="test3()") signout
-        div.logo
-            a(href="/")
-        div.search-bar
-            input
-            button 搜索
-        - if(session.login)
-            button.waves-effect.waves-light.btn#change-show(ng-click="showPublish($event)") 我要发布
-        - else
-            button.waves-effect.waves-light.btn#change-show(data-position="bottom",data-delay="50",data-tooltip="需要先登陆哦！",ng-click="showLogin($event)") 我要发布
-    div.head-category(ng-hide="categoryIsHidden")
-        div
-            div 
-                i.iconfont.icon-digital
-                em 闲置数码
-                a(href="/category/digital")
-                div.detail.z-depth-1
-                    li.hoverable 手机
-                    li.hoverable 电脑
-                    li.hoverable 移动电子
-            div 
-                i.iconfont.icon-ride
-                em 校园代步
-                a(href="/category/ride")
-                div.detail.z-depth-1
-                    li.hoverable 自行车
-                    li.hoverable 电动车
-                    li.hoverable 滑板轮滑
-            div 
-                i.iconfont.icon-commodity
-                em 电器日用
-                a(href="/category/commodity")
-                div.detail.z-depth-1 
-                    li.hoverable 小家电
-                    li.hoverable 洗衣机
-                    li.hoverable 日用品
-            div 
-                i.iconfont.icon-book
-                em 图书教材
-                a(href="/category/book")
-                div.detail.z-depth-1 
-                    li.hoverable GER/托福
-                    li.hoverable 小说
-                    li.hoverable 教科书
-            div 
-                i.iconfont.icon-makeup
-                em 美妆衣物
-                a(href="/category/makeup")
-                div.detail.z-depth-1
-                    li.hoverable 化妆品
-                    li.hoverable 衣物鞋帽
-                    li.hoverable 箱包
-            div 
-                i.iconfont.icon-sport
-                em 运动棋牌
-                a(href="/category/sport")
-                div.detail.z-depth-1
-                    li.hoverable 运动健身
-                    li.hoverable 乐器
-                    li.hoverable 棋牌
-            div.last-hack
-                i.iconfont.icon-smallthing
-                em 票券小物
-                a(href="/category/smallthing")
-                div.detail.z-depth-1
-                    li.hoverable 票务卡券
-                    li.hoverable 食品
-                    li.hoverable 小物品
-    div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
-        div.publish-box.z-depth-4
-            div.row
-                div.col.s12.loader(ng-show="publishLoaderIsShow")
-                    div.preloader-wrapper.big.active
-                        div.spinner-layer.spinner-red-only
-                            div.circle-clipper.left
-                                div.circle
-                            div.gap-patch
-                                div.circle
-                            div.circle-clipper.right
-                                div.circle
-                div.col.s12.title
-                    h1 发布商品
-                div.input-field.col.s12
-                    input#item-name.validate(type="text",ng-model="item.name",required)
-                    label(for="item-name") 商品名称（必填）
-                div.input-field.col.s12
-                    textarea#item-detail.materialize-textarea(ng-model="item.detail",required)
-                    label(for="item-detail") 商品详情（必填）
-                div.input-field.col.s6
-                    select.browser-default(ng-model="item.location")
-                        option(value="",disabled,selected) 交易地点
-                        option(value="本部") 本部
-                        option(value="江湾") 江湾
-                        option(value="枫林") 枫林
-                        option(value="张江") 张江
-                div.input-field.col.s6
-                    input#item-price.validate(type="text",ng-model="item.price",pattern="[0-9]*",required)
-                    label(for="item-price") 商品价格（必填）（元）
-                div.input-field.col.s6
-                    select.browser-default(ng-model="item.category",required)
-                        option(value="",disabled,selected) 商品类型（必填）
-                        option(value="闲置数码") 闲置数码
-                        option(value="校园代步") 校园代步
-                        option(value="电器日用") 电器日用
-                        option(value="图书教材") 图书教材
-                        option(value="美妆衣物") 美妆衣物
-                        option(value="运动棋牌") 运动棋牌
-                        option(value="票券小物") 票券小物
-                div.switch.col.s6
-                    label 
-                        em 可讲价
-                        input(type="checkbox",ng-model="item.noBargain")
-                        span.lever
-                        em 不可讲价
-                
-                //- div.col.s12.tags
-                //-     p 标签
-                //-     button.waves-effect.waves-light.btn 标签1
-                //-     button.waves-effect.waves-light.btn 标签2
-                //-     button.waves-effect.waves-light.btn 标签3
-                //-     button.waves-effect.waves-light.btn 标签4
-                p.contact 联系方式
-                div.input-field.col.s6
-                    input#item-contact-phone.validate(type="text",ng-model="item.tel",required,pattern="[0-9]{11}")
-                    label(for="item-contact") 手机（必填）
-                div.email.input-field.col.s6
-                    //- input#item-contact-stuNo.validate(type="text",ng-model="item.stuNo",required,pattern="[0-9]{11}")
-                    //- label(for="item-contact") 学号（必填）
-                    h1 邮箱
-                    p #{session.email}
-                div.input-field.col.s6
-                    input#item-contact-qq.validate(type="text",ng-model="item.qq")
-                    label(for="item-contact") QQ
-                div.input-field.col.s6
-                    input#item-contact-wechat.validate(type="text",ng-model="item.wechat")
-                    label(for="item-contact") 微信号
-                div.file-field.input-field.col.s12(ng-repeat="img in imgs track by $index")
-                    div.btn
-                        span 商品图片
-                        input.upload-img(type="file",accept="image/*")
-                            
-                    div.file-path-wrapper
-                        input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
-                button.btn-floating.btn-small.waves-effect.waves-light.add(ng-click="addImg()")
-                    i.material-icons add
-                button.btn-floating.btn-small.waves-effect.waves-light.delete(ng-show="imgs.length>1",ng-click="deleteImg()")
-                    i.material-icons delete
-                button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
-                    i.material-icons.left done_all
-                    em 马上发布
-    include ../publish/publish.jade
-    include ../login/login.jade
-    include ../signup/signup.jade
-
-
+div.header.navbar-fixed(ng-controller="headerController")
+    nav.teal.lighten-1
+        div.nav-wrapper
+            a.brand-logo(href="/") 旦市
+            div.nav-wrapper.search-bar
+                div.input-field
+                    input#search(type="search",required)
+                    label(for="search")
+                        i.material-icons search
+                    i.material-icons trending_flat
+            ul.right.hide-on-med-and-down
+                - if(session.login)
+                    li.publish-btn
+                        button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
+                    li
+                        a(href="/user/") #{session.name}
+                    li
+                        a(href="/usermanage/") 我发布的商品
+                    li
+                        a(ng-click="logout()") 退出
+                - else
+                    li.publish-btn
+                        button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showLogin()",data-position="bottom",data-delay="50",data-tooltip="需要先登陆哦！") 我要发布
+                    li
+                        a(ng-click="showLogin()") 登陆
+                    li
+                        a(ng-click="showSignup()") 注册
+    nav.teal.nav2(ng-hide="categoryIsHidden")
+        div.nav-wrapper
+            ul.hide-on-med-and-down.category
+                li(ng-class="{true: 'active'}[isDigital]")
+                    a(href="/category/digital") 
+                        i.iconfont.icon-digital
+                        em 闲置数码
+                li(ng-class="{true: 'active'}[isRide]")
+                    a(href="/category/ride")
+                        i.iconfont.icon-ride
+                        em 校园代步
+                li(ng-class="{true: 'active'}[isCommodity]")
+                    a(href="/category/commodity")
+                        i.iconfont.icon-commodity
+                        em 电器日用
+                li(ng-class="{true: 'active'}[isBook]")
+                    a(href="/category/book")
+                        i.iconfont.icon-book
+                        em 图书教材
+                li(ng-class="{true: 'active'}[isMakeup]")
+                    a(href="/category/makeup")
+                        i.iconfont.icon-makeup
+                        em 美妆衣物
+                li(ng-class="{true: 'active'}[isSport]")
+                    a(href="/category/sport")
+                        i.iconfont.icon-sport
+                        em 运动棋牌
+                li(ng-class="{true: 'active'}[isSmallthing]")
+                    a(href="/category/smallthing")
+                        i.iconfont.icon-smallthing
+                        em 票券小物
+                //- li.active
+                //-     a(href="") a
+include ../publish/publish.jade
+include ../login/login.jade
+include ../signup/signup.jade

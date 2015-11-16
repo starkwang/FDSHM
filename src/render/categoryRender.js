@@ -1,6 +1,7 @@
 function render(req, res) {
     var sess = req.session;
     var category;
+    console.log(req.params.category);
     switch (req.params.category) {
         case 'digital':
             category = '闲置数码'

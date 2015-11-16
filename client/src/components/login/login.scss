@@ -5,8 +5,9 @@ div.login {
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 99;
+    z-index: 9999;
     .publish-box {
+        z-index: 9999;
         >.row {
             padding-bottom: 70px;
         }

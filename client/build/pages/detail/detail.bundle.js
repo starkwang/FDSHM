@@ -29152,6 +29152,30 @@
 	        $scope.categoryIsHidden = true;
 	    }
 	    $('[data-position]').tooltip({delay: 50});
+
+	    switch(window.location.pathname){
+	        case '/category/digital':
+	            $scope.isDigital = true;
+	            break;
+	        case '/category/ride':
+	            $scope.isRide = true;
+	            break;
+	        case '/category/commodity':
+	            $scope.isCommodity = true;
+	            break;
+	        case '/category/book':
+	            $scope.isBook = true;
+	            break;
+	        case '/category/makeup':
+	            $scope.isMakeup = true;
+	            break;
+	        case '/category/sport':
+	            $scope.isSport = true;
+	            break;
+	        case '/category/smallthing':
+	            $scope.isSmallthing = true;
+	            break;
+	    }
 	    $scope.showPublish = function() {
 	        $rootScope.$broadcast('showPublish');
 	    }
