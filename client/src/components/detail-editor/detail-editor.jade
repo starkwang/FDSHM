@@ -1,8 +1,8 @@
-div(ng-controller="publishController")
-    div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
-        div.publish-box.z-depth-4
+div(ng-controller="detailEditorController")
+    div.detail-editor#change-show(ng-show="detailEditorIsShow",ng-click="changeDetailEditorShow($event)")
+        div.detail-editor-box.z-depth-4
             div.row
-                div.col.s12.loader(ng-show="publishLoaderIsShow")
+                div.col.s12.loader(ng-show="detailEditorLoaderIsShow")
                     div.preloader-wrapper.big.active
                         div.spinner-layer.spinner-red-only
                             div.circle-clipper.left
@@ -12,7 +12,7 @@ div(ng-controller="publishController")
                             div.circle-clipper.right
                                 div.circle
                 div.col.s12.title
-                    h1 发布商品
+                    h1 修改商品信息
                 div.input-field.col.s12
                     input#item-name.validate(type="text",ng-model="item.name",required)
                     label(for="item-name") 商品名称（必填）
@@ -68,17 +68,6 @@ div(ng-controller="publishController")
                 div.input-field.col.s6
                     input#item-contact-wechat.validate(type="text",ng-model="item.wechat")
                     label(for="item-contact-wechat") 微信号
-                div.file-field.input-field.col.s12(ng-repeat="img in imgs track by $index")
-                    div.btn
-                        span 商品图片
-                        input.upload-img(type="file",accept="image/*")
-                            
-                    div.file-path-wrapper
-                        input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
-                button.btn-floating.btn-small.waves-effect.waves-light.add(ng-click="addImg()")
-                    i.material-icons add
-                button.btn-floating.btn-small.waves-effect.waves-light.delete(ng-show="imgs.length>1",ng-click="deleteImg()")
-                    i.material-icons delete
                 button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
                     i.material-icons.left done_all
                     em 马上发布

@@ -1,12 +1,11 @@
 html(ng-app="starkAPP")
     head
-        title #{detailBox.name}
-        link(rel='stylesheet',href='/static/pages/detail/detail.css')
+        title 我发布的商品
+        link(rel='stylesheet',href='/static/pages/usermanage/usermanage.css')
         script(type='text/javascript',src='/static/pages/index/index.bundle.js')
         script(type='text/javascript',src='/static/base/jquery.js')
         script(type='text/javascript',src='/static/base/materialize.min.js')
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
     body(ng-view)
         include ../components/header/header.jade
-        include ../components/detail-box/detail-box.jade
-        include ../components/detail-editor/detail-editor.jade
+        include ../components/waterfoo/waterfoo.jade

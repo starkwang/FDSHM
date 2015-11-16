@@ -65,6 +65,7 @@
 	starkAPP.controller('publishController', __webpack_require__(10));
 	starkAPP.controller('loginController', __webpack_require__(11));
 	starkAPP.controller('signupController', __webpack_require__(12));
+	starkAPP.controller('detailEditorController', __webpack_require__(13));
 	module.exports = starkAPP;
 
 
@@ -29078,6 +29079,9 @@
 	                    xhr.addEventListener("load", callback, false);
 	                    xhr.open("POST", "/api/upload");
 	                    xhr.send(fd);
+	                },
+	                equalTo: function(params, start, amount, category) {
+	                    return POST('/api/item/equal_to')
 	                }
 	            }
 	            var waterfoo = {
@@ -29088,7 +29092,15 @@
 	                        category: category
 	                    }
 	                    return GET('/api/item/collection', params);
-	                }
+	                },
+	                getItemInUsermanage : function(start, amount, category) {
+	                    var params = {
+	                        start: start,
+	                        amount: amount,
+	                        category: category
+	                    }
+	                    return POST('/api/user/my_item', params);
+	                },
 	            };
 	            var user = {
 	                login: function(username, password) {
@@ -29125,6 +29137,10 @@
 /***/ function(module, exports) {
 
 	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    if(window.location.pathname == '/usermanage/'){
+	        $scope.categoryIsHidden = true;
+	    }
+	    $('[data-position]').tooltip({delay: 50});
 	    $scope.showPublish = function() {
 	        $rootScope.$broadcast('showPublish');
 	    }
@@ -29164,6 +29180,11 @@
 	__webpack_require__(8);
 	module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseService, $location) {
 
+	    var dataSource = BaseService.waterfoo.getItem;
+	    if(window.location.pathname == '/usermanage/'){
+	        $scope.waterfooListIsShow = true;
+	        dataSource = BaseService.waterfoo.getItemInUsermanage;
+	    }
 	    var now = 0;
 	    var everyPullAmount = 20;
 	    $scope.items = [];
@@ -29205,7 +29226,7 @@
 
 	    $scope.getItem = function() {
 	        $scope.isBusy = $scope.loaderShow = true;
-	        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount, category).then(function(result) {
+	        dataSource(now * everyPullAmount, everyPullAmount, category).then(function(result) {
 	            if (result.data.length === 0) {
 	                $scope.isBusy = true;
 	                $scope.loaderShow = false;
@@ -29215,6 +29236,7 @@
 	            }
 	        });
 	        now++;
+	        console.log($scope.items);
 	    }
 
 
@@ -29310,8 +29332,16 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = ['$scope', function($scope) {
-	    $('.slider').slider({full_width: true});
+	module.exports = ['$scope', '$rootScope', function($scope, $rootScope) {
+	    $('.slider').slider({
+	        full_width: true
+	    });
+	    $scope.detialBox = {};
+	    var item_id = window.location.pathname.split('/')[2];
+	    $scope.showDetailEditor = function() {
+	        $rootScope.$broadcast('showDetailEditor', item_id)
+	    }
+	    console.log($scope);
 	}]
 
 
@@ -29463,6 +29493,26 @@
 	            }
 	        });
 	    }
+	}]
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    $scope.detailEditorIsShow = false;
+	    $scope.item = {};
+	    $scope.$on('showDetailEditor',function(){
+	        $scope.detailEditorIsShow = true;
+	    })
+	    $scope.changeDetailEditorShow = function($event) {
+	        if ($event.target.id == "change-show") {
+	            $scope.detailEditorIsShow = !$scope.detailEditorIsShow;
+	        }
+	    };
+
+
 	}]
 
 

@@ -51,6 +51,9 @@ div.detail-box.z-depth-1.row(ng-controller="detailBoxController")
                     p 发布时间
                 td
                     h1.item-pub-time #{detailBox.pubTime}
+        - if(session.login)
+            button.edit-btn.btn-floating.btn-large.red(ng-click="showDetailEditor()") 修改
+                //-i.large.material-icon mode_edit
 div.detail-box.z-depth-1.row
     h1.title 商品详情
     - for (var i = 0; i < detailBox.detail.length; i++) {

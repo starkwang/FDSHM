@@ -1,0 +1,90 @@
+div.detail-editor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 99;
+    .detail-editor-box {
+        >.row {
+            padding-bottom: 70px;
+        }
+        width: 500px;
+        position:absolute;
+        left: 50%;
+        margin-left: -250px;
+        top: 5%;
+        background:#fff;
+        .title {
+            background: #26a69a;
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+        }
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            .preloader-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -32px;
+                margin-left: -32px;
+            }
+        }
+        div.s6 {
+            height: 50px;
+        }
+        div.switch {
+            padding-top: 30px;
+        }
+        div.tags {
+            margin-top: 20px;
+            p {
+                margin-bottom: 10px;
+            }
+            button {
+                margin: 10px;
+            }
+        }
+        div.email {
+            h1 {
+                margin-top: -10px;
+                font-size: 13px;
+                color: #9e9e9e;
+            }
+            p {
+                margin-top: 18px;
+                font-size: 16px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #9e9e9e;
+            }
+        }
+        p.contact {
+            float: left;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        .publish-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -75px;
+        }
+        .publish-btn:hover {
+            background-color: lighten(#EF5350, 5%) !important;
+        }
+        .add,
+        .delete {
+            float: left;
+            margin-left: 20px;
+        }
+    }
+}

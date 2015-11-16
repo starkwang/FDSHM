@@ -1,6 +1,11 @@
 require('../waterfoo/ng-infinite-scroll.min.js');
 module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseService, $location) {
 
+    var dataSource = BaseService.waterfoo.getItem;
+    if(window.location.pathname == '/usermanage/'){
+        $scope.waterfooListIsShow = true;
+        dataSource = BaseService.waterfoo.getItemInUsermanage;
+    }
     var now = 0;
     var everyPullAmount = 20;
     $scope.items = [];
@@ -42,7 +47,7 @@ module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseSer
 
     $scope.getItem = function() {
         $scope.isBusy = $scope.loaderShow = true;
-        BaseService.waterfoo.getItem(now * everyPullAmount, everyPullAmount, category).then(function(result) {
+        dataSource(now * everyPullAmount, everyPullAmount, category).then(function(result) {
             if (result.data.length === 0) {
                 $scope.isBusy = true;
                 $scope.loaderShow = false;
@@ -52,6 +57,7 @@ module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseSer
             }
         });
         now++;
+        console.log($scope.items);
     }
 
 

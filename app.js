@@ -12,7 +12,7 @@ var render = {
     detail: require('./src/render/detailRender'),
     category: require('./src/render/categoryRender'),
     login:require('./src/render/loginRender'),
-    //usermanage:require('./src/render/usermanage')
+    usermanage:require('./src/render/usermanageRender')
 };
 var api = require('./src/api/api');
 
@@ -41,16 +41,18 @@ app.get('/', render.index);
 app.get('/login', render.login);
 app.get('/item/:pubTimeStamp', render.detail);
 app.get('/category/:category', render.category);
-//app.get('/usermanage/', render.usermanage);
+app.get('/usermanage/', render.usermanage);
 
 
 //API
 app.get('/api/item/collection', api.item.collection);
 app.post('/api/item/publish', api.item.publish);
+app.post('/api/item/equal_to',api.item.equalTo);
+
 app.post('/api/user/signup', api.user.signup);
 app.post('/api/user/login', api.user.login);
 app.post('/api/user/logout', api.user.logout);
-
+app.post('/api/user/my_item',api.user.myItem);
 
 
 var storage = multer.diskStorage({

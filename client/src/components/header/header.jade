@@ -21,8 +21,8 @@ div.header.z-depth-1(ng-controller="headerController")
         - if(session.login)
             button.waves-effect.waves-light.btn#change-show(ng-click="showPublish($event)") 我要发布
         - else
-            button.waves-effect.waves-light.btn#change-show(ng-click="showLogin($event)") 我要发布
-    div.head-category
+            button.waves-effect.waves-light.btn#change-show(data-position="bottom",data-delay="50",data-tooltip="需要先登陆哦！",ng-click="showLogin($event)") 我要发布
+    div.head-category(ng-hide="categoryIsHidden")
         div
             div 
                 i.iconfont.icon-digital

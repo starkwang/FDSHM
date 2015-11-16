@@ -1,10 +1,11 @@
 AV = require('avoscloud-sdk');
 login = require('./login');
 mail = require('./mail');
-
+Promise = require('bluebird');
 AV.initialize('YDTUXYEl6XT9bhNzsBAdDIYm', 'HvxtrUGyHQjUdaeIG5HHM0JE');
 var Item = AV.Object.extend('Item');
 
+var itemGetCache = {};
 var item = {
     publish: function(params) {
         var item = new Item();
@@ -26,23 +27,43 @@ var item = {
     },
     get: function(pubTimeStamp) {
         console.log(pubTimeStamp);
+        //使用缓存
+        if (itemGetCache[pubTimeStamp]) {
+            console.log('use cache');
+            return itemGetCache[pubTimeStamp];
+        } else {
+            console.log('use api');
+            var itemQuery = new AV.Query(Item);
+            itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
+            itemGetCache[pubTimeStamp] = itemQuery.find();
+            return itemQuery.find();
+        }
+    },
+    equalTo: function(params, config) {
         var itemQuery = new AV.Query(Item);
-        itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
+        for (attr in params) {
+            itemQuery.equalTo(attr, params[attr]);
+        }
+        itemQuery.skip(config.start);
+        itemQuery.limit(config.amount);
         return itemQuery.find();
+    },
+    update:function(params){
+
     }
 };
 
 var user = {
-    signup: function(username, email, password,name) {
+    signup: function(username, email, password, name) {
         var user = new AV.User();
         user.set("username", username);
         user.set("password", password);
         user.set("email", email);
         user.set("name", name);
-        user.set('timeStamp',new Date().getTime());
+        user.set('timeStamp', new Date().getTime());
         return user.signUp();
     },
-    login: function(username,password) {
+    login: function(username, password) {
         return AV.User.logIn(username, password);
     }
 };
@@ -52,5 +73,5 @@ module.exports = {
     item: item,
     login: login,
     mail: mail,
-    user:user
+    user: user
 }

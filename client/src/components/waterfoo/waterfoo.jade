@@ -1,13 +1,23 @@
 div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",infinite-scroll-distance="1",infinite-scroll-disabled="isBusy")
-    div.item-wrapper
+    div.item-wrapper.normal(ng-hide="waterfooListIsShow")
         div.card.col(ng-repeat="item in items")
             a(ng-href="/item/{{item.pubTimeStamp||0}}")
-                div.card-image
-                    img(ng-src="{{item.image[0]}}")
+                div.card-image(style="background-image:url({{item.image[0]}})")
+                    //- img(ng-src="{{item.image[0]}}")
                     span.card-title ￥{{item.price}}
                 div.card-content
-                    p {{item.content}}
-                div.card-action
-                    a {{item.link}}
+                    p {{item.name}}
+    div.item-wrapper.list(ng-show="waterfooListIsShow")
+        div.card.row(ng-repeat="item in items")
+            a(ng-href="/item/{{item.pubTimeStamp||0}}")
+                div.card-image.col.s3(style="background-image:url({{item.image[0]}})")
+                    //- img(ng-src="{{item.image[0]}}")
+                div.main-info.col.s6
+                    h1.item-name {{item.name}}
+                    
+                    h1.item-publisher.col.s6 发布者：{{item.publisher_name}}
+                    h1.item-location.col.s6 {{item.location}}
+                div.col.s3
+                    h1.item-price ￥{{item.price}}
     div.progress(ng-show="loaderShow")
         div.indeterminate

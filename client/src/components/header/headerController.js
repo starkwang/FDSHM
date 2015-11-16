@@ -1,4 +1,8 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+    if(window.location.pathname == '/usermanage/'){
+        $scope.categoryIsHidden = true;
+    }
+    $('[data-position]').tooltip({delay: 50});
     $scope.showPublish = function() {
         $rootScope.$broadcast('showPublish');
     }
