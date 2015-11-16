@@ -35,6 +35,12 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
         .card-content{
             font-size: 16px;
             line-height: 20px;
+            p{
+                height: 20px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
         }
     }
     .list {
