@@ -16,7 +16,7 @@ var item = {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            res.send(items.reverse());
+            res.send(items);
             res.end();
         });
     },

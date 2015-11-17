@@ -8,4 +8,57 @@ html(ng-app="starkAPP")
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
     body(ng-view)
         include ../components/header/header.jade
-        include ../components/waterfoo/waterfoo.jade
+        div(ng-controller="headerController")
+            div.index-title 最新发布
+            div.waterfoo.row
+                div.item-wrapper.normal
+                    - if(data.all.length >0)
+                        - for(var i =0;i<data.all.length;i++){
+                            div.card.col
+                                a(href="/item/#{data.all[i].pubTimeStamp||0}")
+                                    div.card-image(style="background-image:url(#{data.all[i].image[0]})")
+                                        //- img(ng-src="{{item.image[0]}}")
+                                        span.card-title ￥#{data.all[i].price}
+                                    div.card-content
+                                        p #{data.all[i].name}           
+                        - }
+                    - else
+                        div 空的哦
+            - for(category in fliter){
+                - if(category!='all')
+                    div.index-title
+                        - if(category == 'digital')
+                            i.iconfont.icon-digital
+                        - if(category == 'ride')
+                            i.iconfont.icon-ride
+                        - if(category == 'commodity')
+                            i.iconfont.icon-commodity
+                        - if(category == 'book')
+                            i.iconfont.icon-book
+                        - if(category == 'makeup')
+                            i.iconfont.icon-makeup
+                        - if(category == 'sport')
+                            i.iconfont.icon-sport
+                        - if(category == 'smallthing')
+                            i.iconfont.icon-smallthing
+                        p #{fliter[category]}
+                    div.waterfoo.row
+                        div.item-wrapper.normal
+                            - if(data[category].length >0)
+                                - for(var i =0;i<data[category].length;i++){
+                                    div.card.col
+                                        a(href="/item/#{data[category][i].pubTimeStamp||0}")
+                                            div.card-image(style="background-image:url(#{data[category][i].image[0]})")
+                                                //- img(ng-src="{{item.image[0]}}")
+                                                span.card-title ￥#{data[category][i].price}
+                                            div.card-content
+                                                p #{data[category][i].name}           
+                                - }
+                            - else
+                                div.no-item 
+                                    p 哎呀，还没有人发布这个类型的商品哦~
+                                    - if(session.login)
+                                        button.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
+                                    - else
+                                        button.waves-effect.waves-light.btn(ng-click="showLogin()",data-position="top",data-delay="50",data-tooltip="需要先登陆哦！") 我要发布
+            - }

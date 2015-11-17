@@ -3,7 +3,7 @@ $depth-2:0 8px 17px 0 rgba(0, 0, 0, 0.2),
 $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 .waterfoo {
-    width: 960px;
+    width: 1040px;
     margin: 10px auto;
     .normal {
         a {
@@ -14,7 +14,7 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
         }
         .card {
             margin: 10px;
-            width: 300px;
+            width: 240px;
             padding: 0;
             transition: all 0.3s;
             background: #f9f9f9;
@@ -24,7 +24,7 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             background: #fff;
         }
         .card-image {
-            height: 300px;
+            height: 260px;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
