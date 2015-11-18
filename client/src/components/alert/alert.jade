@@ -1,0 +1,8 @@
+div(ng-controller="alertController")
+    div.alert(ng-show="alertIsShow",ng-click="shake()")
+        div.publish-box.z-depth-4(class="{{shake}}")
+            div.row
+                div.col.s12.title.red.lighten-1
+                    h1 提示
+                div.content.col.s12 {{text}}
+                a.waves-effect.btn-flat.close(ng-click="close()") 关闭

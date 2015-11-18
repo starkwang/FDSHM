@@ -237,3 +237,17 @@ body {
     animation: 0.7s fadeIn;
     z-index: 95;
 }
+.alert.ng-hide-remove {
+    -webkit-animation: 0.5s bounceIn;
+    -moz-animation: 0.5s bounceIn;
+    -o-animation: 0.5s bounceIn;
+    animation: 0.5s bounceIn;
+    z-index: 99999;
+}
+.alert.ng-hide-add {
+    -webkit-animation: 0.5s bounceOut;
+    -moz-animation: 0.5s bounceOut;
+    -o-animation: 0.5s bounceOut;
+    animation: 0.5s bounceOut;
+    z-index: 99999;
+}

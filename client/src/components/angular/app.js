@@ -13,4 +13,5 @@ starkAPP.controller('publishController', require('../publish/publishController.j
 starkAPP.controller('loginController', require('../login/loginController.js'));
 starkAPP.controller('signupController', require('../signup/signupController.js'));
 starkAPP.controller('detailEditorController', require('../detail-editor/detail-editor-controller.js'));
+starkAPP.controller('alertController', require('../alert/alertController.js'));
 module.exports = starkAPP;

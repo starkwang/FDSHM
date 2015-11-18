@@ -24,16 +24,18 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
 
     $scope.update = function() {
         if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-            alert('有必要信息缺失哦~')
+            $rootScope.$broadcast('alert', '有必要信息缺失哦~');
             return;
         }
         BaseService.item.update(id, $scope.item).then(function(result){
             console.log(result);
             if(result.data){
-                alert('修改成功！');
-                window.location.reload();
+                $rootScope.$broadcast('alert', '修改成功！');
+                setTimeout(function(){
+                    window.location.reload();
+                }, 2000);
             }else{
-                alert('修改失败');
+                $rootScope.$broadcast('alert', '修改失败');
             }
         });
     }

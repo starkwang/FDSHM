@@ -66,6 +66,7 @@
 	starkAPP.controller('loginController', __webpack_require__(11));
 	starkAPP.controller('signupController', __webpack_require__(12));
 	starkAPP.controller('detailEditorController', __webpack_require__(13));
+	starkAPP.controller('alertController', __webpack_require__(14));
 	module.exports = starkAPP;
 
 
@@ -29402,7 +29403,7 @@
 	            BaseService.item.publish($scope.item).then(function(result) {
 	                console.log(result);
 	                if (result.data.success) {
-	                    alert('商品发布成功！');
+	                    $rootScope.broadcast('alert', '商品发布成功！');
 	                }
 	                $scope.publishLoaderIsShow = false;
 	                $scope.publishIsShow = false;
@@ -29411,7 +29412,7 @@
 
 	        }
 	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-	            alert('发布失败，好像有重要信息缺失哦？');
+	            $rootScope.broadcast('alert', '发布失败，好像有重要信息缺失哦？');
 	            $scope.publishLoaderIsShow = false;
 	            return;
 	        }
@@ -29422,7 +29423,7 @@
 	            var file = $(".upload-img")[i].files[0];
 	            console.log(file);
 	            if (file == undefined) {
-	                alert('图片不能为空！');
+	                $rootScope.broadcast('alert', '图片不能为空！');
 	                //second();
 	                return;
 	            }
@@ -29441,7 +29442,7 @@
 	                        second();
 	                    }
 	                } else {
-	                    alert('图片上传失败!');
+	                    $rootScope.broadcast('alert', '图片上传失败!');
 	                }
 	            });
 	        }
@@ -29464,6 +29465,7 @@
 /***/ function(module, exports) {
 
 	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    $scope.user = {};
 	    if (window.location.pathname == '/login') {
 	        $scope.loginIsShow = true;
 	    } else {
@@ -29480,6 +29482,7 @@
 	    }
 	    $scope.login = function() {
 	        if (!$scope.user.username || !$scope.user.password) {
+	            $rootScope.$broadcast('alert', '账号或者密码格式错误');
 	            return;
 	        }
 	        BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
@@ -29487,7 +29490,7 @@
 	            if (result.data.success) {
 	                window.location.pathname = '/';
 	            } else {
-	                alert('账号不存在，或者密码错误！');
+	                $rootScope.$broadcast('alert', '账号不存在，或者密码错误！');
 	            }
 	        });
 	    }
@@ -29514,18 +29517,18 @@
 	    }
 	    $scope.signup = function() {
 	        if (!$scope.signupInfo.email) {
-	            alert('请填入正确的复旦邮箱！');
+	            $rootScope.$broadcast('alert', '请填入正确的复旦邮箱！');
 	            return;
 	        }
 	        if (!$scope.signupInfo.password || !$scope.signupInfo.name) {
-	            alert('密码或用户名不能为空！');
+	            $rootScope.$broadcast('alert', '密码或用户名不能为空！');
 	            return;
 	        }
 	        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
 	            if (result.data.success) {
-	                alert('注册成功！');
+	                $rootScope.$broadcast('alert', '注册成功！');
 	            } else {
-	                alert('注册失败');
+	                $rootScope.$broadcast('alert', '注册失败');
 	            }
 	        });
 	    }
@@ -29562,21 +29565,39 @@
 
 	    $scope.update = function() {
 	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-	            alert('有必要信息缺失哦~')
+	            $rootScope.$broadcast('alert', '有必要信息缺失哦~');
 	            return;
 	        }
 	        BaseService.item.update(id, $scope.item).then(function(result){
 	            console.log(result);
 	            if(result.data){
-	                alert('修改成功！');
-	                window.location.reload();
+	                $rootScope.$broadcast('alert', '修改成功！');
+	                setTimeout(function(){
+	                    window.location.reload();
+	                }, 2000);
 	            }else{
-	                alert('修改失败');
+	                $rootScope.$broadcast('alert', '修改失败');
 	            }
 	        });
 	    }
 
 
+	}]
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    $scope.$on('alert', function(event,text) {
+	        console.log(text);
+	        $scope.alertIsShow = true;
+	        $scope.text = text;
+	    })
+	    $scope.close = function() {
+	        $scope.alertIsShow = false;
+	    }
 	}]
 
 

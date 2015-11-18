@@ -11,18 +11,18 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.signup = function() {
         if (!$scope.signupInfo.email) {
-            alert('请填入正确的复旦邮箱！');
+            $rootScope.$broadcast('alert', '请填入正确的复旦邮箱！');
             return;
         }
         if (!$scope.signupInfo.password || !$scope.signupInfo.name) {
-            alert('密码或用户名不能为空！');
+            $rootScope.$broadcast('alert', '密码或用户名不能为空！');
             return;
         }
         BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
             if (result.data.success) {
-                alert('注册成功！');
+                $rootScope.$broadcast('alert', '注册成功！');
             } else {
-                alert('注册失败');
+                $rootScope.$broadcast('alert', '注册失败');
             }
         });
     }

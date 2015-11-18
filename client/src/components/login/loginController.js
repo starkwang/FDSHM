@@ -1,4 +1,5 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+    $scope.user = {};
     if (window.location.pathname == '/login') {
         $scope.loginIsShow = true;
     } else {
@@ -15,6 +16,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.login = function() {
         if (!$scope.user.username || !$scope.user.password) {
+            $rootScope.$broadcast('alert', '账号或者密码格式错误');
             return;
         }
         BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
@@ -22,7 +24,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             if (result.data.success) {
                 window.location.pathname = '/';
             } else {
-                alert('账号不存在，或者密码错误！');
+                $rootScope.$broadcast('alert', '账号不存在，或者密码错误！');
             }
         });
     }

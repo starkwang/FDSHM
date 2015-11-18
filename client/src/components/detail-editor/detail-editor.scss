@@ -1,11 +1,12 @@
 div.detail-editor {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0);
-    z-index: 99;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    overflow: auto;
     .detail-editor-box {
         >.row {
             padding-bottom: 70px;
