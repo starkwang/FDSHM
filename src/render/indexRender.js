@@ -1,15 +1,17 @@
 service = require('../service/service');
 var cache = {};
-setInterval(function(){
+setInterval(function() {
     cache = {};
     console.log('clear index cache');
-},60000);
+}, 60000);
+
 function render(req, res) {
     if (statusCheck(cache)) {
         console.log('use index cache');
-        renderer(req, res);
+        renderer(req, res, cache);
         return;
     } else {
+        var tmp_cache = {};
         console.log('use index api');
         service.item.collection({
             category: 'all',
@@ -29,9 +31,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.all = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.all = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
 
@@ -53,9 +56,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.digital = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.digital = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -76,9 +80,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.ride = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.ride = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -99,9 +104,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.commodity = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.commodity = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -122,9 +128,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.book = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.book = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -145,9 +152,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.makeup = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.makeup = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -168,9 +176,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.sport = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.sport = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
         service.item.collection({
@@ -191,9 +200,10 @@ function render(req, res) {
                     pubTimeStamp: object.get('pubTimeStamp')
                 })
             }
-            cache.smallthing = items;
-            if (statusCheck(cache)) {
-                renderer(req, res)
+            tmp_cache.smallthing = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
             }
         });
     }
@@ -202,13 +212,15 @@ function render(req, res) {
 function statusCheck(cache) {
     if (cache.all && cache.digital && cache.ride && cache.commodity && cache.book && cache.makeup && cache.sport && cache.smallthing) {
         return true;
+    } else {
+        return false;
     }
 }
 
-function renderer(req, res) {
+function renderer(req, res, data) {
     res.render('index', {
         session: req.session ? req.session : {},
-        data: cache,
+        data: data,
         fliter: {
             digital: '闲置数码',
             ride: '校园代步',
