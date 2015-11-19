@@ -5,6 +5,7 @@ var alphabet = require('alphabetjs');
 var bodyParser = require('body-parser');
 var promise = require('bluebird');
 var session = require('express-session');
+var morgan = require('morgan');
 var RedisStore = require('connect-redis')(session);
 
 var render = {
@@ -18,6 +19,8 @@ var api = require('./src/api/api');
 
 app.set('view engine', 'jade');
 app.set('views', './client/src/template');
+
+app.use(morgan('dev'))
 
 //静态资源
 app.use('/static', express.static('client/build/'));

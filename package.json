@@ -10,6 +10,7 @@
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "jade": "^1.11.0",
+    "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "nodemailer": "^1.9.0",
     "redis": "^2.3.0"
