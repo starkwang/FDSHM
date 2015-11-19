@@ -1,3 +1,5 @@
+var preCompile = require('./preCompile');
+
 function render(req, res) {
     var sess = req.session;
     var category;
@@ -24,9 +26,13 @@ function render(req, res) {
             category = '票券小物'
             break;
     }
-    res.render('category', {
+    res.send(preCompile.category({
         session: req.session ? req.session : {},
         category: category
-    });
+    }));
+    // res.render('category', {
+    //     session: req.session ? req.session : {},
+    //     category: category
+    // });
 }
 module.exports = render;

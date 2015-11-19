@@ -218,7 +218,7 @@ function statusCheck(cache) {
 }
 
 function renderer(req, res, data) {
-    res.render('index', {
+    res.send(preCompile.index({
         session: req.session ? req.session : {},
         data: data,
         fliter: {
@@ -230,7 +230,20 @@ function renderer(req, res, data) {
             sport: '运动棋牌',
             smallthing: '票券小物'
         }
-    })
+    }));
+    // res.render('index', {
+    //     session: req.session ? req.session : {},
+    //     data: data,
+    //     fliter: {
+    //         digital: '闲置数码',
+    //         ride: '校园代步',
+    //         commodity: '电器日用',
+    //         book: '图书教材',
+    //         makeup: '美妆衣物',
+    //         sport: '运动棋牌',
+    //         smallthing: '票券小物'
+    //     }
+    // })
 }
 
 

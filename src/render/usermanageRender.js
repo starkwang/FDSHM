@@ -2,9 +2,9 @@ function render(req, res) {
     if (!req.session.login) {
         res.redirect('/login');
     } else {
-        res.render('usermanage', {
+        res.send(preCompile.usermanage({
             session: req.session ? req.session : {}
-        });
+        }));
     }
 
 }
