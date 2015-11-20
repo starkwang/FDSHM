@@ -1,8 +1,8 @@
 require('../waterfoo/ng-infinite-scroll.min.js');
-module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseService, $location) {
+module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($scope, BaseService, $location, $rootScope) {
 
     var dataSource = BaseService.waterfoo.getItem;
-    if(window.location.pathname == '/usermanage/'){
+    if (window.location.pathname == '/usermanage/') {
         $scope.waterfooListIsShow = true;
         dataSource = BaseService.waterfoo.getItemInUsermanage;
     }
@@ -55,9 +55,9 @@ module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseSer
                 $scope.items = $scope.items.concat(result.data);
                 $scope.isBusy = $scope.loaderShow = false;
             }
+            console.log($scope.items);
         });
         now++;
-        console.log($scope.items);
     }
 
 
@@ -75,4 +75,8 @@ module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseSer
     $scope.$on('item-publish', function() {
         init();
     });
+
+    $scope.showDetailEditor = function() {
+        $rootScope.$broadcast('showDetailEditor', this.item.pubTimeStamp)
+    }
 }]

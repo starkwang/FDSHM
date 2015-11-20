@@ -5,14 +5,21 @@ div(ng-controller="signupController")
                     div.col.s12.title
                         h1 注册
                     div.input-field.col.s12
-                        input.validate(type="text",ng-model="signupInfo.email",required,pattern="[0-9]{11}@fudan.edu.cn")
-                        label(for="item-name") 复旦邮箱
+                        input.validate(type="text",ng-model="signupInfo.tel",required,pattern="^1[0-9]{10}$")
+                        label 手机
                     div.input-field.col.s12
                         input.validate(type="password",ng-model="signupInfo.password",required)
-                        label(for="item-detail") 密码
+                        label 密码
                     div.input-field.col.s12
                         input.validate(type="text",ng-model="signupInfo.name",required)
-                        label(for="item-detail") 昵称
-                    button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="signup()")
+                        label 姓名
+                    div.col.s12(ng-show="checkTelIsShow")
+                        button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="checkTel()")
+                            i.material-icons.left assignment_ind
+                            em 验证手机
+                    div.input-field.col.s12(ng-show="captchaIsShow")
+                        input.validate(type="text",ng-model="signupInfo.captcha",required)
+                        label 验证码
+                    button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-show="signupBtnIsShow",ng-click="signup()")
                         i.material-icons.left assignment_ind
                         em 注册

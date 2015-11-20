@@ -27,25 +27,28 @@ div.detail-box.z-depth-1.row(ng-controller="detailBoxController")
                     td.attr 
                         p 手机
                     td
-                        h1.item-tel #{detailBox.tel}
-            - if (detailBox.stuNo)
-                tr
-                    td.attr 
-                        p 学号
-                    td
-                        h1.item-tel #{detailBox.stuNo}
+                        - if(session.login)
+                            h1.item-tel #{detailBox.tel}
+                        - else
+                            h1.item-tel 登陆后可见
             - if (detailBox.qq)
                 tr
                     td.attr 
                         p QQ
                     td
-                        h1.item-qq #{detailBox.qq}
+                        - if(session.login)
+                            h1.item-qq #{detailBox.qq}
+                        - else
+                            h1.item-qq 登陆后可见
             - if (detailBox.wechat)
                 tr
                     td.attr 
                         p 微信号
                     td
-                        h1.item-qq #{detailBox.wechat}
+                        - if(session.login)
+                            h1.item-qq #{detailBox.wechat}
+                        - else
+                            h1.item-qq 登陆后可见
             tr
                 td.attr 
                     p 发布时间

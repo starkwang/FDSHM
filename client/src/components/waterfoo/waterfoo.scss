@@ -32,10 +32,10 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
                 background: rgba(0, 0, 0, 0.5);
             }
         }
-        .card-content{
+        .card-content {
             font-size: 16px;
             line-height: 20px;
-            p{
+            p {
                 height: 20px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -49,22 +49,18 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             color: #000;
             text-decoration: none;
             overflow: hidden;
-            >.col {
-                height: 200px;
-            }
         }
         .main-info {
             border-right: 1px solid #ddd;
         }
         .card {
-            margin: 10px;
+            margin: 20px;
             padding: 0;
             transition: all 0.3s;
             background: #f9f9f9;
-        }
-        .card:hover {
-            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            background: #fff;
+            >.col {
+                height: 200px;
+            }
         }
         .card-image {
             height: 200px;
@@ -73,11 +69,16 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            >a {
+                width: 100%;
+                height: 100%;
+            }
         }
         h1 {
             padding: 10px;
         }
-        .item-name {
+        .item-name,
+        .item-price {
             height: 70%;
         }
         .item-publisher,
@@ -86,8 +87,26 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             font-size: 16px;
             color: #999;
         }
-        .item-location {
+        .item-location,
+        .item-price {
             text-align: right;
+        }
+        .item-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .item-price {
+            font-size: 20px;
+            color: #ee6e73;
+            font-weight: 700;
+        }
+        .btn-col {
+            position: relative;
+            padding:35px;
+            .btn {
+                width: 180px;
+                margin-bottom: 20px;
+            }
         }
     }
     .progress {

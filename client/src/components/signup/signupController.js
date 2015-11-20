@@ -1,6 +1,7 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
     $scope.signupIsShow = false;
-    $scope.$on('showSignup',function(){
+    $scope.checkTelIsShow = true;
+    $scope.$on('showSignup', function() {
         $scope.signupIsShow = true;
     })
     $scope.changeSignupShow = function($event) {
@@ -9,16 +10,33 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             $scope.signupIsShow = !$scope.signupIsShow;
         }
     }
+
+    $scope.checkTel = function() {
+        if (!$scope.signupInfo.tel) {
+            $rootScope.$broadcast('alert', '请填入正确的手机号码！');
+            return;
+        }
+        BaseService.user.requsetTelVertify($scope.signupInfo.tel).then(function(result) {
+            if (result.data.success) {
+                $scope.checkTelIsShow = false;
+                $scope.captchaIsShow = true;
+                $scope.signupBtnIsShow = true;
+            } else {
+                $rootScope.$broadcast('alert', result.data.message);
+            }
+        });
+    }
+
     $scope.signup = function() {
-        if (!$scope.signupInfo.email) {
-            $rootScope.$broadcast('alert', '请填入正确的复旦邮箱！');
+        if (!$scope.signupInfo.tel) {
+            $rootScope.$broadcast('alert', '请填入正确的手机号码！');
             return;
         }
         if (!$scope.signupInfo.password || !$scope.signupInfo.name) {
             $rootScope.$broadcast('alert', '密码或用户名不能为空！');
             return;
         }
-        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
+        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.tel, $scope.signupInfo.captcha).then(function(result) {
             if (result.data.success) {
                 $rootScope.$broadcast('alert', '注册成功！');
             } else {

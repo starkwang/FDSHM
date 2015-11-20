@@ -1,13 +1,24 @@
 AV = require('avoscloud-sdk');
-AV.Cloud.requestSmsCode({
-    mobilePhoneNumber: '13316919664',
-    name: 'FDSHM',
-    op: '某种操作',
-    ttl: 10
-}).then(function(result) {
-    //发送成功
-    console.log(result);
-}, function(err) {
-    //发送失败
-    console.log(err);
-});
+
+function send(tel) {
+    return AV.Cloud.requestSmsCode({
+        mobilePhoneNumber: tel,
+        name: '复旦二手工坊',
+        op: '注册',
+        ttl: 10
+    });
+}
+
+function vertify(tel, captcha) {
+    var user = new AV.User();
+    return user.signUpOrlogInWithMobilePhone({
+        mobilePhoneNumber: tel,
+        smsCode: captcha,
+    });
+}
+
+
+module.exports = {
+    send: send,
+    vertify: vertify
+}

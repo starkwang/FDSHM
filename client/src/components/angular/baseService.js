@@ -64,20 +64,25 @@ angular.module('baseService', [])
                 },
             };
             var user = {
+                requsetTelVertify: function(tel) {
+                    return POST('/api/user/request_tel_vertify', {
+                        tel: tel
+                    });
+                },
                 login: function(username, password) {
                     return POST('/api/user/login', {
                         username: username,
                         password: password
                     })
                 },
-                signup: function(name, password, email) {
+                signup: function(tel, password, name, captcha) {
                     //username为账户名，和email一致
                     //name为昵称
                     return POST('/api/user/signup', {
-                        username: email,
+                        tel: tel,
                         password: password,
-                        email: email,
-                        name: name
+                        name: name,
+                        captcha: captcha
                     })
                 },
                 logout: function() {

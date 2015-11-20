@@ -55,6 +55,7 @@ app.get('/api/item/get',api.item.get);
 app.post('/api/item/update',api.item.update);
 
 app.post('/api/user/signup', api.user.signup);
+app.post('/api/user/request_tel_vertify', api.user.requestTelVertify);
 app.post('/api/user/login', api.user.login);
 app.post('/api/user/logout', api.user.logout);
 app.post('/api/user/my_item',api.user.myItem);

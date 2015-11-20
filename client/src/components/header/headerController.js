@@ -2,8 +2,8 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     if(window.location.pathname == '/usermanage/'){
         $scope.categoryIsHidden = true;
     }
+    $scope.moreVertIsShow = false;
     $('[data-position]').tooltip({delay: 50});
-
     switch(window.location.pathname){
         case '/category/digital':
             $scope.isDigital = true;
@@ -35,6 +35,10 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.showSignup = function() {
         $rootScope.$broadcast('showSignup');
+    }
+    $scope.changeMoreVertShow = function(){
+        console.log('message');
+        $scope.moreVertIsShow = !$scope.moreVertIsShow;
     }
     $scope.test = function() {
         BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {

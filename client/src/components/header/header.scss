@@ -43,6 +43,18 @@
             }
         }
     }
+    .nav1{
+        z-index: 1;
+        .more-vert{
+            position:absolute;
+            >.dropdown-content{
+                opacity: 1;
+                display: block;
+                width: 150px;
+                left:-100px;
+            }
+        }
+    }
     .nav2{
         top: 64px;
         .nav-wrapper{

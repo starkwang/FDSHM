@@ -29116,20 +29116,25 @@
 	                },
 	            };
 	            var user = {
+	                requsetTelVertify: function(tel) {
+	                    return POST('/api/user/request_tel_vertify', {
+	                        tel: tel
+	                    });
+	                },
 	                login: function(username, password) {
 	                    return POST('/api/user/login', {
 	                        username: username,
 	                        password: password
 	                    })
 	                },
-	                signup: function(name, password, email) {
+	                signup: function(tel, password, name, captcha) {
 	                    //username为账户名，和email一致
 	                    //name为昵称
 	                    return POST('/api/user/signup', {
-	                        username: email,
+	                        tel: tel,
 	                        password: password,
-	                        email: email,
-	                        name: name
+	                        name: name,
+	                        captcha: captcha
 	                    })
 	                },
 	                logout: function() {
@@ -29153,8 +29158,8 @@
 	    if(window.location.pathname == '/usermanage/'){
 	        $scope.categoryIsHidden = true;
 	    }
+	    $scope.moreVertIsShow = false;
 	    $('[data-position]').tooltip({delay: 50});
-
 	    switch(window.location.pathname){
 	        case '/category/digital':
 	            $scope.isDigital = true;
@@ -29187,6 +29192,10 @@
 	    $scope.showSignup = function() {
 	        $rootScope.$broadcast('showSignup');
 	    }
+	    $scope.changeMoreVertShow = function(){
+	        console.log('message');
+	        $scope.moreVertIsShow = !$scope.moreVertIsShow;
+	    }
 	    $scope.test = function() {
 	        BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {
 	            console.log(result);
@@ -29215,10 +29224,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
-	module.exports = ['$scope', 'BaseService', '$location', function($scope, BaseService, $location) {
+	module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($scope, BaseService, $location, $rootScope) {
 
 	    var dataSource = BaseService.waterfoo.getItem;
-	    if(window.location.pathname == '/usermanage/'){
+	    if (window.location.pathname == '/usermanage/') {
 	        $scope.waterfooListIsShow = true;
 	        dataSource = BaseService.waterfoo.getItemInUsermanage;
 	    }
@@ -29271,9 +29280,9 @@
 	                $scope.items = $scope.items.concat(result.data);
 	                $scope.isBusy = $scope.loaderShow = false;
 	            }
+	            console.log($scope.items);
 	        });
 	        now++;
-	        console.log($scope.items);
 	    }
 
 
@@ -29291,6 +29300,10 @@
 	    $scope.$on('item-publish', function() {
 	        init();
 	    });
+
+	    $scope.showDetailEditor = function() {
+	        $rootScope.$broadcast('showDetailEditor', this.item.pubTimeStamp)
+	    }
 	}]
 
 
@@ -29506,7 +29519,8 @@
 
 	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
 	    $scope.signupIsShow = false;
-	    $scope.$on('showSignup',function(){
+	    $scope.checkTelIsShow = true;
+	    $scope.$on('showSignup', function() {
 	        $scope.signupIsShow = true;
 	    })
 	    $scope.changeSignupShow = function($event) {
@@ -29515,16 +29529,33 @@
 	            $scope.signupIsShow = !$scope.signupIsShow;
 	        }
 	    }
+
+	    $scope.checkTel = function() {
+	        if (!$scope.signupInfo.tel) {
+	            $rootScope.$broadcast('alert', '请填入正确的手机号码！');
+	            return;
+	        }
+	        BaseService.user.requsetTelVertify($scope.signupInfo.tel).then(function(result) {
+	            if (result.data.success) {
+	                $scope.checkTelIsShow = false;
+	                $scope.captchaIsShow = true;
+	                $scope.signupBtnIsShow = true;
+	            } else {
+	                $rootScope.$broadcast('alert', result.data.message);
+	            }
+	        });
+	    }
+
 	    $scope.signup = function() {
-	        if (!$scope.signupInfo.email) {
-	            $rootScope.$broadcast('alert', '请填入正确的复旦邮箱！');
+	        if (!$scope.signupInfo.tel) {
+	            $rootScope.$broadcast('alert', '请填入正确的手机号码！');
 	            return;
 	        }
 	        if (!$scope.signupInfo.password || !$scope.signupInfo.name) {
 	            $rootScope.$broadcast('alert', '密码或用户名不能为空！');
 	            return;
 	        }
-	        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.email).then(function(result) {
+	        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.tel, $scope.signupInfo.captcha).then(function(result) {
 	            if (result.data.success) {
 	                $rootScope.$broadcast('alert', '注册成功！');
 	            } else {

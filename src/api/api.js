@@ -108,19 +108,46 @@ var item = {
 };
 
 var user = {
-    signup: function(req, res) {
-        service.user.signup(req.body.username, req.body.email, req.body.password, req.body.name).then(function(result) {
-            if (result) {
+    requestTelVertify: function(req, res) {
+        console.log('[ API : user.telVertify ] ' + JSON.stringify(req.body));
+        if (req.body.tel) {
+            service.sms.send(req.body.tel).then(function(result) {
                 res.send({
                     success: true
                 });
-            }
-        }, function(err) {
-            console.log(err);
+            }, function(err) {
+                res.send({
+                    success: false,
+                    message: err
+                });
+            })
+        } else {
             res.send({
                 success: false
             });
-        })
+        }
+    },
+    signup: function(req, res) {
+        console.log('[ API : user.signup ] ' + JSON.stringify(req.body));
+        if (req.body.tel && req.body.password && req.body.name, req.body.captcha) {
+            service.user.signup(req.body.tel, req.body.password, req.body.name, req.body.tel, req.body.captcha).then(function(result) {
+                if (result) {
+                    res.send({
+                        success: true
+                    });
+                }
+            }, function(err) {
+                console.log(err);
+                res.send({
+                    success: false
+                });
+            })
+        } else {
+            res.send({
+                success: false
+            });
+        }
+
     },
     login: function(req, res) {
         service.user.login(req.body.username, req.body.password).then(function(result) {

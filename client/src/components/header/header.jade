@@ -1,5 +1,5 @@
 div.header.navbar-fixed(ng-controller="headerController")
-    nav.teal.lighten-1
+    nav.teal.nav1.lighten-1
         div.nav-wrapper
             a.brand-logo(href="/") 旦市
             div.nav-wrapper.search-bar
@@ -13,11 +13,21 @@ div.header.navbar-fixed(ng-controller="headerController")
                     li.publish-btn
                         button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
                     li
-                        a(href="/user/") #{session.name}
-                    li
                         a(href="/usermanage/") 我发布的商品
                     li
-                        a(ng-click="logout()") 退出
+                        a(href="/user/") #{session.name}
+                    li
+                        a(ng-click="changeMoreVertShow()")
+                            i.material-icons more_vert
+                        div.more-vert
+                            ul.dropdown-content(ng-show="moreVertIsShow")
+                                li
+                                    a 学邮验证
+                                li
+                                    a 个人信息设置
+                                li 
+                                    a(ng-click="logout()") 退出登录
+                    
                 - else
                     li.publish-btn
                         button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showLogin()",data-position="bottom",data-delay="50",data-tooltip="需要先登陆哦！") 我要发布

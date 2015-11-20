@@ -15,7 +15,9 @@ var template = ['category', 'detail', 'index', 'login', 'usermanage'];
 
 template.forEach(function(template) {
     console.log(basePath + template + '.jade');
-    Render[template] = jade.compileFile(basePath + template + '.jade');
+    Render[template] = jade.compileFile(basePath + template + '.jade',{
+        compileDebug:true
+    });
 })
 
 console.log(Render);

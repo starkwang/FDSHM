@@ -3,3 +3,17 @@
 @import '../../components/base/base.scss';
 @import '../../components/base/animate.scss';
 @import '../../components/material.css';
+@import '../../components/detail-editor/detail-editor.scss';
+.index-title{
+    width: 1040px;
+    margin:0 auto;
+    margin-top: 30px;
+    font-size: 40px;
+    color: #26a69a!important;
+    border-bottom: 2px solid;
+    padding: 10px;
+    i{
+        float: left;
+        font-size: 40px;
+    }
+}
