@@ -104,6 +104,34 @@ var item = {
                 success: false
             })
         }
+    },
+    setStatus: function(req, res) {
+        console.log(req.session);
+        if (req.session.login && req.body.itemTimeStamp && req.body.status) {
+            service.item.get(req.body.itemTimeStamp).then(function(result) {
+                var publisher_id = result[0].get('publisher_id');
+                var objectId = result[0].id;
+                if (req.session.userid == publisher_id) {
+                    console.log('认证成功，修改！');
+                    service.item.setStatus(objectId, req.body.status, req.body.itemTimeStamp).then(function(result) {
+                        console.log(result);
+                        res.send({
+                            success: true
+                        })
+                    }, function(err) {
+                        console.log(err);
+                    });
+                } else {
+                    res.send({
+                        success: false
+                    })
+                }
+            })
+        } else {
+            res.send({
+                success: false
+            })
+        }
     }
 };
 
@@ -200,7 +228,8 @@ var user = {
                         location: object.get('location'),
                         publisher_id: object.get('publisher_id'),
                         publisher_name: object.get('publisher_name'),
-                        pubTimeStamp: object.get('pubTimeStamp')
+                        pubTimeStamp: object.get('pubTimeStamp'),
+                        status: object.get('status')
                     })
                 }
                 res.send(items.reverse());

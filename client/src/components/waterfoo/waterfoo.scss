@@ -102,11 +102,24 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
         }
         .btn-col {
             position: relative;
-            padding:35px;
+            padding: 20px 35px;
             .btn {
                 width: 180px;
                 margin-bottom: 20px;
             }
+            .btn.teal.accent-4:hover {
+                background-color: lighten(#00bfa5, 5%) !important;
+            }
+            .btn.cyan.darken-1:hover {
+                background-color: lighten(#00acc1, 5%) !important;
+            }
+            .btn.red.lighten-1:hover {
+                background-color: lighten(#ef5350, 5%) !important;
+            }
+        }
+        .status-col {
+            font-size: 24px;
+            padding: 60px;
         }
     }
     .progress {

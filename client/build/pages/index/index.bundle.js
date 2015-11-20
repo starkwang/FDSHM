@@ -29095,6 +29095,12 @@
 	                        itemTimeStamp: itemTimeStamp,
 	                        params: params
 	                    });
+	                },
+	                setStatus: function(itemTimeStamp,status) {
+	                    return POST('/api/item/set_status', {
+	                        itemTimeStamp: itemTimeStamp,
+	                        status: status
+	                    });
 	                }
 	            }
 	            var waterfoo = {
@@ -29303,7 +29309,30 @@
 
 	    $scope.showDetailEditor = function() {
 	        $rootScope.$broadcast('showDetailEditor', this.item.pubTimeStamp)
-	    }
+	    };
+	    $scope.itemSaled = function(){
+	        console.log(this);
+	        if(confirm('此操作会让商品下架，请慎重操作')){
+	            BaseService.item.setStatus(this.item.pubTimeStamp,'saled').then(function(result){
+	                if(result.data.success){
+	                    $rootScope.$broadcast('alert', '成功！');
+	                    init();
+	                }
+	            })
+	        }
+	        
+	    };
+	    $scope.itemUnderCarriage = function(){
+	        console.log(this);
+	        if(confirm('此操作会让商品下架，请慎重操作')){
+	            BaseService.item.setStatus(this.item.pubTimeStamp,'undercarriage').then(function(result){
+	                if(result.data.success){
+	                    $rootScope.$broadcast('alert', '成功！');
+	                    init();
+	                }
+	            })
+	        }
+	    };
 	}]
 
 

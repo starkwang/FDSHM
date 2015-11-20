@@ -43,6 +43,12 @@ angular.module('baseService', [])
                         itemTimeStamp: itemTimeStamp,
                         params: params
                     });
+                },
+                setStatus: function(itemTimeStamp,status) {
+                    return POST('/api/item/set_status', {
+                        itemTimeStamp: itemTimeStamp,
+                        status: status
+                    });
                 }
             }
             var waterfoo = {

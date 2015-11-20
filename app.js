@@ -53,6 +53,7 @@ app.post('/api/item/publish', api.item.publish);
 app.post('/api/item/equal_to',api.item.equalTo);
 app.get('/api/item/get',api.item.get);
 app.post('/api/item/update',api.item.update);
+app.post('/api/item/set_status',api.item.setStatus);
 
 app.post('/api/user/signup', api.user.signup);
 app.post('/api/user/request_tel_vertify', api.user.requestTelVertify);
