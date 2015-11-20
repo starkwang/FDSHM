@@ -8,6 +8,7 @@ function render(req, res) {
             var html = preCompile.detail({
                 session: req.session ? req.session : {},
                 detailBox: {
+                    status: item.get('status'),
                     images: item.get('imgPaths'),
                     name: item.get('name'),
                     tel: item.get('tel'),
