@@ -11,6 +11,9 @@ div(ng-controller="signupController")
                         input.validate(type="password",ng-model="signupInfo.password",required)
                         label 密码
                     div.input-field.col.s12
+                        input.validate(type="password",ng-model="signupInfo.password2",required)
+                        label 确认密码
+                    div.input-field.col.s12
                         input.validate(type="text",ng-model="signupInfo.name",required)
                         label 姓名
                     div.col.s12(ng-show="checkTelIsShow")

@@ -14,4 +14,5 @@ starkAPP.controller('loginController', require('../login/loginController.js'));
 starkAPP.controller('signupController', require('../signup/signupController.js'));
 starkAPP.controller('detailEditorController', require('../detail-editor/detail-editor-controller.js'));
 starkAPP.controller('alertController', require('../alert/alertController.js'));
+starkAPP.controller('verifyMailController', require('../verifymail/verifymailController.js'));
 module.exports = starkAPP;

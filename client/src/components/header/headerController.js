@@ -40,6 +40,9 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         console.log('message');
         $scope.moreVertIsShow = !$scope.moreVertIsShow;
     }
+    $scope.showVerifyMail = function(){
+        $rootScope.$broadcast('showVerifyMail');
+    }
     $scope.test = function() {
         BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {
             console.log(result);

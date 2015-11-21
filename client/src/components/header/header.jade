@@ -1,17 +1,21 @@
 div.header.navbar-fixed(ng-controller="headerController")
     nav.teal.nav1.lighten-1
         div.nav-wrapper
-            a.brand-logo(href="/") 旦市
-            div.nav-wrapper.search-bar
-                div.input-field
-                    input#search(type="search",required)
-                    label(for="search")
-                        i.material-icons search
-                    i.material-icons trending_flat
+            a.brand-logo(href="/") 复旦二手工坊
+            //- div.nav-wrapper.search-bar
+            //-     div.input-field
+            //-         input#search(type="search",required)
+            //-         label(for="search")
+            //-             i.material-icons search
+            //-         i.material-icons trending_flat
             ul.right.hide-on-med-and-down
                 - if(session.login)
-                    li.publish-btn
-                        button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
+                    - if(session.emailVerified)
+                        li.publish-btn
+                            button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
+                    -else
+                        li.publish-btn
+                            button.teal.lighten-2.waves-effect.waves-light.btn(ng-click="showVerifyMail()",data-position="bottom",data-delay="50",data-tooltip="需要先验证邮箱哦！") 我要发布
                     li
                         a(href="/usermanage/") 我发布的商品
                     li
@@ -21,8 +25,12 @@ div.header.navbar-fixed(ng-controller="headerController")
                             i.material-icons more_vert
                         div.more-vert
                             ul.dropdown-content(ng-show="moreVertIsShow")
-                                li
-                                    a 学邮验证
+                                - if(session.emailVerified)
+                                    li
+                                        a 已学邮验证√
+                                - else
+                                    li
+                                        a(ng-click="showVerifyMail()") 学邮验证
                                 li
                                     a 个人信息设置
                                 li 
@@ -72,3 +80,4 @@ include ../publish/publish.jade
 include ../alert/alert.jade
 include ../login/login.jade
 include ../signup/signup.jade
+include ../verifymail/verifymail.jade

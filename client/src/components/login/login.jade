@@ -5,8 +5,8 @@ div(ng-controller="loginController")
                 div.col.s12.title
                     h1 登陆
                 div.input-field.col.s12
-                    input.validate(type="text",ng-model="user.username",required,pattern="[0-9]{11}@fudan.edu.cn")
-                    label(for="item-name") 复旦邮箱
+                    input.validate(type="text",ng-model="user.username",required)
+                    label(for="item-name") 手机
                 div.input-field.col.s12
                     input.validate(type="password",ng-model="user.password",required)
                     label(for="item-detail") 密码

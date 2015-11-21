@@ -1,0 +1,39 @@
+div.verify-mail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    .publish-box {
+        >.row {
+            padding-bottom: 70px;
+        }
+        width: 300px;
+        position:absolute;
+        left: 50%;
+        margin-left: -150px;
+        top: 20%;
+        background:#fff;
+        .title {
+            background: #26a69a;
+            color: #fff;
+            padding: 10px;
+            font-size: 24px;
+            text-align: center;
+        }
+        div.s6 {
+            height: 50px;
+        }
+        .publish-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -85px;
+        }
+        .publish-btn:hover {
+            background-color: lighten(#EF5350, 5%) !important;
+        }
+    }
+}

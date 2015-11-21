@@ -16,7 +16,13 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             $rootScope.$broadcast('alert', '请填入正确的手机号码！');
             return;
         }
-        BaseService.user.requsetTelVertify($scope.signupInfo.tel).then(function(result) {
+
+        if($scope.signupInfo.password != $scope.signupInfo.password2){
+            $rootScope.$broadcast('alert', '两次输入的密码不一致哦~');
+            return;
+        }
+
+        BaseService.user.requsetTelVerify($scope.signupInfo.tel).then(function(result) {
             if (result.data.success) {
                 $scope.checkTelIsShow = false;
                 $scope.captchaIsShow = true;
@@ -39,6 +45,9 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.tel, $scope.signupInfo.captcha).then(function(result) {
             if (result.data.success) {
                 $rootScope.$broadcast('alert', '注册成功！');
+                setTimeout(function() {
+                    window.location.pathname = '/login';
+                }, 1500);
             } else {
                 $rootScope.$broadcast('alert', '注册失败');
             }

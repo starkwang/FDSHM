@@ -44,7 +44,7 @@ angular.module('baseService', [])
                         params: params
                     });
                 },
-                setStatus: function(itemTimeStamp,status) {
+                setStatus: function(itemTimeStamp, status) {
                     return POST('/api/item/set_status', {
                         itemTimeStamp: itemTimeStamp,
                         status: status
@@ -70,8 +70,8 @@ angular.module('baseService', [])
                 },
             };
             var user = {
-                requsetTelVertify: function(tel) {
-                    return POST('/api/user/request_tel_vertify', {
+                requsetTelVerify: function(tel) {
+                    return POST('/api/user/request_tel_verify', {
                         tel: tel
                     });
                 },
@@ -79,9 +79,9 @@ angular.module('baseService', [])
                     return POST('/api/user/login', {
                         username: username,
                         password: password
-                    })
+                    });
                 },
-                signup: function(tel, password, name, captcha) {
+                signup: function(name, password, tel, captcha) {
                     //username为账户名，和email一致
                     //name为昵称
                     return POST('/api/user/signup', {
@@ -89,11 +89,16 @@ angular.module('baseService', [])
                         password: password,
                         name: name,
                         captcha: captcha
-                    })
+                    });
                 },
                 logout: function() {
                     return POST('/api/user/logout');
                 },
+                requestMailVerify: function(mailAddress) {
+                    return POST('/api/user/request_mail_verify', {
+                        mailAddress: mailAddress
+                    });
+                }
             }
             return {
                 waterfoo: waterfoo,

@@ -9,16 +9,7 @@ function send(tel) {
     });
 }
 
-function vertify(tel, captcha) {
-    var user = new AV.User();
-    return user.signUpOrlogInWithMobilePhone({
-        mobilePhoneNumber: tel,
-        smsCode: captcha,
-    });
-}
-
 
 module.exports = {
     send: send,
-    vertify: vertify
 }

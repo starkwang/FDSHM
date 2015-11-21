@@ -15,7 +15,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             BaseService.item.publish($scope.item).then(function(result) {
                 console.log(result);
                 if (result.data.success) {
-                    $rootScope.broadcast('alert', '商品发布成功！');
+                    $rootScope.$broadcast('alert', '商品发布成功！');
                 }
                 $scope.publishLoaderIsShow = false;
                 $scope.publishIsShow = false;
@@ -24,7 +24,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
 
         }
         if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-            $rootScope.broadcast('alert', '发布失败，好像有重要信息缺失哦？');
+            $rootScope.$broadcast('alert', '发布失败，好像有重要信息缺失哦？');
             $scope.publishLoaderIsShow = false;
             return;
         }
@@ -35,7 +35,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             var file = $(".upload-img")[i].files[0];
             console.log(file);
             if (file == undefined) {
-                $rootScope.broadcast('alert', '图片不能为空！');
+                $rootScope.$broadcast('alert', '图片不能为空！');
                 //second();
                 return;
             }
@@ -54,7 +54,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
                         second();
                     }
                 } else {
-                    $rootScope.broadcast('alert', '图片上传失败!');
+                    $rootScope.$broadcast('alert', '图片上传失败!');
                 }
             });
         }

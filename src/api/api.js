@@ -24,7 +24,7 @@ var item = {
     // '/api/item/publish' POST
     publish: function(req, res) {
         console.log(req.body);
-        if (req.session.login && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
+        if (req.session.login && req.session.emailVerified && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
             req.body.publisher_id = req.session.userid;
             req.body.publisher_name = req.session.name
             service.item.publish(req.body).then(function(result) {
@@ -136,8 +136,8 @@ var item = {
 };
 
 var user = {
-    requestTelVertify: function(req, res) {
-        console.log('[ API : user.telVertify ] ' + JSON.stringify(req.body));
+    requestTelVerify: function(req, res) {
+        console.log('[ API : user.telVerify ] ' + JSON.stringify(req.body));
         if (req.body.tel) {
             service.sms.send(req.body.tel).then(function(result) {
                 res.send({
@@ -185,6 +185,7 @@ var user = {
                 req.session.login = true;
                 req.session.name = result.attributes.name;
                 req.session.email = result.attributes.email;
+                req.session.emailVerified = result.attributes.emailVerified;
                 req.session.userid = result.attributes.timeStamp;
                 res.send({
                     success: true
@@ -238,6 +239,44 @@ var user = {
         } else {
             res.send({
                 success: false
+            })
+        }
+    },
+    requestMailVerify: function(req, res) {
+        if (/^[0-9]{11}@fudan.edu.cn$/.test(req.body.mailAddress) && req.session.login) {
+            service.user.requestMailVerify(req.body.mailAddress, req.session.userid).then(function(result) {
+                res.send({
+                    success: true
+                });
+            }, function(err) {
+                res.send({
+                    success: false,
+                    message: 'code:' + err.code + ' ' + err.message
+                });
+            })
+        } else {
+            res.send({
+                success: false,
+                message: 'not login or mailaddress error'
+            })
+        }
+    },
+    mailVerify: function(req, res) {
+        if (req.session.login) {
+            service.user.mailVerify(req.params.objectId).then(function(result) {
+                res.send({
+                    success: true
+                });
+            }, function(err) {
+                res.send({
+                    success: false,
+                    message: 'code:' + err.code + ' ' + err.message
+                });
+            })
+        } else {
+            res.send({
+                success: false,
+                message: 'not login'
             })
         }
     }

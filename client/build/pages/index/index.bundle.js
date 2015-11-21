@@ -67,6 +67,7 @@
 	starkAPP.controller('signupController', __webpack_require__(12));
 	starkAPP.controller('detailEditorController', __webpack_require__(13));
 	starkAPP.controller('alertController', __webpack_require__(14));
+	starkAPP.controller('verifyMailController', __webpack_require__(15));
 	module.exports = starkAPP;
 
 
@@ -29096,7 +29097,7 @@
 	                        params: params
 	                    });
 	                },
-	                setStatus: function(itemTimeStamp,status) {
+	                setStatus: function(itemTimeStamp, status) {
 	                    return POST('/api/item/set_status', {
 	                        itemTimeStamp: itemTimeStamp,
 	                        status: status
@@ -29122,8 +29123,8 @@
 	                },
 	            };
 	            var user = {
-	                requsetTelVertify: function(tel) {
-	                    return POST('/api/user/request_tel_vertify', {
+	                requsetTelVerify: function(tel) {
+	                    return POST('/api/user/request_tel_verify', {
 	                        tel: tel
 	                    });
 	                },
@@ -29131,9 +29132,9 @@
 	                    return POST('/api/user/login', {
 	                        username: username,
 	                        password: password
-	                    })
+	                    });
 	                },
-	                signup: function(tel, password, name, captcha) {
+	                signup: function(name, password, tel, captcha) {
 	                    //username为账户名，和email一致
 	                    //name为昵称
 	                    return POST('/api/user/signup', {
@@ -29141,11 +29142,16 @@
 	                        password: password,
 	                        name: name,
 	                        captcha: captcha
-	                    })
+	                    });
 	                },
 	                logout: function() {
 	                    return POST('/api/user/logout');
 	                },
+	                requestMailVerify: function(mailAddress) {
+	                    return POST('/api/user/request_mail_verify', {
+	                        mailAddress: mailAddress
+	                    });
+	                }
 	            }
 	            return {
 	                waterfoo: waterfoo,
@@ -29201,6 +29207,9 @@
 	    $scope.changeMoreVertShow = function(){
 	        console.log('message');
 	        $scope.moreVertIsShow = !$scope.moreVertIsShow;
+	    }
+	    $scope.showVerifyMail = function(){
+	        $rootScope.$broadcast('showVerifyMail');
 	    }
 	    $scope.test = function() {
 	        BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {
@@ -29445,7 +29454,7 @@
 	            BaseService.item.publish($scope.item).then(function(result) {
 	                console.log(result);
 	                if (result.data.success) {
-	                    $rootScope.broadcast('alert', '商品发布成功！');
+	                    $rootScope.$broadcast('alert', '商品发布成功！');
 	                }
 	                $scope.publishLoaderIsShow = false;
 	                $scope.publishIsShow = false;
@@ -29454,7 +29463,7 @@
 
 	        }
 	        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-	            $rootScope.broadcast('alert', '发布失败，好像有重要信息缺失哦？');
+	            $rootScope.$broadcast('alert', '发布失败，好像有重要信息缺失哦？');
 	            $scope.publishLoaderIsShow = false;
 	            return;
 	        }
@@ -29465,7 +29474,7 @@
 	            var file = $(".upload-img")[i].files[0];
 	            console.log(file);
 	            if (file == undefined) {
-	                $rootScope.broadcast('alert', '图片不能为空！');
+	                $rootScope.$broadcast('alert', '图片不能为空！');
 	                //second();
 	                return;
 	            }
@@ -29484,7 +29493,7 @@
 	                        second();
 	                    }
 	                } else {
-	                    $rootScope.broadcast('alert', '图片上传失败!');
+	                    $rootScope.$broadcast('alert', '图片上传失败!');
 	                }
 	            });
 	        }
@@ -29564,7 +29573,13 @@
 	            $rootScope.$broadcast('alert', '请填入正确的手机号码！');
 	            return;
 	        }
-	        BaseService.user.requsetTelVertify($scope.signupInfo.tel).then(function(result) {
+
+	        if($scope.signupInfo.password != $scope.signupInfo.password2){
+	            $rootScope.$broadcast('alert', '两次输入的密码不一致哦~');
+	            return;
+	        }
+
+	        BaseService.user.requsetTelVerify($scope.signupInfo.tel).then(function(result) {
 	            if (result.data.success) {
 	                $scope.checkTelIsShow = false;
 	                $scope.captchaIsShow = true;
@@ -29587,6 +29602,9 @@
 	        BaseService.user.signup($scope.signupInfo.name, $scope.signupInfo.password, $scope.signupInfo.tel, $scope.signupInfo.captcha).then(function(result) {
 	            if (result.data.success) {
 	                $rootScope.$broadcast('alert', '注册成功！');
+	                setTimeout(function() {
+	                    window.location.pathname = '/login';
+	                }, 1500);
 	            } else {
 	                $rootScope.$broadcast('alert', '注册失败');
 	            }
@@ -29658,6 +29676,40 @@
 	    $scope.close = function() {
 	        $scope.alertIsShow = false;
 	    }
+	}]
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+	    $scope.verifyMailIsShow = false;
+	    $scope.$on('showVerifyMail', function() {
+	        $scope.verifyMailIsShow = true;
+	    })
+	    $scope.changeVerifyMailShow = function($event) {
+	        console.log($event);
+	        if ($event.target.id == "change-show") {
+	            $scope.verifyMailIsShow = !$scope.verifyMailIsShow;
+	        }
+	    }
+
+	    $scope.requestVerifyMail = function(){
+	        if($scope.mailAddress){
+	            BaseService.user.requestMailVerify($scope.mailAddress).then(function(result){
+	                if(result.data.success){
+	                    $rootScope.$broadcast('alert', '我们向你的邮箱发送了一封验证邮件，快去查收哦~');
+	                }else{
+	                    $rootScope.$broadcast('alert', '哎呀失败了 T^T');
+	                }
+	            });
+	        }else{
+	            $rootScope.$broadcast('alert', '请输入正确的复旦邮箱 0v0');
+	        }
+	        
+	    }
+
 	}]
 
 
