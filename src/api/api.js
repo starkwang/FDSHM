@@ -264,9 +264,7 @@ var user = {
     mailVerify: function(req, res) {
         if (req.session.login) {
             service.user.mailVerify(req.params.objectId).then(function(result) {
-                res.send({
-                    success: true
-                });
+                res.send('<script>alert("验证成功!");window.location.pathname="/";</script>');
             }, function(err) {
                 res.send({
                     success: false,

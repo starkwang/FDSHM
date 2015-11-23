@@ -6,7 +6,10 @@ var bodyParser = require('body-parser');
 var promise = require('bluebird');
 var session = require('express-session');
 var morgan = require('morgan');
+var moment = require('moment');
 var RedisStore = require('connect-redis')(session);
+
+
 
 var render = {
     index: require('./src/render/indexRender'),
@@ -104,3 +107,4 @@ app.post('/api/upload', upload.single('file'), function(req, res, next) {
 
 app.listen(3000);
 console.log(alphabet('FUDAN', 'planar'));
+console.log(moment(1448249498353).format('YYYY/MM/DD HH:mm:ss'));

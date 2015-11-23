@@ -1,6 +1,6 @@
 service = require('../service/service');
 preCompile = require('./preCompile');
-
+moment = require('moment');
 function render(req, res) {
     service.item.get(req.params.pubTimeStamp).then(function(result) {
         if (result.length >= 1) {
@@ -20,7 +20,7 @@ function render(req, res) {
                     stuNo: item.get('stuNo'),
                     publisher_name: item.get('publisher_name'),
                     publisher_id: item.get('publisher_id'),
-                    pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
+                    pubTime: moment(parseInt(item.get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
                 }
             });
             res.send(html);
