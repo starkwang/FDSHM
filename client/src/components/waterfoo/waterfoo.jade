@@ -6,8 +6,11 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
                 div.card-image(style="background-image:url({{item.image[0]}})")
                     //- img(ng-src="{{item.image[0]}}")
                     span.card-title ￥{{item.price}}
-                div.card-content
+                div.card-content.item-name
                     p {{item.name}}
+                div.card-content.item-location
+                    p {{item.location}}
+                    p {{item.pubTime}}
     div.item-wrapper.list(ng-show="waterfooListIsShow")
         div.card.row(ng-repeat="item in items")
             div.card-image.col.s3(style="background-image:url({{item.image[0]}})")

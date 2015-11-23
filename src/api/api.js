@@ -1,4 +1,5 @@
 service = require('../service/service');
+moment = require('moment');
 var item = {
     // '/api/item/collection' GET
     collection: function(req, res) {
@@ -13,7 +14,8 @@ var item = {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             res.send(items);

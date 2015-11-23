@@ -1,4 +1,6 @@
 service = require('../service/service');
+moment = require('moment');
+moment.locale('zh-cn');
 var cache = {};
 setInterval(function() {
     cache = {};
@@ -28,7 +30,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.all = items;
@@ -53,7 +56,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.digital = items;
@@ -77,7 +81,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.ride = items;
@@ -101,7 +106,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.commodity = items;
@@ -125,7 +131,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.book = items;
@@ -149,7 +156,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.makeup = items;
@@ -173,7 +181,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.sport = items;
@@ -197,7 +206,8 @@ function render(req, res) {
                     location: object.get('location'),
                     publisher_id: object.get('publisher_id'),
                     publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp')
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
                 })
             }
             tmp_cache.smallthing = items;

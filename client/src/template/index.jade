@@ -19,8 +19,11 @@ html(ng-app="starkAPP")
                                     div.card-image(style="background-image:url(#{data.all[i].image[0]})")
                                         //- img(ng-src="{{item.image[0]}}")
                                         span.card-title ￥#{data.all[i].price}
-                                    div.card-content
-                                        p #{data.all[i].name}           
+                                    div.card-content.item-name
+                                        p #{data.all[i].name}
+                                    div.card-content.item-location
+                                        p #{data.all[i].location}
+                                        p #{data.all[i].pubTime}         
                         - }
                     - else
                         div 空的哦
@@ -51,8 +54,11 @@ html(ng-app="starkAPP")
                                             div.card-image(style="background-image:url(#{data[category][i].image[0]})")
                                                 //- img(ng-src="{{item.image[0]}}")
                                                 span.card-title ￥#{data[category][i].price}
-                                            div.card-content
-                                                p #{data[category][i].name}           
+                                            div.card-content.item-name
+                                                p #{data[category][i].name}
+                                            div.card-content.item-location
+                                                p #{data[category][i].location}
+                                                p #{data[category][i].pubTime}           
                                 - }
                             - else
                                 div.no-item 
