@@ -36,7 +36,7 @@ gulp.task("webpack", function() {
     return gulp
         .src('./')
         .pipe(webpack(webpackConfig))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('./build/pages'));
 });
 gulp.task('watch', function() {
