@@ -22,7 +22,7 @@ div.header.navbar-fixed(ng-controller="headerController")
                         a(href="/user/") #{session.name}
                     li
                         a(ng-click="changeMoreVertShow()")
-                            i.material-icons more_vert
+                            i.iconfont &#xe615;
                         div.more-vert
                             ul.dropdown-content(ng-show="moreVertIsShow")
                                 - if(session.emailVerified)

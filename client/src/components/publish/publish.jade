@@ -76,9 +76,9 @@ div(ng-controller="publishController")
                     div.file-path-wrapper
                         input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
                 button.btn-floating.btn-small.waves-effect.waves-light.add(ng-click="addImg()")
-                    i.material-icons add
+                    i.iconfont &#xe60c;
                 button.btn-floating.btn-small.waves-effect.waves-light.delete(ng-show="imgs.length>1",ng-click="deleteImg()")
-                    i.material-icons delete
+                    i.iconfont &#xe610;
                 button.waves-effect.waves-light.btn-large.publish-btn.red.lighten-1(ng-click="publish()")
-                    i.material-icons.left done_all
+                    i.iconfont.left &#xe611;
                     em 马上发布

@@ -18,11 +18,11 @@ div(ng-controller="signupController")
                         label 姓名
                     div.col.s12(ng-show="checkTelIsShow")
                         button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="checkTel()")
-                            i.material-icons.left assignment_ind
+                            i.iconfont.left &#xe60d;
                             em 验证手机
                     div.input-field.col.s12(ng-show="captchaIsShow")
                         input.validate(type="text",ng-model="signupInfo.captcha",required)
                         label 验证码
                     button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-show="signupBtnIsShow",ng-click="signup()")
-                        i.material-icons.left assignment_ind
+                        i.iconfont.left &#xe60b;
                         em 注册

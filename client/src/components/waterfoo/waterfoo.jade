@@ -23,20 +23,20 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
                     h1.item-publisher.col.s6 发布者：{{item.publisher_name}}
                     h1.item-location.col.s6 {{item.location}}
             div.col.s3.status-col(ng-show="item.status == 'saled'")
-                i.material-icons.left done
+                i.iconfont.left &#xe60e;
                 em 已售出
             div.col.s3.status-col(ng-show="item.status == 'undercarriage'")
-                i.material-icons.left system_update_alt
+                i.iconfont.left &#xe613;
                 em 已下架
             div.col.s3.btn-col(ng-show="item.status != 'saled'&&item.status != 'undercarriage'")
                 button.waves-effect.waves-light.btn.teal.accent-4(ng-click="itemSaled()")
-                    i.material-icons.left done
+                    i.iconfont.left &#xe60e;
                     em 已售出
                 button.waves-effect.waves-light.btn.cyan.darken-1(ng-click="showDetailEditor()")
-                    i.material-icons.left mode_edit
+                    i.iconfont.left &#xe608;
                     em 修改商品信息
                 button.waves-effect.waves-light.btn.red.lighten-1(ng-click="itemUnderCarriage()")
-                    i.material-icons.left system_update_alt
+                    i.iconfont.left &#xe613;
                     em 下架商品
     div.progress(ng-show="loaderShow")
         div.indeterminate
