@@ -1,4 +1,4 @@
 node_modules/
 client/node_modules/
 img/
-src/service/
+src/service/leancloud.js
