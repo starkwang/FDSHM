@@ -266,6 +266,34 @@ var user = {
         } else {
             sendErr(res, 'not login');
         }
+    },
+    requestPasswordReset: function(req, res) {
+        if (req.body.tel) {
+            console.log('[ API : user.requestPasswordReset ] ' + JSON.stringify(req.body));
+            service.user.requestPasswordReset(req.body.tel).then(function(result) {
+                res.send({
+                    success: true
+                });
+            }, function(err) {
+                sendErr(res, err);
+            })
+        } else {
+            sendErr(res, 'params error');
+        }
+    },
+    resetPassword: function(req, res) {
+        if (req.body.captcha && req.body.newPassword) {
+            console.log('[ API : user.resetPassword ] ' + JSON.stringify(req.body));
+            service.user.resetPassword(req.body.captcha, req.body.newPassword).then(function(result) {
+                res.send({
+                    success: true
+                });
+            }, function(err) {
+                sendErr(res, err);
+            })
+        } else {
+            sendErr(res, 'params error');
+        }
     }
 };
 

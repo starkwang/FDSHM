@@ -1,11 +1,10 @@
 preCompile = require('./preCompile');
 
 function render(req, res) {
-    res.send(preCompile.login({
-        session: req.session ? req.session : {}
-    }));
-    // res.render('login', {
-    //     session: req.session ? req.session : {}
-    // });
+    if (req.session.login) {
+        res.redirect('/');
+    } else {
+        res.send(preCompile.login());
+    }
 }
 module.exports = render;

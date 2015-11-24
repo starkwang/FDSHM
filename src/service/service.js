@@ -4,7 +4,7 @@ sms = require('./sms');
 Promise = require('bluebird');
 AV = require('avoscloud-sdk');
 setting = require('./setting');
-AV.initialize(setting.leancloud.appid, setting.leancloud.appid);
+AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
 
 var itemGetCache = {};
@@ -136,7 +136,7 @@ var user = {
             })
             .then(function(user) {
                 console.log(user.id);
-                return mail.send(mailAddress, "【复旦二手工坊账号验证】", '<p>测试阶段暂时访问这个url：</p>'+'<p>http://10.108.81.230:3000/api/user/mail_verify/'+user.id+'</p>');
+                return mail.send(mailAddress, "【复旦二手工坊账号验证】", '<p>测试阶段暂时访问这个url：</p>' + '<p>http://10.108.81.230:3000/api/user/mail_verify/' + user.id + '</p>');
             }, function(err) {
                 console.log(err);
                 return err;
@@ -156,6 +156,25 @@ var user = {
                 console.log(err);
                 return err;
             });
+    },
+    requestPasswordReset: function(tel) {
+        return AV.User.requestPasswordResetBySmsCode(tel);
+    },
+    resetPassword: function(captcha, newPassword) {
+        return AV.User.resetPasswordBySmsCode(captcha, newPassword)
+            .then(function(result) {
+                var query = new AV.Query(AV.User);
+                return query.get(result.objectId);
+            })
+            .then(function(user) {
+                return AV.User.logIn(user.get('username'), user.get('pwd'));
+            })
+            .then(function(user){
+                user.set('pwd', newPassword);
+                return user.save();
+            },function(err){
+                return err;
+            })
     }
 };
 

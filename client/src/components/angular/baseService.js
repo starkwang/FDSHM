@@ -98,6 +98,17 @@ angular.module('baseService', [])
                     return POST('/api/user/request_mail_verify', {
                         mailAddress: mailAddress
                     });
+                },
+                requestPasswordReset: function(tel) {
+                    return POST('/api/user/request_password_reset', {
+                        tel: tel
+                    });
+                },
+                resetPassword: function(captcha, newPassword) {
+                    return POST('/api/user/reset_password', {
+                        captcha: captcha,
+                        newPassword: newPassword
+                    })
                 }
             }
             return {

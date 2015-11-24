@@ -31,4 +31,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.showSignup = function(){
         $rootScope.$broadcast('showSignup');
     }
+    $scope.showForget = function(){
+        $rootScope.$broadcast('showForget');
+    }
 }]
