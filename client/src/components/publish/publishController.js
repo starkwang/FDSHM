@@ -2,7 +2,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.publishIsShow = false;
     $scope.item = {};
     $scope.imgs = [0];
-    $scope.$on('showPublish',function(){
+    $scope.$on('showPublish', function() {
         $scope.publishIsShow = true;
     })
     $scope.changePublishShow = function($event) {
@@ -23,8 +23,19 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             });
 
         }
-        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
-            $rootScope.$broadcast('alert', '发布失败，好像有重要信息缺失哦？');
+
+        if (!($scope.item.name && $scope.item.detail && $scope.item.category )) {
+            $rootScope.$broadcast('alert', '好像有重要信息缺失哦？');
+            $scope.publishLoaderIsShow = false;
+            return;
+        }
+        if (!$scope.item.price) {
+            $rootScope.$broadcast('alert', '商品价格不正确');
+            $scope.publishLoaderIsShow = false;
+            return;
+        }
+        if (!($scope.item.tel || $scope.item.wechat || $scope.item.qq)) {
+            $rootScope.$broadcast('alert', '手机、微信、QQ至少填写一个');
             $scope.publishLoaderIsShow = false;
             return;
         }
@@ -36,7 +47,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             console.log(file);
             if (file == undefined) {
                 $rootScope.$broadcast('alert', '图片不能为空！');
-                //second();
                 return;
             }
         }

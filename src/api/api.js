@@ -1,26 +1,37 @@
 service = require('../service/service');
 moment = require('moment');
+
+function sendErr(res, message) {
+    res.send({
+        success: false,
+        message: message
+    });
+}
+
 var item = {
     // '/api/item/collection' GET
     collection: function(req, res) {
-        service.item.collection(req.query).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
-            res.send(items);
-            res.end();
-        });
+        service.item.collection(req.query)
+            .then(function(results) {
+                var items = [];
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    items.push({
+                        image: object.get('imgPaths'),
+                        price: object.get('price'),
+                        name: object.get('name'),
+                        location: object.get('location'),
+                        publisher_id: object.get('publisher_id'),
+                        publisher_name: object.get('publisher_name'),
+                        pubTimeStamp: object.get('pubTimeStamp'),
+                        pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
+                    })
+                }
+                res.send(items);
+                res.end();
+            }, function(err) {
+                sendErr(res, err);
+            });
     },
 
     // '/api/item/publish' POST
@@ -29,55 +40,58 @@ var item = {
         if (req.session.login && req.session.emailVerified && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
             req.body.publisher_id = req.session.userid;
             req.body.publisher_name = req.session.name
-            service.item.publish(req.body).then(function(result) {
-                console.log(result);
-                res.send({
-                    success: true,
-                    //id: result.id
-                })
-            })
+            service.item.publish(req.body)
+                .then(function(result) {
+                    console.log(result);
+                    res.send({
+                        success: true,
+                        //id: result.id
+                    })
+                }, function(err) {
+                    sendErr(res, err);;
+                });
         } else {
-            res.send({
-                success: false,
-            })
+            sendErr(res, 'params error');
         }
 
     },
     // '/api/item/get/' GET
     get: function(req, res) {
         if (req.query.id) {
-            service.item.get(req.query.id).then(function(result) {
-                var item = result[0];
-                res.send({
-                    images: item.get('imgPaths'),
-                    name: item.get('name'),
-                    category: item.get('category'),
-                    tel: item.get('tel'),
-                    location: item.get('location'),
-                    price: item.get('price'),
-                    detail: item.get('detail').split('\n'),
-                    qq: item.get('qq'),
-                    wechat: item.get('wechat'),
-                    stuNo: item.get('stuNo'),
-                    pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
-                })
-            });
+            service.item.get(req.query.id)
+                .then(function(result) {
+                    var item = result[0];
+                    res.send({
+                        images: item.get('imgPaths'),
+                        name: item.get('name'),
+                        category: item.get('category'),
+                        tel: item.get('tel'),
+                        location: item.get('location'),
+                        price: item.get('price'),
+                        detail: item.get('detail').split('\n'),
+                        qq: item.get('qq'),
+                        wechat: item.get('wechat'),
+                        stuNo: item.get('stuNo'),
+                        pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
+                    })
+                }, function(err) {
+                    sendErr(res, err);;
+                });
         } else {
-            res.send({
-                success: false
-            });
+            sendErr(res, 'params error');;
         }
     },
     // '/api/item/equal_to' POST
     equalTo: function(req, res) {
         if (req.body) {
-            service.item.equalTo(req.body).then(function(result) {
-                res.send(result)
-            })
+            service.item.equalTo(req.body)
+                .then(function(result) {
+                    res.send(result);
+                }, function(err) {
+                    sendErr(res, err);;
+                })
         } else {
-            res.send({
-                success: false
-            })
+            sendErr(res, 'params error');
         }
     },
     update: function(req, res) {
@@ -86,7 +100,6 @@ var item = {
                 var publisher_id = result[0].get('publisher_id');
                 var objectId = result[0].id;
                 if (req.session.userid == publisher_id) {
-                    console.log('认证成功，修改！');
                     service.item.update(objectId, req.body.params, req.body.itemTimeStamp).then(function(result) {
                         console.log(result);
                         res.send({
@@ -94,17 +107,14 @@ var item = {
                         })
                     }, function(err) {
                         console.log(err);
+                        sendErr(res, err);;
                     });
                 } else {
-                    res.send({
-                        success: false
-                    })
+                    sendErr(res, 'auth error');
                 }
             })
         } else {
-            res.send({
-                success: false
-            })
+            sendErr(res, 'params error');
         }
     },
     setStatus: function(req, res) {
@@ -122,17 +132,14 @@ var item = {
                         })
                     }, function(err) {
                         console.log(err);
+                        sendErr(res, err);;
                     });
                 } else {
-                    res.send({
-                        success: false
-                    })
+                    sendErr(res, 'auth error');
                 }
             })
         } else {
-            res.send({
-                success: false
-            })
+            sendErr(res, 'params error');
         }
     }
 };
@@ -146,15 +153,10 @@ var user = {
                     success: true
                 });
             }, function(err) {
-                res.send({
-                    success: false,
-                    message: err
-                });
+                sendErr(res, err);
             })
         } else {
-            res.send({
-                success: false
-            });
+            sendErr(res, 'params error');
         }
     },
     signup: function(req, res) {
@@ -168,14 +170,10 @@ var user = {
                 }
             }, function(err) {
                 console.log(err);
-                res.send({
-                    success: false
-                });
+                sendErr(res, err);
             })
         } else {
-            res.send({
-                success: false
-            });
+            sendErr(res, 'params error');
         }
 
     },
@@ -192,12 +190,12 @@ var user = {
                 res.send({
                     success: true
                 });
+            }, function(err) {
+                sendErr(res, err);
             });
 
         }, function(err) {
-            res.send({
-                success: false
-            });
+            sendErr(res, 'params error');
         })
     },
     logout: function(req, res) {
@@ -220,7 +218,6 @@ var user = {
                 amount: req.body.amount
             }
             service.item.equalTo(query, config).then(function(results) {
-
                 var items = [];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
@@ -237,11 +234,11 @@ var user = {
                 }
                 res.send(items.reverse());
                 res.end();
+            }, function(err) {
+                sendErr(res, err);
             })
         } else {
-            res.send({
-                success: false
-            })
+            sendErr(res, 'not login');
         }
     },
     requestMailVerify: function(req, res) {
@@ -251,16 +248,10 @@ var user = {
                     success: true
                 });
             }, function(err) {
-                res.send({
-                    success: false,
-                    message: 'code:' + err.code + ' ' + err.message
-                });
+                sendErr(res, err);
             })
         } else {
-            res.send({
-                success: false,
-                message: 'not login or mailaddress error'
-            })
+            sendErr(res, 'not login or mailaddress erro');
         }
     },
     mailVerify: function(req, res) {
@@ -270,16 +261,10 @@ var user = {
                 req.session.emailVerified = result.attributes.emailVerified;
                 res.send('<script>alert("验证成功!");window.location.pathname="/";</script>');
             }, function(err) {
-                res.send({
-                    success: false,
-                    message: 'code:' + err.code + ' ' + err.message
-                });
+                sendErr(res, err);
             })
         } else {
-            res.send({
-                success: false,
-                message: 'not login'
-            })
+            sendErr(res, 'not login');
         }
     }
 };
