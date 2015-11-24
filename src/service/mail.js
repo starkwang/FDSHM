@@ -1,8 +1,9 @@
 var Promise = require('bluebird');
 var nodemailer = require('nodemailer');
 var service = require('./service');
-var user = '13307130321@fudan.edu.cn',
-    pass = '310618';
+var setting = require('./setting');
+var user = setting.mail.username,
+    pass = setting.mail.password;
 
 var mail = {
     send: function(target, title, content) {

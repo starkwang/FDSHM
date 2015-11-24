@@ -1,9 +1,10 @@
-AV = require('./leancloud');
 login = require('./login');
 mail = require('./mail');
 sms = require('./sms');
 Promise = require('bluebird');
-
+AV = require('avoscloud-sdk');
+setting = require('./setting');
+AV.initialize(setting.leancloud.appid, setting.leancloud.appid);
 var Item = AV.Object.extend('Item');
 
 var itemGetCache = {};
