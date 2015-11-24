@@ -10,7 +10,7 @@ div(ng-controller="loginController")
                 div.input-field.col.s12
                     input.validate(type="password",ng-model="user.password",required)
                     label(for="item-detail") 密码
-                    a(ng-click="showForget()") 忘记密码？
+                    a.forget-btn(ng-click="showForget()") 忘记密码？
                 button.waves-effect.waves-light.btn.login-btn.red.lighten-1(ng-click="login()")
                     i.iconfont.left &#xe614;
                     em 登陆

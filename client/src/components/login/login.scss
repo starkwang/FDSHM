@@ -40,5 +40,8 @@ div.login {
         .publish-btn:hover {
             background-color: lighten(#EF5350, 5%) !important;
         }
+        .forget-btn{
+            cursor: pointer;
+        }
     }
 }

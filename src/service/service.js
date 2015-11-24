@@ -121,18 +121,14 @@ var user = {
                 console.log(result[0].id);
                 var query = new AV.Query(AV.User);
                 return query.get(result[0].id);
-            }, function(err) {
-                return err;
             })
             .then(function(user) {
                 console.log(user);
-                return AV.User.logIn(user.get('username'), user.get('pwd')).then(function(user) {
-                    user.set('email', mailAddress);
-                    return user.save();
-                })
-            }, function(err) {
-
-                return err;
+                return AV.User.logIn(user.get('username'), user.get('pwd'))
+            })
+            .then(function(user) {
+                user.set('email', mailAddress);
+                return user.save();
             })
             .then(function(user) {
                 console.log(user.id);
@@ -169,10 +165,10 @@ var user = {
             .then(function(user) {
                 return AV.User.logIn(user.get('username'), user.get('pwd'));
             })
-            .then(function(user){
+            .then(function(user) {
                 user.set('pwd', newPassword);
                 return user.save();
-            },function(err){
+            }, function(err) {
                 return err;
             })
     }
