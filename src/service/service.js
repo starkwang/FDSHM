@@ -8,6 +8,12 @@ AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
 
 var itemGetCache = {};
+var itemGetTodayNewItemAmountCache = false;
+setTimeout(function() {
+    console.log('clear cache for todayAmount');
+    itemGetTodayNewItemAmountCache = false;
+}, 60000);
+
 var item = {
     publish: function(params) {
         var item = new Item();
@@ -80,6 +86,30 @@ var item = {
         return item.save().then(function() {
             itemGetCache[itemTimeStamp] = null;
         });
+    },
+    getTodayNewItemAmount: function() {
+        if (itemGetTodayNewItemAmountCache) {
+            console.log('use amount cache');
+            return Promise.resolve(itemGetTodayNewItemAmountCache);
+        } else {
+            console.log('use amount api');
+            var date = new Date();
+            var dateStr = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' 00:00:00';
+            var categories = ['电器日用', '校园代步', '闲置数码', '美妆衣物', '图书教材', '运动棋牌', '票券小物'];
+            var amount = {};
+            return Promise.map(categories, function(category) {
+                var itemQuery = new AV.Query(Item);
+                itemQuery.greaterThan("createdAt", new Date(dateStr));
+                itemQuery.equalTo('category', category);
+                itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
+                return itemQuery.find().then(function(result) {
+                    amount[category] = result.length;
+                });
+            }).then(function() {
+                itemGetTodayNewItemAmountCache = amount;
+                return amount;
+            });
+        }
     }
 };
 

@@ -16,15 +16,15 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
                 console.log(result);
                 if (result.data.success) {
                     $rootScope.$broadcast('alert', '商品发布成功！');
+                    $scope.publishLoaderIsShow = false;
+                    $scope.publishIsShow = false;
+                    $rootScope.$broadcast('item-publish');
                 }
-                $scope.publishLoaderIsShow = false;
-                $scope.publishIsShow = false;
-                $rootScope.$broadcast('item-publish');
             });
 
         }
 
-        if (!($scope.item.name && $scope.item.detail && $scope.item.category )) {
+        if (!($scope.item.name && $scope.item.detail && $scope.item.category)) {
             $rootScope.$broadcast('alert', '好像有重要信息缺失哦？');
             $scope.publishLoaderIsShow = false;
             return;

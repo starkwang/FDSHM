@@ -1,10 +1,13 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
-    if(window.location.pathname == '/usermanage/'){
+    if (window.location.pathname == '/usermanage/') {
         $scope.categoryIsHidden = true;
     }
     $scope.moreVertIsShow = false;
-    $('[data-position]').tooltip({delay: 50});
-    switch(window.location.pathname){
+    $scope.amount = {};
+    $('[data-position]').tooltip({
+        delay: 50
+    });
+    switch (window.location.pathname) {
         case '/category/digital':
             $scope.isDigital = true;
             break;
@@ -27,6 +30,15 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             $scope.isSmallthing = true;
             break;
     }
+    BaseService.item.getTodayNewItemAmount().then(function(result) {
+        // amount = {
+        //     digital: 1,
+        //     ride: 2,
+        //     commodity: 0,
+        //     ...
+        // }
+        $scope.amount = result.data;
+    })
     $scope.showPublish = function() {
         $rootScope.$broadcast('showPublish');
     }
@@ -36,11 +48,11 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.showSignup = function() {
         $rootScope.$broadcast('showSignup');
     }
-    $scope.changeMoreVertShow = function(){
+    $scope.changeMoreVertShow = function() {
         console.log('message');
         $scope.moreVertIsShow = !$scope.moreVertIsShow;
     }
-    $scope.showVerifyMail = function(){
+    $scope.showVerifyMail = function() {
         $rootScope.$broadcast('showVerifyMail');
     }
     $scope.test = function() {

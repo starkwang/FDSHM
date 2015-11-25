@@ -49,6 +49,9 @@ angular.module('baseService', [])
                         itemTimeStamp: itemTimeStamp,
                         status: status
                     });
+                },
+                getTodayNewItemAmount:function(){
+                    return GET('/api/item/get_today_new_item_amount');
                 }
             }
             var waterfoo = {

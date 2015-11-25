@@ -141,6 +141,13 @@ var item = {
         } else {
             sendErr(res, 'params error');
         }
+    },
+    getTodayNewItemAmount: function(req, res) {
+        service.item.getTodayNewItemAmount().then(function(result) {
+            res.send(result);
+        }, function(err) {
+            sendErr(res, err);
+        })
     }
 };
 
