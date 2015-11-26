@@ -8,6 +8,7 @@ var session = require('express-session');
 var morgan = require('morgan');
 var moment = require('moment');
 var RedisStore = require('connect-redis')(session);
+var compression = require('compression');
 
 
 
@@ -24,6 +25,7 @@ var api = require('./src/api/api');
 app.set('view engine', 'jade');
 app.set('views', './client/src/template');
 
+app.use(compression());
 app.use(morgan('dev'))
 
 //静态资源
