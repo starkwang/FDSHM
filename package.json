@@ -6,6 +6,7 @@
     "avoscloud-sdk": "^0.6.4",
     "bluebird": "^2.10.2",
     "body-parser": "^1.14.1",
+    "compression": "^1.6.0",
     "connect-redis": "^3.0.1",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
