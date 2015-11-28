@@ -71,10 +71,20 @@
                 display: block;
                 width: 150px;
                 left: -100px;
+                li a {
+                    color: #5d4037 !important;
+                }
             }
+        }
+        li.publish-btn:hover {
+            background-color: #795548 !important;
+        }
+        li.publish-btn>button:hover {
+            background-color: lighten(#a1887f, 5%) !important;
         }
     }
     .nav2 {
+        background-color: rgba(255, 255, 255, 0.9);
         top: 64px;
         .nav-wrapper {
             ul {
@@ -82,6 +92,27 @@
                 width: 850px;
                 margin: 0 auto;
             }
+        }
+        a.digital {
+            color: #ef5350;
+        }
+        a.ride {
+            color: #fb8c00;
+        }
+        a.commodity {
+            color: #afb42b;
+        }
+        a.book {
+            color: #66bb6a;
+        }
+        a.makeup {
+            color: #039be5;
+        }
+        a.sport {
+            color: #9575cd;
+        }
+        a.smallthing {
+            color: #ab47bc;
         }
     }
 }

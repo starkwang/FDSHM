@@ -9,7 +9,7 @@
     margin:0 auto;
     margin-top: 30px;
     font-size: 40px;
-    color: #26a69a!important;
+    color: #5d4037!important;
     border-bottom: 2px solid;
     padding: 10px;
     i{
@@ -17,7 +17,7 @@
         font-size: 40px;
     }
     a{
-        color: #26a69a!important;
+        color: #5d4037!important;
     }
 }
 .no-item{
@@ -26,4 +26,7 @@
     line-height: 100px;
     text-align: center;
     margin-bottom: 50px;
+    >button:hover{
+        background-color: lighten(#795548,5%) !important;
+    }
 }
