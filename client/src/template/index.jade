@@ -44,7 +44,7 @@ html(ng-app="starkAPP")
                             i.iconfont.icon-sport
                         - if(category == 'smallthing')
                             i.iconfont.icon-smallthing
-                        p #{fliter[category]}
+                        a(href="/category/#{category}") #{fliter[category]}
                     div.waterfoo.row
                         div.item-wrapper.normal
                             - if(data[category].length >0)

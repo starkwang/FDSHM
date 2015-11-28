@@ -19,7 +19,7 @@ div.header.navbar-fixed(ng-controller="headerController")
                     li
                         a(href="/usermanage/") 我发布的商品
                     li
-                        a(href="/user/") #{session.name}
+                        a(href="") #{session.name}
                     li
                         a(ng-click="changeMoreVertShow()")
                             i.iconfont &#xe615;
@@ -32,7 +32,7 @@ div.header.navbar-fixed(ng-controller="headerController")
                                     li
                                         a(ng-click="showVerifyMail()") 学邮验证
                                 li
-                                    a 个人信息设置
+                                    a 更改用户名
                                 li 
                                     a(ng-click="logout()") 退出登录
                     

@@ -131,40 +131,48 @@ var user = {
             user.set("password", password);
             return user.signUp();
         });
-
-        // user.set("pwd", password);
-        // user.set("name", name);
-        // user.setMobilePhoneNumber(tel);
-        // user.set('timeStamp', new Date().getTime());
-        // return user.signUp();
     },
     login: function(username, password) {
         return AV.User.logIn(username, password);
     },
-    getUserObjectId: function(userid) {
-        var query = new AV.Query(AV.User);
-        query.equalTo("timeStamp", userid);
-        return query.find();
+
+    //leancloud 不允许未登录时修改用户数据，这里是模拟登陆的hack
+    loginHack: function(userid) {
+        return this.getUserByUserId(userid)
+            .then(function(user) {
+                return AV.User.logIn(user.get('username'), user.get('pwd'));
+            })
     },
-    requestMailVerify: function(mailAddress, userid) {
-        return this.getUserObjectId(userid).then(function(result) {
-                console.log(result[0].id);
+    setName: function(userid, name) {
+        return this.setInfo(userid, 'name', name);
+    },
+    setInfo: function(userid, attr, data) {
+        return this.loginHack(userid)
+            .then(function(user) {
+                user.set(attr, data)
+                return user.save();
+            }, function(err) {
+                return err;
+            });
+    },
+    getUserByUserId: function(userid) {
+        var query = new AV.Query(AV.User);
+        query.equalTo("timeStamp", parseInt(userid));
+        return query.find()
+            .then(function(result) {
                 var query = new AV.Query(AV.User);
                 return query.get(result[0].id);
-            })
-            .then(function(user) {
-                console.log(user);
-                return AV.User.logIn(user.get('username'), user.get('pwd'))
-            })
+            });
+    },
+    requestMailVerify: function(mailAddress, userid) {
+        return this.loginHack(userid)
             .then(function(user) {
                 user.set('email', mailAddress);
                 return user.save();
             })
             .then(function(user) {
-                console.log(user.id);
                 return mail.send(mailAddress, "【复旦二手工坊账号验证】", '<p>测试阶段暂时访问这个url：</p>' + '<p>http://10.108.81.230:3000/api/user/mail_verify/' + user.id + '</p>');
             }, function(err) {
-                console.log(err);
                 return err;
             })
 
@@ -173,13 +181,11 @@ var user = {
         var query = new AV.Query(AV.User);
         return query.get(objectId)
             .then(function(user) {
-                console.log(user);
                 return AV.User.logIn(user.get('username'), user.get('pwd')).then(function(user) {
                     user.set('emailVerified', true);
                     return user.save();
                 })
             }, function(err) {
-                console.log(err);
                 return err;
             });
     },

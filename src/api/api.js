@@ -7,7 +7,11 @@ function sendErr(res, message) {
         message: message
     });
 }
-
+// service.user.setInfo(1448263981073,'name','starkwang').then(function(result){
+//     console.log('success');
+// },function(err){
+//     console.log(err);
+// });
 var item = {
     // '/api/item/collection' GET
     collection: function(req, res) {
@@ -247,6 +251,27 @@ var user = {
         } else {
             sendErr(res, 'not login');
         }
+    },
+    setInfo: function(req, res) {
+        if (!(req.body.userid && req.body.name)) {
+            sendErr(res, 'params err');
+            return
+        }
+        if (!/^[0-9]{13}$/.test(req.body.userid)) {
+            sendErr(res, 'userid must be numbers');
+            return;
+        }
+        var userid = parseInt(req.body.userid);
+        var name = req.body.name;
+        service.user.setName(userid, name).then(function(result) {
+            console.log('success');
+            res.send({
+                success: true
+            })
+        }, function(err) {
+            sendErr(res, err);
+            console.log(err);
+        });
     },
     requestMailVerify: function(req, res) {
         if (/^[0-9]{11}@fudan.edu.cn$/.test(req.body.mailAddress) && req.session.login) {
