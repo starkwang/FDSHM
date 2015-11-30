@@ -2,7 +2,7 @@ div(ng-controller="verifyMailController")
     div.verify-mail#change-show(ng-show="verifyMailIsShow",ng-click="changeVerifyMailShow($event)")
             div.publish-box.z-depth-4
                 div.row
-                    div.col.s12.title
+                    div.col.s12.title.brown
                         h1 验证邮箱
                     div.input-field.col.s12
                         input.validate(type="text",ng-model="mailAddress",required,pattern="^[0-9]{11}@fudan.edu.cn$")

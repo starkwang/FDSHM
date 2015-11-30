@@ -43,44 +43,44 @@ div.header.navbar-fixed(ng-controller="headerController")
                         a(ng-click="showLogin()") 登陆
                     li
                         a(ng-click="showSignup()") 注册
-    nav.nav2(ng-hide="categoryIsHidden")
-        div.nav-wrapper
-            ul.hide-on-med-and-down.category
-                li(ng-class="{true: 'active'}[isDigital]")
-                    a.digital(href="/category/digital") 
-                        i.iconfont &#xe601;
-                        em 闲置数码
-                        span.new-item.red.lighten-1(ng-show="amount['闲置数码']>0") +{{amount['闲置数码']}}
-                li(ng-class="{true: 'active'}[isRide]")
-                    a.ride(href="/category/ride")
-                        i.iconfont &#xe602;
-                        em 校园代步
-                        span.new-item.red.lighten-1(ng-show="amount['校园代步']>0") +{{amount['校园代步']}}
-                li(ng-class="{true: 'active'}[isCommodity]")
-                    a.commodity(href="/category/commodity")
-                        i.iconfont &#xe603;
-                        em 电器日用
-                        span.new-item.red.lighten-1(ng-show="amount['电器日用']>0") +{{amount['电器日用']}}
-                li(ng-class="{true: 'active'}[isBook]")
-                    a.book(href="/category/book")
-                        i.iconfont &#xe605;
-                        em 图书教材
-                        span.new-item.red.lighten-1(ng-show="amount['图书教材']>0") +{{amount['图书教材']}}
-                li(ng-class="{true: 'active'}[isMakeup]")
-                    a.makeup(href="/category/makeup")
-                        i.iconfont &#xe600;
-                        em 美妆衣物
-                        span.new-item.red.lighten-1(ng-show="amount['美妆衣物']>0") +{{amount['美妆衣物']}}
-                li(ng-class="{true: 'active'}[isSport]")
-                    a.sport(href="/category/sport")
-                        i.iconfont &#xe604;
-                        em 运动棋牌
-                        span.new-item.red.lighten-1(ng-show="amount['运动棋牌']>0") +{{amount['运动棋牌']}}
-                li(ng-class="{true: 'active'}[isSmallthing]")
-                    a.smallthing(href="/category/smallthing")
-                        i.iconfont &#xe606;
-                        em 票券小物
-                        span.new-item.red.lighten-1(ng-show="amount['票券小物']>0") +{{amount['票券小物']}}
+    //- nav.nav2(ng-hide="categoryIsHidden")
+    //-     div.nav-wrapper
+    //-         ul.hide-on-med-and-down.category
+    //-             li(ng-class="{true: 'active'}[isDigital]")
+    //-                 a.digital(href="/category/digital") 
+    //-                     i.iconfont &#xe601;
+    //-                     em 闲置数码
+    //-                     span.new-item.red.lighten-1(ng-show="amount['闲置数码']>0") +{{amount['闲置数码']}}
+    //-             li(ng-class="{true: 'active'}[isRide]")
+    //-                 a.ride(href="/category/ride")
+    //-                     i.iconfont &#xe602;
+    //-                     em 校园代步
+    //-                     span.new-item.red.lighten-1(ng-show="amount['校园代步']>0") +{{amount['校园代步']}}
+    //-             li(ng-class="{true: 'active'}[isCommodity]")
+    //-                 a.commodity(href="/category/commodity")
+    //-                     i.iconfont &#xe603;
+    //-                     em 电器日用
+    //-                     span.new-item.red.lighten-1(ng-show="amount['电器日用']>0") +{{amount['电器日用']}}
+    //-             li(ng-class="{true: 'active'}[isBook]")
+    //-                 a.book(href="/category/book")
+    //-                     i.iconfont &#xe605;
+    //-                     em 图书教材
+    //-                     span.new-item.red.lighten-1(ng-show="amount['图书教材']>0") +{{amount['图书教材']}}
+    //-             li(ng-class="{true: 'active'}[isMakeup]")
+    //-                 a.makeup(href="/category/makeup")
+    //-                     i.iconfont &#xe600;
+    //-                     em 美妆衣物
+    //-                     span.new-item.red.lighten-1(ng-show="amount['美妆衣物']>0") +{{amount['美妆衣物']}}
+    //-             li(ng-class="{true: 'active'}[isSport]")
+    //-                 a.sport(href="/category/sport")
+    //-                     i.iconfont &#xe604;
+    //-                     em 运动棋牌
+    //-                     span.new-item.red.lighten-1(ng-show="amount['运动棋牌']>0") +{{amount['运动棋牌']}}
+    //-             li(ng-class="{true: 'active'}[isSmallthing]")
+    //-                 a.smallthing(href="/category/smallthing")
+    //-                     i.iconfont &#xe606;
+    //-                     em 票券小物
+    //-                     span.new-item.red.lighten-1(ng-show="amount['票券小物']>0") +{{amount['票券小物']}}
                 //- li.active
                 //-     a(href="") a
 include ../publish/publish.jade

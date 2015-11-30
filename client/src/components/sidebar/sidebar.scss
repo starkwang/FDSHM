@@ -1,17 +1,73 @@
-.sidebar{
-    display: none;
-    background: #ddd;
+.sidebar {
     position: fixed;
-    top: 300px;
-    left:100px;
-    font-size: 20px;
-    width:160px;
-    li{
-        padding: 5px;
+    top: 100px;
+    left: 0;
+    font-size: 18px;
+    width: 190px;
+    li {
+        padding: 10px 10px;
+        padding-left: 30px;
         list-style-type: none;
-        text-align: center;
         display: block;
         cursor: pointer;
-
+        transition: all .3s;
+        position: relative;
+        a {
+            display: block;
+        }
+        i {
+            font-size: 26px;
+            margin-right: 15px;
+        }
+        em {
+            line-height: 26px;
+        }
+        span.new-item {
+            color: #fff;
+            position: absolute;
+            right: 20px;
+            bottom: 17px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 12px;
+            padding: 0 4px;
+            border-radius: 5px;
+        }
+    }
+    li:hover {
+        background-color: #e1e1e1;
+    }
+    li.active {
+        background-color: #e1e1e1;
+    }
+    a.index {
+        color: #333;
+    }
+    a.digital {
+        color: #ef5350;
+    }
+    a.ride {
+        color: #fb8c00;
+    }
+    a.commodity {
+        color: #afb42b;
+    }
+    a.book {
+        color: #66bb6a;
+    }
+    a.makeup {
+        color: #039be5;
+    }
+    a.sport {
+        color: #9575cd;
+    }
+    a.smallthing {
+        color: #ab47bc;
+    }
+    .info {
+        font-size: 14px;
+        border-top: 1px solid #ccc;
+        color: #aaa;
+        padding: 30px;
     }
 }

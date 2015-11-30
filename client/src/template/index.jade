@@ -9,7 +9,8 @@ html(ng-app="starkAPP")
     body(ng-view)
         include ../components/header/header.jade
         include ../components/back-to-top/back-to-top.jade
-        div(ng-controller="headerController")
+        include ../components/sidebar/sidebar.jade
+        div.main-content(ng-controller="headerController")
             div.index-title 最新发布
             div.waterfoo.row
                 div.item-wrapper.normal

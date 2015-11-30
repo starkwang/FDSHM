@@ -1,16 +1,42 @@
 div.sidebar(ng-controller="sidebarController")
-    li 闲置数码
-        div.detail
-    li 校园代步
-        div.detail
-    li 电器日用
-        div.detail
-    li 图书教材
-        div.detail
-    li 美妆衣物
-        div.detail
-    li 运动棋牌
-        div.detail
-    li 票券小物
-        div.detail
-    
+    li(ng-class="{true: 'active'}[isIndex]")
+        a.index(href="/")
+            i.iconfont &#xe601;
+            em 主页
+    li(ng-class="{true: 'active'}[isDigital]")
+        a.digital(href="/category/digital")
+            i.iconfont &#xe601;
+            em 闲置数码
+            span.new-item.grey.lighten-1(ng-show="amount['闲置数码']>0") +{{amount['闲置数码']}}
+    li(ng-class="{true: 'active'}[isRide]")
+        a.ride(href="/category/ride")
+            i.iconfont &#xe602;
+            em 校园代步
+            span.new-item.grey.lighten-1(ng-show="amount['校园代步']>0") +{{amount['校园代步']}}
+    li(ng-class="{true: 'active'}[isCommodity]")
+        a.commodity(href="/category/commodity")
+            i.iconfont &#xe603;
+            em 电器日用
+            span.new-item.grey.lighten-1(ng-show="amount['电器日用']>0") +{{amount['电器日用']}}
+    li(ng-class="{true: 'active'}[isBook]")
+        a.book(href="/category/book")
+            i.iconfont &#xe605;
+            em 图书教材
+            span.new-item.grey.lighten-1(ng-show="amount['图书教材']>0") +{{amount['图书教材']}}
+    li(ng-class="{true: 'active'}[isMakeup]")
+        a.makeup(href="/category/makeup")
+            i.iconfont &#xe600;
+            em 美妆衣物
+            span.new-item.grey.lighten-1(ng-show="amount['美妆衣物']>0") +{{amount['美妆衣物']}}
+    li(ng-class="{true: 'active'}[isSport]")
+        a.sport(href="/category/sport")
+            i.iconfont &#xe604;
+            em 运动棋牌
+            span.new-item.grey.lighten-1(ng-show="amount['运动棋牌']>0") +{{amount['运动棋牌']}}
+    li(ng-class="{true: 'active'}[isSmallthing]")
+        a.smallthing(href="/category/smallthing")
+            i.iconfont &#xe606;
+            em 票券小物
+            span.new-item.grey.lighten-1(ng-show="amount['票券小物']>0") +{{amount['票券小物']}}
+    div.info
+        @2015 晨曦工作室
