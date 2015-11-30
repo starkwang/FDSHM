@@ -1,0 +1,35 @@
+#backtop.light {
+    bottom: 30px;
+    right: 30px
+}
+
+#backtop.light button {
+    border-radius: 100%;
+    color: black;
+    background: white;
+    padding: 10px;
+    font-size: 22px;
+    color: #fff;
+    i{
+        font-size: 22px;
+    }
+}
+
+#backtop {
+    opacity: 0;
+    transition: all .3s ease-out;
+    position: fixed
+}
+
+#backtop button {
+    outline: none;
+    border: 0
+}
+
+#backtop button:hover {
+    cursor: pointer
+}
+
+.show {
+    opacity: 1 !important
+}

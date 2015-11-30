@@ -1,10 +1,12 @@
 var angular = require('angular');
 require('./angular-animate.min');
 require('./baseService');
+require('../back-to-top/back-to-top.js');
 var starkAPP = angular.module('starkAPP', [
     'ngAnimate',
     'baseService',
-    'infinite-scroll'
+    'infinite-scroll',
+    'angular.backtop'
 ]);
 starkAPP.controller('headerController', require('../header/headerController.js'));
 starkAPP.controller('waterfooController', require('../waterfoo/waterfooController.js'));

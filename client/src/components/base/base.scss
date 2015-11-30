@@ -191,39 +191,67 @@ html {
     height: 100%;
 }
 
-body, button, input, select, textarea {
+body,
+button,
+input,
+select,
+textarea {
     font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', 'Helvetica', 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', 'STHeiti', 'WenQuanYi Micro Hei', 'SimSun', 'sans-serif'!important;
     height: 100%;
     background: #eeeeee;
 }
 
 @font-face {
-  font-family: 'iconfont';
-  src: url('http://at.alicdn.com/t/font_1448271761_1592715.eot'); /* IE9*/
-  src: url('http://at.alicdn.com/t/font_1448271761_1592715.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('http://at.alicdn.com/t/font_1448271761_1592715.woff') format('woff'), /* chrome、firefox */
-  url('http://at.alicdn.com/t/font_1448271761_1592715.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('http://at.alicdn.com/t/font_1448271761_1592715.svg#iconfont') format('svg'); /* iOS 4.1- */
+    font-family: 'iconfont';
+    src: url('http://at.alicdn.com/t/font_1448853974_4183507.eot');
+    /* IE9*/
+    src: url('http://at.alicdn.com/t/font_1448853974_4183507.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('http://at.alicdn.com/t/font_1448853974_4183507.woff') format('woff'), /* chrome、firefox */
+    url('http://at.alicdn.com/t/font_1448853974_4183507.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('http://at.alicdn.com/t/font_1448853974_4183507.svg#iconfont') format('svg');
+    /* iOS 4.1- */
 }
-                    
-                    
 
 .iconfont {
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
 }
-.icon-makeup:before { content: "\e600"; }
-.icon-search:before { content: "\e607"; }
-.icon-digital:before { content: "\e601"; }
-.icon-ride:before { content: "\e602"; }
-.icon-commodity:before { content: "\e603"; }
-.icon-sport:before { content: "\e604"; }
-.icon-book:before { content: "\e605"; }
-.icon-smallthing:before { content: "\e606"; }
+
+.icon-makeup:before {
+    content: "\e600";
+}
+
+.icon-search:before {
+    content: "\e607";
+}
+
+.icon-digital:before {
+    content: "\e601";
+}
+
+.icon-ride:before {
+    content: "\e602";
+}
+
+.icon-commodity:before {
+    content: "\e603";
+}
+
+.icon-sport:before {
+    content: "\e604";
+}
+
+.icon-book:before {
+    content: "\e605";
+}
+
+.icon-smallthing:before {
+    content: "\e606";
+}
 
 .ng-hide-add {
     -webkit-animation: 0.5s fadeOut;
@@ -240,6 +268,7 @@ body, button, input, select, textarea {
     animation: 0.7s fadeIn;
     z-index: 95;
 }
+
 .alert.ng-hide-remove {
     -webkit-animation: 0.5s bounceIn;
     -moz-animation: 0.5s bounceIn;
@@ -247,6 +276,7 @@ body, button, input, select, textarea {
     animation: 0.5s bounceIn;
     z-index: 99999;
 }
+
 .alert.ng-hide-add {
     -webkit-animation: 0.5s bounceOut;
     -moz-animation: 0.5s bounceOut;
