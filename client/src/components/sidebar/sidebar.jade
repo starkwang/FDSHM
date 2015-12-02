@@ -1,7 +1,7 @@
 div.sidebar(ng-controller="sidebarController")
     li(ng-class="{true: 'active'}[isIndex]")
         a.index(href="/")
-            i.iconfont &#xe601;
+            i.iconfont &#xe616;
             em 主页
     li(ng-class="{true: 'active'}[isDigital]")
         a.digital(href="/category/digital")
@@ -35,7 +35,7 @@ div.sidebar(ng-controller="sidebarController")
             span.new-item.grey.lighten-1(ng-show="amount['运动棋牌']>0") +{{amount['运动棋牌']}}
     li(ng-class="{true: 'active'}[isSmallthing]")
         a.smallthing(href="/category/smallthing")
-            i.iconfont &#xe606;
+            i.iconfont &#xe617;
             em 票券小物
             span.new-item.grey.lighten-1(ng-show="amount['票券小物']>0") +{{amount['票券小物']}}
     div.info
