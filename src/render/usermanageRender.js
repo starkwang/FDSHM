@@ -1,3 +1,4 @@
+var preCompile = require('./preCompile');
 function render(req, res) {
     if (!req.session.login) {
         res.redirect('/login');

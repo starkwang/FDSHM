@@ -1,4 +1,4 @@
-preCompile = require('./preCompile');
+var preCompile = require('./preCompile');
 
 function render(req, res) {
     if (req.session.login) {

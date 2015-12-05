@@ -1,6 +1,6 @@
-promise = require('bluebird');
-fs = promise.promisifyAll(require('fs'));
-jade = require('jade');
+var promise = require('bluebird');
+var fs = promise.promisifyAll(require('fs'));
+var jade = require('jade');
 
 var Render = {};
 

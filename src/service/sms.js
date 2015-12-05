@@ -1,4 +1,4 @@
-AV = require('avoscloud-sdk');
+var AV = require('avoscloud-sdk');
 
 function send(tel) {
     return AV.Cloud.requestSmsCode({

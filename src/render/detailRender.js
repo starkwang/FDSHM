@@ -1,6 +1,6 @@
-service = require('../service/service');
-preCompile = require('./preCompile');
-moment = require('moment');
+var service = require('../service/service');
+var preCompile = require('./preCompile');
+var moment = require('moment');
 
 function render(req, res) {
     var templateData = {}

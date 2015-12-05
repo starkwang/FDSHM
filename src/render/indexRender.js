@@ -1,5 +1,6 @@
-service = require('../service/service');
-moment = require('moment');
+var service = require('../service/service');
+var moment = require('moment');
+var preCompile = require('./preCompile');
 moment.locale('zh-cn');
 var cache = {};
 setInterval(function() {

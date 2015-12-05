@@ -1,5 +1,5 @@
-service = require('../service/service');
-moment = require('moment');
+var service = require('../service/service');
+var moment = require('moment');
 
 function sendErr(res, message) {
     res.send({
