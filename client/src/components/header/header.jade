@@ -1,14 +1,14 @@
 div.header.navbar-fixed(ng-controller="headerController")
     nav.brown.nav1.darkenen-1
         div.nav-wrapper
-            a.brand-logo(href="/") 复旦二手工坊
+            a.logo(href="/") 复旦二手工坊
             //- div.nav-wrapper.search-bar
             //-     div.input-field
             //-         input#search(type="search",required)
             //-         label(for="search")
             //-             i.material-icons search
             //-         i.material-icons trending_flat
-            ul.right.hide-on-med-and-down
+            ul.right
                 - if(session.login)
                     - if(session.emailVerified)
                         li.publish-btn

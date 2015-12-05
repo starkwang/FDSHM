@@ -18,16 +18,61 @@
         font-size: 16px;
     }
     .item-name{
-        font-size: 28px;
+        font-size: 24px;
         padding:10px;
+        font-weight:500;
     }
     .item-price{
         font-size: 20px;
         padding:10px;
+        color: #EF5350;
+        font-weight: 700;
     }
-    .bargain{
+    .item-public-info{
+        overflow: hidden;
+        p{
+            float: left;
+            font-size: 16px;
+            padding:10px;
+        }
+    }
+    .item-pub-time{
         padding:10px;
-        font-size: 16px;
+        font-size: 14px;
+        color: #999;
+    }
+    .item-contact{
+        border:1px dashed #d7ccc8;
+        >div{
+            overflow: hidden;
+            padding:10px;
+        }
+        .attr{
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            text-align: center;
+            float: left;
+            color: #fff;
+            i{
+                font-size: 24px;
+                line-height: 39px;
+            }
+        }
+        .value{
+            float: left;
+            font-size: 20px;
+            line-height: 40px;
+            margin-left: 15px;
+        }
+        .not-login{
+            padding:110px 0px;
+            font-size: 20px;
+            text-align: center;
+            a{
+                cursor: pointer;
+            }
+        }
     }
     table{
         td{

@@ -161,6 +161,9 @@ var user = {
         return query.find()
             .then(function(result) {
                 var query = new AV.Query(AV.User);
+                // query.get(result[0].id).then(function(user){
+                //     getUserByUserIdCache[result[0].id] = user;
+                // })
                 return query.get(result[0].id);
             });
     },

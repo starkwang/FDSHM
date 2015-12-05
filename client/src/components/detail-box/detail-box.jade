@@ -11,58 +11,43 @@ div.detail-box.z-depth-1.row(ng-controller="detailBoxController")
     div.col.s6
         h1.item-name #{detailBox.name}
         h2.item-price ￥#{detailBox.price}
-        - if (detailBox.noBargain)
-            p.bargain 不可讲价
-        - else
-            p.bargain 可讲价
-        table
+        div.item-public-info
+            - if (detailBox.noBargain)
+                p.bargain 不可讲价
+            - else
+                p.bargain 可讲价
             - if (detailBox.location)
-                tr
-                    td.attr 
-                        p 交易地点
-                    td
-                        h1.item-location #{detailBox.location}
-            - if (detailBox.publisher_name)
-                tr
-                    td.attr 
-                        p 发布者
-                    td
-                        - if(session.login)
-                            h1.item-qq #{detailBox.publisher_name}
-                        - else
-                            h1.item-qq 登陆后可见
-            - if (detailBox.tel)
-                tr
-                    td.attr 
-                        p 手机
-                    td
-                        - if(session.login)
-                            h1.item-tel #{detailBox.tel}
-                        - else
-                            h1.item-tel 登陆后可见
-            - if (detailBox.qq)
-                tr
-                    td.attr 
-                        p QQ
-                    td
-                        - if(session.login)
-                            h1.item-qq #{detailBox.qq}
-                        - else
-                            h1.item-qq 登陆后可见
-            - if (detailBox.wechat)
-                tr
-                    td.attr 
-                        p 微信号
-                    td
-                        - if(session.login)
-                            h1.item-qq #{detailBox.wechat}
-                        - else
-                            h1.item-qq 登陆后可见
-            tr
-                td.attr 
-                    p 发布时间
-                td
-                    h1.item-pub-time #{detailBox.pubTime}
+                p
+                    i.iconfont &#xe61a;
+                    em.item-location #{detailBox.location}
+        h1.item-pub-time 发布于 #{detailBox.pubTime}
+        - if(session.login)
+            div.item-contact
+                - if(detailBox.publisher_name)
+                    div
+                        div.brown.z-depth-1.attr
+                            i.iconfont &#xe619;
+                        div.value #{detailBox.publisher_name}
+                - if (detailBox.tel)
+                    div
+                        div.brown.z-depth-1.attr
+                            i.iconfont &#xe61b;
+                        div.value #{detailBox.tel}
+                - if (detailBox.qq)
+                    div
+                        div.brown.z-depth-1.attr
+                            i.iconfont &#xe618;
+                        div.value #{detailBox.qq}
+                - if (detailBox.wechat)
+                    div
+                        div.brown.z-depth-1.attr
+                            i.iconfont &#xe61c;
+                        div.value #{detailBox.wechat}
+        - else
+            div.item-contact 
+                p.not-login 
+                    a(ng-click="showLogin()") 登陆
+                    em 后查看联系信息
         - if(session.userid == detailBox.publisher_id && detailBox.status!='saled'&& detailBox.status!='undercarriage')
             button.edit-btn.btn-floating.btn-large.red(ng-click="showDetailEditor()") 修改
         - if(detailBox.status=='saled')

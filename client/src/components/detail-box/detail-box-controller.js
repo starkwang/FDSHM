@@ -5,7 +5,9 @@ module.exports = ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.detialBox = {};
     var item_id = window.location.pathname.split('/')[2];
     $scope.showDetailEditor = function() {
-        $rootScope.$broadcast('showDetailEditor', item_id)
+        $rootScope.$broadcast('showDetailEditor', item_id);
     }
-    console.log($scope);
+    $scope.showLogin = function(){
+        $rootScope.$broadcast('showLogin', item_id);
+    }
 }]
