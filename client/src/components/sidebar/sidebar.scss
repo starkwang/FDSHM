@@ -5,8 +5,6 @@
     font-size: 18px;
     width: 190px;
     li {
-        padding: 10px 10px;
-        padding-left: 30px;
         list-style-type: none;
         display: block;
         cursor: pointer;
@@ -14,6 +12,8 @@
         position: relative;
         a {
             display: block;
+            padding: 10px 10px;
+            padding-left: 30px;
         }
         i {
             font-size: 26px;
