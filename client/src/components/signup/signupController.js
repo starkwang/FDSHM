@@ -4,6 +4,8 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.$on('showSignup', function() {
         $scope.signupIsShow = true;
     })
+
+    $scope.signupInfo = {};
     $scope.changeSignupShow = function($event) {
         console.log($event);
         if ($event.target.id == "change-show") {
