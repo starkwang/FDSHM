@@ -95,7 +95,7 @@ function render(req, res) {
         service.item.collection({
             category: '电器日用',
             start: 0,
-            amount: 8
+            amount: 4
         }).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {
@@ -120,7 +120,7 @@ function render(req, res) {
         service.item.collection({
             category: '图书教材',
             start: 0,
-            amount: 8
+            amount: 4
         }).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {
@@ -145,7 +145,7 @@ function render(req, res) {
         service.item.collection({
             category: '美妆衣物',
             start: 0,
-            amount: 8
+            amount: 4
         }).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {
@@ -170,7 +170,7 @@ function render(req, res) {
         service.item.collection({
             category: '运动棋牌',
             start: 0,
-            amount: 8
+            amount: 4
         }).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {
@@ -195,7 +195,7 @@ function render(req, res) {
         service.item.collection({
             category: '票券小物',
             start: 0,
-            amount: 8
+            amount: 4
         }).then(function(results) {
             var items = [];
             for (var i = 0; i < results.length; i++) {

@@ -29,6 +29,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         });
     }
     $scope.showSignup = function(){
+        $scope.loginIsShow = false;
         $rootScope.$broadcast('showSignup');
     }
     $scope.showForget = function(){
