@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
+    "angular": "^1.4.8",
     "ng-file-upload": "^9.1.2"
   },
   "devDependencies": {
