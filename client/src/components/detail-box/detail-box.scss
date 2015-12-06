@@ -41,8 +41,10 @@
         font-size: 14px;
         color: #999;
     }
-    .item-contact{
+    .item-contact.have-border{
         border:1px dashed #d7ccc8;
+    }
+    .item-contact{
         >div{
             overflow: hidden;
             padding:10px;
