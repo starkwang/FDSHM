@@ -5,7 +5,7 @@ var moment = require('moment');
 function render(req, res) {
     var templateData = {}
     service.item.get(req.params.pubTimeStamp).then(function(result) {
-        if (result.length >= 1) {
+        if (result.length > 0) {
             var item = result[0];
             templateData.session = req.session ? req.session : {};
             templateData.detailBox = {
@@ -29,8 +29,9 @@ function render(req, res) {
             return false;
         }
     }).then(function(user) {
+        console.log(user);
         if (user) {
-            templateData.detailBox.publisher_name = user.get('name');
+            templateData.detailBox.publisher_name = user == "none" ? "none" : user.get('name');
             var html = preCompile.detail(templateData);
             res.send(html);
         } else {

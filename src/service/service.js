@@ -6,19 +6,6 @@ var AV = require('avoscloud-sdk');
 var setting = require('./setting');
 AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
-
-var query = new AV.Query(AV.User);
-query.equalTo("username", '13316919664');
-query.find(function(result) {
-    console.log(result);
-    console.log(result.length);
-    if (result.length > 0) {
-        console.log('false');
-    } else {
-        console.log('true');
-    }
-})
-
 var itemGetCache = {};
 var itemGetTodayNewItemAmountCache = false;
 setTimeout(function() {
@@ -193,16 +180,15 @@ var user = {
         query.equalTo("timeStamp", parseInt(userid));
         return query.find()
             .then(function(result) {
-                if (result.length > 1) {
+                if (result.length > 0) {
                     var query = new AV.Query(AV.User);
                     // query.get(result[0].id).then(function(user){
                     //     getUserByUserIdCache[result[0].id] = user;
                     // })
                     return query.get(result[0].id);
                 } else {
-                    return false;
+                    return Promise.resolve('none');
                 }
-
             });
     },
     requestMailVerify: function(mailAddress, userid) {
