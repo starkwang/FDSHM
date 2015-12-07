@@ -30,7 +30,7 @@ html(ng-app="starkAPP")
                     - else
                         div 空的哦
             - for(category in fliter){
-                - if(category!='all')
+                - if(category!='all'&&data[category].length >0)
                     div.index-title
                         - if(category == 'digital')
                             i.iconfont.icon-digital
@@ -49,27 +49,16 @@ html(ng-app="starkAPP")
                         a(href="/category/#{category}") #{fliter[category]}
                     div.waterfoo.row
                         div.item-wrapper.normal
-                            - if(data[category].length >0)
-                                - for(var i =0;i<data[category].length;i++){
-                                    div.card.col
-                                        a(href="/item/#{data[category][i].pubTimeStamp||0}")
-                                            div.card-image(style="background-image:url(#{data[category][i].image[0]})")
-                                                //- img(ng-src="{{item.image[0]}}")
-                                                span.card-title ￥#{data[category][i].price}
-                                            div.card-content.item-name
-                                                p #{data[category][i].name}
-                                            div.card-content.item-location
-                                                p #{data[category][i].location}
-                                                p #{data[category][i].pubTime}           
-                                - }
-                            - else
-                                div.no-item 
-                                    p 哎呀，还没有人发布这个类型的商品哦~
-                                    - if(session.login)
-                                        - if(session.emailVerified)
-                                            button.brown.waves-effect.waves-light.btn(ng-click="showPublish()") 我要发布
-                                        - else
-                                            button.brown.waves-effect.waves-light.btn(ng-click="showVerifyMail()",data-position="top",data-delay="50",data-tooltip="需要先验证邮箱哦！") 我要发布
-                                    - else
-                                        button.brown.waves-effect.waves-light.btn(ng-click="showLogin()",data-position="top",data-delay="50",data-tooltip="需要先登陆哦！") 我要发布
+                            - for(var i =0;i<data[category].length;i++){
+                                div.card.col
+                                    a(href="/item/#{data[category][i].pubTimeStamp||0}")
+                                        div.card-image(style="background-image:url(#{data[category][i].image[0]})")
+                                            //- img(ng-src="{{item.image[0]}}")
+                                            span.card-title ￥#{data[category][i].price}
+                                        div.card-content.item-name
+                                            p #{data[category][i].name}
+                                        div.card-content.item-location
+                                            p #{data[category][i].location}
+                                            p #{data[category][i].pubTime}           
+                            - }
             - }

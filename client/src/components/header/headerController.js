@@ -7,38 +7,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $('[data-position]').tooltip({
         delay: 50
     });
-    // switch (window.location.pathname) {
-    //     case '/category/digital':
-    //         $scope.isDigital = true;
-    //         break;
-    //     case '/category/ride':
-    //         $scope.isRide = true;
-    //         break;
-    //     case '/category/commodity':
-    //         $scope.isCommodity = true;
-    //         break;
-    //     case '/category/book':
-    //         $scope.isBook = true;
-    //         break;
-    //     case '/category/makeup':
-    //         $scope.isMakeup = true;
-    //         break;
-    //     case '/category/sport':
-    //         $scope.isSport = true;
-    //         break;
-    //     case '/category/smallthing':
-    //         $scope.isSmallthing = true;
-    //         break;
-    // }
-    // BaseService.item.getTodayNewItemAmount().then(function(result) {
-    //     // amount = {
-    //     //     digital: 1,
-    //     //     ride: 2,
-    //     //     commodity: 0,
-    //     //     ...
-    //     // }
-    //     $scope.amount = result.data;
-    // })
     $scope.showPublish = function() {
         $rootScope.$broadcast('showPublish');
     }
@@ -54,21 +22,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.showVerifyMail = function() {
         $rootScope.$broadcast('showVerifyMail');
-    }
-    $scope.test = function() {
-        BaseService.user.login('13307130321@fudan.edu.cn', '123456').then(function(result) {
-            console.log(result);
-        });
-    }
-    $scope.test2 = function() {
-        BaseService.user.signup('starkwang', '123456', '13307130321@fudan.edu.cn').then(function(result) {
-            console.log(result);
-        });
-    }
-    $scope.test3 = function() {
-        BaseService.user.logout().then(function(result) {
-            console.log(result);
-        });
     }
     $scope.logout = function() {
         BaseService.user.logout().then(function(result) {

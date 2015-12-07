@@ -55,6 +55,9 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
                 $scope.items = $scope.items.concat(result.data);
                 $scope.isBusy = $scope.loaderShow = false;
             }
+            if($scope.items.length === 0 ){
+                $scope.noItemIsShow = true;
+            }
             console.log($scope.items);
         });
         now++;
@@ -102,4 +105,13 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
             })
         }
     };
+    $scope.showPublish = function() {
+        $rootScope.$broadcast('showPublish');
+    }
+    $scope.showLogin = function() {
+        $rootScope.$broadcast('showLogin');
+    }
+    $scope.showSignup = function() {
+        $rootScope.$broadcast('showSignup');
+    }
 }]
