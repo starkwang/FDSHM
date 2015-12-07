@@ -160,9 +160,13 @@ var user = {
         console.log('[ API : user.telVerify ] ' + JSON.stringify(req.body));
         if (req.body.tel) {
             service.sms.send(req.body.tel).then(function(result) {
-                res.send({
-                    success: true
-                });
+                if (result) {
+                    res.send({
+                        success: true
+                    });
+                } else {
+                    sendErr(res, '此手机已经被注册了哦');
+                }
             }, function(err) {
                 sendErr(res, err);
             })
@@ -175,8 +179,14 @@ var user = {
         if (req.body.tel && req.body.password && req.body.name, req.body.captcha) {
             service.user.signup(req.body.tel, req.body.password, req.body.name, req.body.tel, req.body.captcha).then(function(result) {
                 if (result) {
+                    console.log(result);
                     res.send({
                         success: true
+                    });
+                } else {
+                    console.log(result);
+                    res.send({
+                        success: false
                     });
                 }
             }, function(err) {

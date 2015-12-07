@@ -7,13 +7,24 @@ var setting = require('./setting');
 AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
 
+var query = new AV.Query(AV.User);
+query.equalTo("username", '13316919664');
+query.find(function(result) {
+    console.log(result);
+    console.log(result.length);
+    if (result.length > 0) {
+        console.log('false');
+    } else {
+        console.log('true');
+    }
+})
+
 var itemGetCache = {};
 var itemGetTodayNewItemAmountCache = false;
 setTimeout(function() {
     console.log('clear cache for todayAmount');
     itemGetTodayNewItemAmountCache = false;
 }, 60000);
-
 var item = {
     publish: function(params) {
         var item = new Item();
@@ -115,22 +126,43 @@ var item = {
 
 var user = {
     signup: function(username, password, name, tel, captcha) {
-        var user = new AV.User();
-        var params = {
-            mobilePhoneNumber: tel,
-            smsCode: captcha,
-            username: username,
-            password: password,
-            pwd: password,
-            name: name,
-            timeStamp: new Date().getTime()
-        };
-        console.log('service:' + JSON.stringify(params));
-        return user.signUpOrlogInWithMobilePhone(params).then(function(user) {
-            user.set("username", tel);
-            user.set("password", password);
-            return user.signUp();
+        console.log('signup:' + username + '/' + password);
+        var query = new AV.Query(AV.User);
+        query.equalTo("username", username.toString());
+        return query.find().then(function(result) {
+            if (result.length > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }).then(function(noConflict) {
+            if (noConflict) {
+                var user = new AV.User();
+                var params = {
+                    mobilePhoneNumber: tel,
+                    smsCode: captcha,
+                    username: username,
+                    password: password,
+                    pwd: password,
+                    name: name,
+                    timeStamp: new Date().getTime()
+                };
+                return user.signUpOrlogInWithMobilePhone(params)
+            } else {
+                return false;
+            }
+        }).then(function(user) {
+            if (user) {
+                user.set("username", tel);
+                user.set("password", password);
+                return user.signUp();
+            } else {
+                return false;
+            }
         });
+
+        console.log('service:' + JSON.stringify(params));
+
     },
     login: function(username, password) {
         return AV.User.logIn(username, password);
@@ -156,15 +188,21 @@ var user = {
             });
     },
     getUserByUserId: function(userid) {
+        console.log(userid);
         var query = new AV.Query(AV.User);
         query.equalTo("timeStamp", parseInt(userid));
         return query.find()
             .then(function(result) {
-                var query = new AV.Query(AV.User);
-                // query.get(result[0].id).then(function(user){
-                //     getUserByUserIdCache[result[0].id] = user;
-                // })
-                return query.get(result[0].id);
+                if (result.length > 1) {
+                    var query = new AV.Query(AV.User);
+                    // query.get(result[0].id).then(function(user){
+                    //     getUserByUserIdCache[result[0].id] = user;
+                    // })
+                    return query.get(result[0].id);
+                } else {
+                    return false;
+                }
+
             });
     },
     requestMailVerify: function(mailAddress, userid) {
