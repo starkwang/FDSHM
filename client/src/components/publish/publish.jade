@@ -28,7 +28,7 @@ div(ng-controller="publishController")
                         option(value="枫林校区") 枫林校区
                         option(value="张江校区") 张江校区
                 div.input-field.col.s6
-                    input#item-price.validate(type="text",ng-model="item.price",pattern="^[1-9][0-9]{0,5}(\.[0-9]{1,2})$",required)
+                    input#item-price.validate(type="text",ng-model="item.price",required)
                     label(for="item-price") 商品价格（必填）（元）
                 div.input-field.col.s6
                     select.browser-default(ng-model="item.category",required)
