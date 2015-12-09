@@ -10,8 +10,6 @@ var moment = require('moment');
 var RedisStore = require('connect-redis')(session);
 var compression = require('compression');
 
-
-
 var render = {
     index: require('./src/render/indexRender'),
     detail: require('./src/render/detailRender'),

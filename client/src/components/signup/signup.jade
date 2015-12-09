@@ -7,15 +7,6 @@ div(ng-controller="signupController")
                     div.input-field.col.s12
                         input.validate(type="text",ng-model="signupInfo.tel",required,pattern="^1[0-9]{10}$")
                         label 手机
-                    div.input-field.col.s12
-                        input.validate(type="password",ng-model="signupInfo.password",required)
-                        label 密码
-                    div.input-field.col.s12
-                        input.validate(type="password",ng-model="signupInfo.password2",required)
-                        label 确认密码
-                    div.input-field.col.s12
-                        input.validate(type="text",ng-model="signupInfo.name",required)
-                        label 姓名
                     div.col.s12(ng-show="checkTelIsShow")
                         button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="checkTel()")
                             i.iconfont.left &#xe60d;
@@ -23,6 +14,15 @@ div(ng-controller="signupController")
                     div.input-field.col.s12(ng-show="captchaIsShow")
                         input.validate(type="text",ng-model="signupInfo.captcha",required)
                         label 验证码
+                    div.input-field.col.s12(ng-show="captchaIsShow")
+                        input.validate(type="password",ng-model="signupInfo.password",required)
+                        label 密码
+                    div.input-field.col.s12(ng-show="captchaIsShow")
+                        input.validate(type="password",ng-model="signupInfo.password2",required)
+                        label 确认密码
+                    div.input-field.col.s12(ng-show="captchaIsShow")
+                        input.validate(type="text",ng-model="signupInfo.name",required)
+                        label 姓名
                     button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-show="signupBtnIsShow",ng-click="signup()")
                         i.iconfont.left &#xe60b;
                         em 注册

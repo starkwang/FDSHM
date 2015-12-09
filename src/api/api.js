@@ -180,8 +180,15 @@ var user = {
             service.user.signup(req.body.tel, req.body.password, req.body.name, req.body.tel, req.body.captcha).then(function(result) {
                 if (result) {
                     console.log(result);
-                    res.send({
-                        success: true
+                    req.session.regenerate(function() {
+                        req.session.login = true;
+                        req.session.name = result.attributes.name;
+                        req.session.email = result.attributes.email;
+                        req.session.emailVerified = result.attributes.emailVerified;
+                        req.session.userid = result.attributes.timeStamp;
+                        res.send({
+                            success: true
+                        });
                     });
                 } else {
                     console.log(result);
@@ -196,7 +203,6 @@ var user = {
         } else {
             sendErr(res, 'params error');
         }
-
     },
     login: function(req, res) {
         service.user.login(req.body.username, req.body.password).then(function(result) {
