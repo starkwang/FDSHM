@@ -35,4 +35,9 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.showForget = function(){
         $rootScope.$broadcast('showForget');
     }
+    $scope.checkEnter = function($event){
+        if($event.keyCode == 13){
+            $scope.login();
+        }
+    }
 }]
