@@ -76,6 +76,7 @@ var item = {
                         qq: item.get('qq'),
                         wechat: item.get('wechat'),
                         stuNo: item.get('stuNo'),
+                        noBargain: item.get('noBargain'),
                         pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
                     })
                 }, function(err) {

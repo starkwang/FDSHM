@@ -19,6 +19,7 @@ function render(req, res) {
                 qq: item.get('qq'),
                 wechat: item.get('wechat'),
                 stuNo: item.get('stuNo'),
+                noBargain: item.get('noBargain'),
                 //publisher_name: item.get('publisher_name'),
                 publisher_id: item.get('publisher_id'),
                 pubTime: moment(parseInt(item.get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
