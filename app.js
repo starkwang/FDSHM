@@ -108,7 +108,9 @@ app.post('/api/upload', upload.single('file'), function(req, res, next) {
 //     console.log(err);
 // });
 
-
+app.get('*', function(req, res){
+    res.redirect('/');
+});
 app.listen(3000);
 console.log(alphabet('FUDAN', 'planar'));
 console.log(moment(1448249498353).format('YYYY/MM/DD HH:mm:ss'));

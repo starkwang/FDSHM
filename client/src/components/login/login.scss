@@ -9,7 +9,7 @@ div.login {
     .publish-box {
         z-index: 9999;
         >.row {
-            padding-bottom: 70px;
+            padding-bottom: 50px;
         }
         width: 300px;
         position:absolute;
@@ -18,30 +18,36 @@ div.login {
         top: 20%;
         background:#fff;
         .title {
-            background: #26a69a;
-            color: #fff;
-            padding: 10px;
-            font-size: 24px;
-            text-align: center;
+            background:url('/static//img/title.png');
+            background-size:contain;
+            height: 100px;
         }
         div.s6 {
             height: 50px;
         }
         .login-btn {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+            display: block;
+            margin:0 auto;
+            width: 200px;
+            position:relative;
+            top: 20px;
         }
-        .signup-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-        }
-        .publish-btn:hover {
+        .login-btn:hover {
             background-color: lighten(#EF5350, 5%) !important;
         }
         .forget-btn{
             cursor: pointer;
+            float: right;
+            color: #aaa;
+        }
+        .signup-btn{
+            cursor: pointer;
+            color: #EF5350;
+        }
+        .signup-area{
+            text-align: center;
+            position:relative;
+            top: 40px;
         }
     }
 }
