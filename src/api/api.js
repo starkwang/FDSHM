@@ -306,7 +306,7 @@ var user = {
         service.user.mailVerify(req.params.objectId).then(function(result) {
             req.session.email = result.attributes.email;
             req.session.emailVerified = result.attributes.emailVerified;
-            res.send("验证成功！由于复旦学邮启用了沙盒机制，请自行返回fudan.market主页");
+            res.send("<script>alert('验证成功！');window.location.pathname='/';</script>");
         }, function(err) {
             sendErr(res, err);
         });
