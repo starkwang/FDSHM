@@ -306,7 +306,7 @@ var user = {
         service.user.mailVerify(req.params.objectId).then(function(result) {
             req.session.email = result.attributes.email;
             req.session.emailVerified = result.attributes.emailVerified;
-            res.redirect('/');
+            res.send("验证成功！");
         }, function(err) {
             sendErr(res, err);
         });
