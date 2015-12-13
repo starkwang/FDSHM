@@ -8,8 +8,7 @@ AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
 var itemGetCache = {};
 var itemGetTodayNewItemAmountCache = false;
-setTimeout(function() {
-    console.log('clear cache for todayAmount');
+setInterval(function() {
     itemGetTodayNewItemAmountCache = false;
 }, 60000);
 var item = {

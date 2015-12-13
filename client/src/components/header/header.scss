@@ -14,10 +14,20 @@
     a {
         text-decoration: none;
         cursor: pointer;
+        color: #000;
     }
     .logo {
-        margin-left: 30px;
+        margin-left: 60px;
         font-size: 28px;
+        font-family: "Microsoft YaHei","微软雅黑" ! important;
+        font-weight: bolder;
+        .em1{
+            color: #0bb9f8;
+        }
+        .em3{
+            font-size: 16px;
+            padding-left:10px;
+        }
     }
     .publish-btn {
         .btn {
@@ -25,23 +35,7 @@
             font-size: 16px;
         }
     }
-    // .publish-btn:hover {
-    //     background: #26a69a;
-    // }
     .category {
-        // a{
-        //     display: block;
-        //     overflow: hidden;
-        //     height: 100%;
-        //     text-decoration: none;
-        //     i,em{
-        //         display: block;
-        //         height:1em;
-        //         line-height: 1em;
-        //         margin-top: 5px;
-        //         text-align: center;
-        //     }
-        // }
         li {
             position: relative;
         }
@@ -72,47 +66,15 @@
                 width: 150px;
                 left: -100px;
                 li a {
-                    color: #5d4037 !important;
+                    color: #000 !important;
                 }
             }
         }
         li.publish-btn:hover {
-            background-color: #795548 !important;
+            background-color: #fff !important;
         }
         li.publish-btn>button:hover {
-            background-color: lighten(#a1887f, 5%) !important;
-        }
-    }
-    .nav2 {
-        background-color: rgba(255, 255, 255, 0.9);
-        top: 64px;
-        .nav-wrapper {
-            ul {
-                overflow: hidden;
-                width: 850px;
-                margin: 0 auto;
-            }
-        }
-        a.digital {
-            color: #ef5350;
-        }
-        a.ride {
-            color: #fb8c00;
-        }
-        a.commodity {
-            color: #afb42b;
-        }
-        a.book {
-            color: #66bb6a;
-        }
-        a.makeup {
-            color: #039be5;
-        }
-        a.sport {
-            color: #9575cd;
-        }
-        a.smallthing {
-            color: #ab47bc;
+            background-color: lighten(#EF5350, 5%) !important;
         }
     }
 }
