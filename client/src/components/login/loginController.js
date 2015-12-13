@@ -9,7 +9,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         $scope.loginIsShow = true;
     })
     $scope.changeLoginShow = function($event) {
-        console.log($event);
         if ($event.target.id == "change-show" && window.location.pathname != '/login') {
             $scope.loginIsShow = !$scope.loginIsShow;
         }
@@ -20,9 +19,8 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             return;
         }
         BaseService.user.login($scope.user.username, $scope.user.password).then(function(result) {
-            console.log(result);
             if (result.data.success) {
-                window.location.pathname = '/';
+                window.location.reload(true);
             } else {
                 $rootScope.$broadcast('alert', '账号不存在，或者密码错误！');
             }

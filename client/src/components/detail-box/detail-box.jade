@@ -1,5 +1,8 @@
 div.detail-box.z-depth-1.row(ng-controller="detailBoxController")
-    div.col.s12
+    div.col.s12.path
+        a(href='/category/#{detailBox.categoryEn}') #{detailBox.category}
+        em >
+        a #{detailBox.name}
     div.col.s6
         div.slider
             ul.slides

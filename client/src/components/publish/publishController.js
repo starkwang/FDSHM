@@ -13,7 +13,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.publish = function() {
         var second = function() {
             BaseService.item.publish($scope.item).then(function(result) {
-                console.log(result);
                 if (result.data.success) {
                     $rootScope.$broadcast('alert', '商品发布成功！');
                     $scope.publishLoaderIsShow = false;
@@ -44,7 +43,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         for (var i = 0; i < total; i++) {
 
             var file = $(".upload-img")[i].files[0];
-            console.log(file);
             if (file == undefined) {
                 $rootScope.$broadcast('alert', '图片不能为空！');
                 return;

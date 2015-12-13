@@ -1,7 +1,7 @@
 var service = require('../service/service');
 var preCompile = require('./preCompile');
 var moment = require('moment');
-
+var nameFliter = require('./categoryNameFliter');
 function render(req, res) {
     var templateData = {}
     service.item.get(req.params.pubTimeStamp).then(function(result) {
@@ -20,6 +20,8 @@ function render(req, res) {
                 wechat: item.get('wechat'),
                 stuNo: item.get('stuNo'),
                 noBargain: item.get('noBargain'),
+                category: item.get('category'),
+                categoryEn: nameFliter.ch2en(item.get('category')),
                 //publisher_name: item.get('publisher_name'),
                 publisher_id: item.get('publisher_id'),
                 pubTime: moment(parseInt(item.get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
@@ -30,7 +32,6 @@ function render(req, res) {
             return false;
         }
     }).then(function(user) {
-        console.log(user);
         if (user) {
             templateData.detailBox.publisher_name = user == "none" ? "none" : user.get('name');
             var html = preCompile.detail(templateData);

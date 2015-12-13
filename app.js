@@ -24,7 +24,7 @@ app.set('view engine', 'jade');
 app.set('views', './client/src/template');
 
 app.use(compression());
-app.use(morgan('dev'))
+app.use(morgan('tiny'))
 
 //静态资源
 app.use('/static', express.static('client/build/'));

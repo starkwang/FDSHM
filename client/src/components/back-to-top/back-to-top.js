@@ -16,7 +16,6 @@ backtop.directive('backTop', [function() {
 
       scope.text = scope.text || 'Scroll top';
       scope.speed = parseInt(scope.speed, 10) || 1000;
-      console.log(scope.speed);
       scope.theme = scope.theme || 'light';
 
       var self = this;

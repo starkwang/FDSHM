@@ -1,5 +1,4 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
-    console.log(window.location.pathname);
     switch (window.location.pathname) {
         case '/':
             $scope.isIndex = true;
@@ -34,6 +33,5 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         //     ...
         // }
         $scope.amount = result.data;
-        console.log($scope);
     })
 }]

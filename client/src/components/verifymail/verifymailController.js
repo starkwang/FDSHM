@@ -4,7 +4,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         $scope.verifyMailIsShow = true;
     })
     $scope.changeVerifyMailShow = function($event) {
-        console.log($event);
         if ($event.target.id == "change-show") {
             $scope.verifyMailIsShow = !$scope.verifyMailIsShow;
         }

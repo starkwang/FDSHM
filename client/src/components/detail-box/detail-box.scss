@@ -3,6 +3,16 @@
     margin: 20px auto;
     background-color: #f9f9f9;
     position: relative;
+    .path{
+        padding-left:20px;
+        padding-top:10px;
+        font-size: 14px;
+        a{
+            color: #999;
+            cursor: pointer;
+            padding:0 5px;
+        }
+    }
     >.col.s6 {
         padding: 20px;
     }

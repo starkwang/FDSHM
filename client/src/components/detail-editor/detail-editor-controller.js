@@ -3,12 +3,10 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.item = {};
     var id;
     $scope.$on('showDetailEditor', function(target, data) {
-        //console.log(a,b,c);
         $scope.detailEditorIsShow = true;
         $scope.detailEditorLoaderIsShow = true;
         id = data;
         BaseService.item.get(id).then(function(result) {
-            console.log(result);
             if (result.data) {
                 $scope.detailEditorLoaderIsShow = false;
                 $scope.item = result.data;
@@ -28,9 +26,8 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             return;
         }
         BaseService.item.update(id, $scope.item).then(function(result){
-            console.log(result);
             if(result.data){
-                $rootScope.$broadcast('alert', '修改成功！');
+                $rootScope.$broadcast('alert', '修改成功！即将自动刷新页面。');
                 setTimeout(function(){
                     window.location.reload();
                 }, 2000);

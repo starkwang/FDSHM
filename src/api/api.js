@@ -40,7 +40,6 @@ var item = {
 
     // '/api/item/publish' POST
     publish: function(req, res) {
-        console.log(req.body);
         if (req.session.login && req.session.emailVerified && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
             req.body.publisher_id = req.session.userid;
             req.body.publisher_name = req.session.name

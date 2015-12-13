@@ -6,6 +6,7 @@ var AV = require('avoscloud-sdk');
 var setting = require('./setting');
 AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
+var fs = Promise.promisifyAll(require("fs"));
 var itemGetCache = {};
 var itemGetTodayNewItemAmountCache = false;
 setInterval(function() {
@@ -32,7 +33,6 @@ var item = {
         return itemQuery.find();
     },
     get: function(pubTimeStamp) {
-        console.log(pubTimeStamp);
         //使用缓存
         if (itemGetCache[pubTimeStamp]) {
             console.log('use cache:' + itemGetCache[pubTimeStamp]);
@@ -196,8 +196,11 @@ var user = {
                 user.set('email', mailAddress);
                 return user.save();
             })
-            .then(function(user) {
-                return mail.send(mailAddress, "【复旦二手工坊账号验证】", '<p>测试阶段暂时访问这个url：</p>' + '<p>http://10.108.81.230:3000/api/user/mail_verify/' + user.id + '</p>');
+            .then(function() {
+                return fs.readFileAsync("./src/service/mail.html", "utf8");
+            })
+            .then(function(contents) {
+                return mail.send(mailAddress, "【复旦二手工坊账号验证】", contents.replace(/{{user_id}}/ig,userid));
             }, function(err) {
                 return err;
             })

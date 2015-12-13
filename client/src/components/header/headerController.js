@@ -17,7 +17,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         $rootScope.$broadcast('showSignup');
     }
     $scope.changeMoreVertShow = function() {
-        console.log('message');
         $scope.moreVertIsShow = !$scope.moreVertIsShow;
     }
     $scope.showVerifyMail = function() {
@@ -25,7 +24,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
     $scope.logout = function() {
         BaseService.user.logout().then(function(result) {
-            window.location.pathname = '/';
+            window.location.reload(true);
         });
     }
 }]

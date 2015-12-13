@@ -58,7 +58,6 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
             if($scope.items.length === 0 ){
                 $scope.noItemIsShow = true;
             }
-            console.log($scope.items);
         });
         now++;
     }
@@ -83,7 +82,6 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
         $rootScope.$broadcast('showDetailEditor', this.item.pubTimeStamp)
     };
     $scope.itemSaled = function(){
-        console.log(this);
         if(confirm('此操作会让商品下架，请慎重操作')){
             BaseService.item.setStatus(this.item.pubTimeStamp,'saled').then(function(result){
                 if(result.data.success){
@@ -95,7 +93,6 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
         
     };
     $scope.itemUnderCarriage = function(){
-        console.log(this);
         if(confirm('此操作会让商品下架，请慎重操作')){
             BaseService.item.setStatus(this.item.pubTimeStamp,'undercarriage').then(function(result){
                 if(result.data.success){

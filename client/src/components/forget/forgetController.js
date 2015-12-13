@@ -37,7 +37,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     }
 
     $scope.changeForgetShow = function($event) {
-        console.log($event);
         if ($event.target.id == "change-show") {
             $scope.forgetIsShow = !$scope.forgetIsShow;
         }
