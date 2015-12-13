@@ -9,7 +9,7 @@ var mail = {
     send: function(target, title, content) {
         return new Promise(function(resolve, reject) {
             var smtpTransport = nodemailer.createTransport({
-                host: "mail.fudan.edu.cn",
+                host: "smtp.163.com",
                 auth: {
                     user: user,
                     pass: pass
@@ -23,6 +23,7 @@ var mail = {
                 html: content
             }, function(error, result) {
                 if (error) {
+                    console.log(error);
                     reject(error);
                 }
                 if (result) {

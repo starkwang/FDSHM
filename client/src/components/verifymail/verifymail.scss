@@ -40,5 +40,27 @@ div.verify-mail {
         .publish-btn:hover {
             background-color: lighten(#EF5350, 5%) !important;
         }
+        input{
+            width: 150px;
+        }
+        em{
+            font-size: 1rem;
+        }
+        .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            .preloader-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -32px;
+                margin-left: -32px;
+            }
+        }
     }
 }
