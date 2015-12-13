@@ -226,7 +226,7 @@ var user = {
                 return query.get(result.objectId);
             })
             .then(function(user) {
-                return AV.User.logIn(user.get('username'), user.get('pwd'));
+                return AV.User.logIn(user.get('username'), newPassword);
             })
             .then(function(user) {
                 user.set('pwd', newPassword);

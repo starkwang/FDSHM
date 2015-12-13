@@ -1,6 +1,6 @@
 node_modules/
 client/node_modules/
-img/
+/img/
 src/service/setting.js
 dump.rdb
 redis-3.0.5/
