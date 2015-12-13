@@ -191,16 +191,18 @@ var user = {
             });
     },
     requestMailVerify: function(mailAddress, userid) {
+        var objectId;
         return this.loginHack(userid)
             .then(function(user) {
+                objectId = user.id;
                 user.set('email', mailAddress);
                 return user.save();
             })
-            .then(function() {
+            .then(function(user) {
                 return fs.readFileAsync("./src/service/mail.html", "utf8");
             })
             .then(function(contents) {
-                return mail.send(mailAddress, "【复旦二手工坊账号验证】", contents.replace(/{{user_id}}/ig,userid));
+                return mail.send(mailAddress, "【复旦二手工坊账号验证】", contents.replace(/{{user_id}}/ig,objectId));
             }, function(err) {
                 return err;
             })
