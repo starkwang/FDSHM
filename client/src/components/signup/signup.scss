@@ -6,34 +6,44 @@ div.signup {
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
     z-index: 999;
+    overflow: auto;
     .publish-box {
         >.row {
-            padding-bottom: 70px;
+            padding-bottom: 60px;
         }
         width: 300px;
         position:absolute;
         left: 50%;
         margin-left: -150px;
-        top: 20%;
+        top: 10%;
         background:#fff;
         .title {
-            background: #26a69a;
-            color: #fff;
-            padding: 10px;
-            font-size: 24px;
-            text-align: center;
+            background:url('/static//img/title.png');
+            background-size:contain;
+            height: 100px;
         }
         div.s6 {
             height: 50px;
         }
-        .publish-btn {
+        .verify-btn {
             position: absolute;
-            bottom: 20px;
+            bottom: 50px;
             left: 50%;
             margin-left: -75px;
         }
+        .signup-btn{
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            margin-left: -60px;
+        }
         .publish-btn:hover {
             background-color: lighten(#EF5350, 5%) !important;
+        }
+        .login-area{
+            text-align: center;
+            position:relative;
+            top: 60px;
         }
     }
 }

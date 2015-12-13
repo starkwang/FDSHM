@@ -30,6 +30,11 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         });
     }
 
+    $scope.showLogin = function(){
+        $scope.signupIsShow = false;
+        $rootScope.$broadcast('showLogin');
+    }
+
     $scope.signup = function() {
         if (!$scope.signupInfo.tel) {
             $rootScope.$broadcast('alert', '请填入正确的手机号码！');

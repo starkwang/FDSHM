@@ -28,7 +28,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             if (result.data.success) {
                 $rootScope.$broadcast('alert', '密码重置成功！');
                 setTimeout(function(){
-                    window.location.pathname = '/login';
+                    window.location.reload();
                 },1500);
             } else {
                 $rootScope.$broadcast('alert', result.data.message);
