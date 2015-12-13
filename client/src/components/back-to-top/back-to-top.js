@@ -6,7 +6,7 @@ backtop.directive('backTop', [function() {
     restrict: 'E',
     transclude: true,
     replace: true,
-    template: '<div id="backtop" class="{{theme}}"><button class="brown lighten-1 z-depth-2 waves-effect waves-light"><i class="iconfont">&#xe612;️</i></button></div>',
+    template: '<div id="backtop" class="{{theme}}"><button class="base-blue lighten-1 z-depth-2 waves-effect waves-light"><i class="iconfont">&#xe612;️</i></button></div>',
     scope: {
       text: "@buttonText",
       speed: "@scrollSpeed",

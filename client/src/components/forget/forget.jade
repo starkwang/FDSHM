@@ -1,8 +1,8 @@
 div(ng-controller="forgetController")
-    div.signup#change-show(ng-show="forgetIsShow",ng-click="changeForgetShow($event)")
+    div.forget#change-show(ng-show="forgetIsShow",ng-click="changeForgetShow($event)")
             div.publish-box.z-depth-4
                 div.row
-                    div.col.s12.title.brown
+                    div.col.s12.title
                         h1 重置密码
                     div.input-field.col.s12
                         input.validate(type="text",ng-model="tel",required,pattern="^1[0-9]{10}$")
@@ -19,4 +19,4 @@ div(ng-controller="forgetController")
                         label 新密码
                     button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-show="captchaIsShow",ng-click="resetPassword()")
                         i.iconfont.left &#xe60b;
-                        em 确认
+                        em 重置密码

@@ -5,15 +5,32 @@
 @import '../../components/material.css';
 @import '../../components/detail-editor/detail-editor.scss';
 .index-title{
-    width: 1040px;
+    width: 960px;
     margin:0 auto;
     margin-top: 30px;
-    font-size: 40px;
-    color: #5d4037 !important;
-    border-bottom: 2px solid;
+    font-size: 20px;
+    color: #5d4037!important;
     padding: 10px;
     i{
         float: left;
-        font-size: 40px;
+        font-size: 20px;
+    }
+    a,>p{
+        color: #000!important;
+        padding:5px;
+        font-weight: 600;
+        display: block;
+    }
+    .hr1{
+        border:none;
+        border-top:5px solid #0bb9f8;
+        width: 110px;
+        display: inline-block;
+    }
+    .hr2{
+        display: inline-block;
+        width: 830px;
+        border:none;
+        border-top:2px solid #d9d9d9;
     }
 }

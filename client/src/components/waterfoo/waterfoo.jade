@@ -4,8 +4,7 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
         div.card.col(ng-repeat="item in items")
             a(ng-href="/item/{{item.pubTimeStamp||0}}")
                 div.card-image(style="background-image:url({{item.image[0]}})")
-                    //- img(ng-src="{{item.image[0]}}")
-                    span.card-title ￥{{item.price}}
+                div.card-content.item-price ￥{{item.price}}
                 div.card-content.item-name
                     p {{item.name}}
                 div.card-content.item-location

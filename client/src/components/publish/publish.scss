@@ -19,10 +19,16 @@ div.publish {
         top: 5%;
         background:#fff;
         .title {
-            background: #26a69a;
-            color: #fff;
-            padding: 10px;
             font-size: 24px;
+            text-align: center;
+            h1 {
+                border-top: 4px solid #0bb9f8;
+                display: block;
+                width: 200px;
+                padding: 10px 0;
+                margin: 0 auto;
+                font-weight: bold;
+            }
         }
         .loader {
             position: absolute;

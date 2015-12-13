@@ -11,7 +11,10 @@ html(ng-app="starkAPP")
         include ../components/back-to-top/back-to-top.jade
         include ../components/sidebar/sidebar.jade
         div.main-content(ng-controller="headerController")
-            div.index-title 最新发布
+            div.index-title 
+                p 最新发布
+                hr.hr1
+                hr.hr2
             div.waterfoo.row
                 div.item-wrapper.normal
                     - if(data.all.length >0)
@@ -32,21 +35,23 @@ html(ng-app="starkAPP")
             - for(category in fliter){
                 - if(category!='all'&&data[category].length >0)
                     div.index-title
-                        - if(category == 'digital')
-                            i.iconfont.icon-digital
-                        - if(category == 'ride')
-                            i.iconfont.icon-ride
-                        - if(category == 'commodity')
-                            i.iconfont.icon-commodity
-                        - if(category == 'book')
-                            i.iconfont.icon-book
-                        - if(category == 'makeup')
-                            i.iconfont.icon-makeup
-                        - if(category == 'sport')
-                            i.iconfont.icon-sport
-                        - if(category == 'smallthing')
-                            i.iconfont.icon-smallthing
+                        // - if(category == 'digital')
+                        //     i.iconfont.icon-digital
+                        // - if(category == 'ride')
+                        //     i.iconfont.icon-ride
+                        // - if(category == 'commodity')
+                        //     i.iconfont.icon-commodity
+                        // - if(category == 'book')
+                        //     i.iconfont.icon-book
+                        // - if(category == 'makeup')
+                        //     i.iconfont.icon-makeup
+                        // - if(category == 'sport')
+                        //     i.iconfont.icon-sport
+                        // - if(category == 'smallthing')
+                        //     i.iconfont.icon-smallthing
                         a(href="/category/#{category}") #{fliter[category]}
+                        hr.hr1
+                        hr.hr2
                     div.waterfoo.row
                         div.item-wrapper.normal
                             - for(var i =0;i<data[category].length;i++){

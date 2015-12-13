@@ -3,7 +3,7 @@ $depth-2:0 8px 17px 0 rgba(0, 0, 0, 0.2),
 $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 .waterfoo {
-    width: 1000px;
+    width: 900px;
     margin: 10px auto;
     .normal {
         a {
@@ -13,24 +13,32 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             overflow: hidden;
         }
         .card {
-            margin: 15px;
-            width: 220px;
+            margin: 10px;
+            width: 280px;
             padding: 0;
             transition: all 0.3s;
             background: #f9f9f9;
-            .card-content{
-                padding-bottom:10px;
+            .item-price {
+                color: #EF5350;
+                font-weight: 600px;
+                padding-bottom: 0;
             }
-            .item-name{
+            .item-name {
                 font-size: 18px;
             }
-            .item-location{
-                padding:0 20px;
-                padding-bottom:10px;
-                color:#999;
+            .item-location {
+                padding: 0 20px;
+                padding-bottom: 10px;
+                color: #999;
                 font-size: 14px;
-                p:first-child{
+                p:first-child {
                     float: right;
+                    color: #42a5f5;
+                    padding: 5px 10px;
+                    line-height: 10px;
+                    border-radius: 10px;
+                    border: 1px solid;
+                    text-align: center;
                 }
             }
         }
@@ -39,7 +47,7 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
             background: #fff;
         }
         .card-image {
-            height: 260px;
+            height: 280px;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -80,7 +88,6 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
         .card-image {
             height: 200px;
             padding: .75em .75em;
-            border-right: 1px solid #ddd;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -141,14 +148,14 @@ $depth-1:0 2px 5px 0 rgba(0, 0, 0, 0.16),
         margin-top: 20px;
         float: left;
     }
-    .no-item{
-    font-size: 30px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-    margin-bottom: 50px;
-    >button:hover{
-        background-color: lighten(#795548,5%) !important;
+    .no-item {
+        font-size: 30px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        margin-bottom: 50px;
+        >button:hover {
+            background-color: lighten(#795548, 5%) !important;
+        }
     }
-}
 }

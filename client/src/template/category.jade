@@ -10,6 +10,9 @@ html(ng-app="starkAPP")
         include ../components/header/header.jade
         include ../components/sidebar/sidebar.jade
         div.main-content
-            div.index-title #{category}
+            div.index-title 
+                p #{category}
+                hr.hr1
+                hr.hr2
             include ../components/waterfoo/waterfoo.jade
         include ../components/back-to-top/back-to-top.jade

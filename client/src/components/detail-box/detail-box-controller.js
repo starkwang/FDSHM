@@ -8,6 +8,9 @@ module.exports = ['$scope', '$rootScope', function($scope, $rootScope) {
         $rootScope.$broadcast('showDetailEditor', item_id);
     }
     $scope.showLogin = function(){
-        $rootScope.$broadcast('showLogin', item_id);
+        $rootScope.$broadcast('showLogin');
+    }
+    $scope.showSignup = function(){
+        $rootScope.$broadcast('showSignup');
     }
 }]

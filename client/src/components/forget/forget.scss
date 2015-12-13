@@ -18,24 +18,25 @@ div.forget {
         top: 20%;
         background:#fff;
         .title {
-            background: #26a69a;
-            color: #fff;
-            padding: 10px;
             font-size: 24px;
             text-align: center;
+            h1 {
+                border-top: 4px solid #0bb9f8;
+                display: block;
+                width: 200px;
+                padding: 10px 0;
+                margin: 0 auto;
+                font-weight: bold;
+            }
         }
         div.s6 {
             height: 50px;
         }
-        .login-btn {
+        .publish-btn {
             position: absolute;
             bottom: 20px;
-            left: 20px;
-        }
-        .signup-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
+            left: 50%;
+            margin-left: -72px;
         }
         .publish-btn:hover {
             background-color: lighten(#EF5350, 5%) !important;

@@ -11,7 +11,7 @@ div(ng-controller="publishController")
                                 div.circle
                             div.circle-clipper.right
                                 div.circle
-                div.col.s12.title.brown
+                div.col.s12.title
                     h1 发布商品
                 div.input-field.col.s12
                     input#item-name.validate(type="text",ng-model="item.name",required)
@@ -69,10 +69,9 @@ div(ng-controller="publishController")
                     input#item-contact-wechat.validate(type="text",ng-model="item.wechat")
                     label(for="item-contact-wechat") 微信号
                 div.file-field.input-field.col.s12(ng-repeat="img in imgs track by $index")
-                    div.btn
+                    div.btn.base-blue
                         span 商品图片
                         input.upload-img(type="file",accept="image/*")
-                            
                     div.file-path-wrapper
                         input.file-path.validate(type="text",placeholder="这里上传你的商品图片")
                 button.btn-floating.btn-small.waves-effect.waves-light.add(ng-click="addImg()")
