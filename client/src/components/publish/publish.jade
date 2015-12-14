@@ -69,7 +69,7 @@ div(ng-controller="publishController")
                     input#item-contact-wechat.validate(type="text",ng-model="item.wechat")
                     label(for="item-contact-wechat") 微信号
                 div.file-field.input-field.col.s12(ng-repeat="img in imgs track by $index")
-                    div.btn.base-blue
+                    div.btn.base-blue.waves-effect.waves-light
                         span 商品图片
                         input.upload-img(type="file",accept="image/*")
                     div.file-path-wrapper

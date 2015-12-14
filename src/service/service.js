@@ -3,6 +3,11 @@ var mail = require('./mail');
 var sms = require('./sms');
 var Promise = require('bluebird');
 var AV = require('avoscloud-sdk');
+var moment = require('moment');
+var redis = require('redis');
+Promise.promisifyAll(redis.RedisClient.prototype);
+Promise.promisifyAll(redis.Multi.prototype);
+var redisClient = redis.createClient(6379, '127.0.0.1');
 var setting = require('./setting');
 AV.initialize(setting.leancloud.appid, setting.leancloud.appkey);
 var Item = AV.Object.extend('Item');
@@ -12,6 +17,40 @@ var itemGetTodayNewItemAmountCache = false;
 setInterval(function() {
     itemGetTodayNewItemAmountCache = false;
 }, 60000);
+
+redisClient.setAsync('roban', 'this is an testing val').then(function(result) {
+    console.log(result);
+}).then(function() {
+    return redisClient.getAsync('roban');
+}).then(function(value) {
+    console.log(value);
+}).then(function() {
+    redisClient.expire('roban', 3);
+}).then(function() {
+    setTimeout(function() {
+        redisClient.getAsync('roban').then(function(value) {
+            console.log(value);
+        });
+    }, 1000)
+    setTimeout(function() {
+        redisClient.getAsync('roban').then(function(value) {
+            console.log(value);
+        });
+    }, 4000)
+})
+
+// redisClient.set('roban', 'this is an testing val', function(err, response) {
+//     if (err) {
+//         console.log('Failed to set key of roban, error:' + err);
+//         return false;
+//     }
+
+//     redisClient.get('roban',function(errGet,responseGet){
+//         console.log('Val:'+responseGet);
+//     });
+
+// });
+
 var item = {
     publish: function(params) {
         var item = new Item();
@@ -34,18 +73,55 @@ var item = {
     },
     get: function(pubTimeStamp) {
         //使用缓存
-        if (itemGetCache[pubTimeStamp]) {
-            console.log('use cache:' + itemGetCache[pubTimeStamp]);
-            return Promise.resolve(itemGetCache[pubTimeStamp]);
-        } else {
-            console.log('use api');
-            var itemQuery = new AV.Query(Item);
-            itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
-            itemQuery.find().then(function(result) {
-                itemGetCache[pubTimeStamp] = result;
-            });
-            return itemQuery.find();
-        }
+        return redisClient.getAsync(pubTimeStamp.toString()).then(function(value) {
+            if (value && value != 'updated') {
+                console.log('use cache:' + pubTimeStamp);
+                var item = JSON.parse(value);
+                return Promise.resolve(item);
+            } else {
+                console.log('use api:' + pubTimeStamp);
+                var itemQuery = new AV.Query(Item);
+                itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
+                return itemQuery.find().then(function(result) {
+                    var item = {
+                        id: result[0].id,
+                        status: result[0].get('status'),
+                        images: result[0].get('imgPaths'),
+                        name: result[0].get('name'),
+                        tel: result[0].get('tel'),
+                        location: result[0].get('location'),
+                        price: result[0].get('price'),
+                        detail: result[0].get('detail').split('\n'),
+                        qq: result[0].get('qq'),
+                        wechat: result[0].get('wechat'),
+                        stuNo: result[0].get('stuNo'),
+                        noBargain: result[0].get('noBargain'),
+                        category: result[0].get('category'),
+                        //categoryEn: nameFliter.ch2en(result[0].get('category')),
+                        publisher_name: result[0].get('publisher_name'),
+                        publisher_id: result[0].get('publisher_id'),
+                        pubTime: moment(parseInt(result[0].get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
+                    }
+                    redisClient.setAsync(pubTimeStamp.toString(), JSON.stringify(item));
+                    redisClient.expire(pubTimeStamp.toString(), 600);
+                    return item;
+                });
+
+            }
+        });
+        // if (itemGetCache[pubTimeStamp]) {
+        //     console.log('use cache:' + itemGetCache[pubTimeStamp]);
+        //     return Promise.resolve(itemGetCache[pubTimeStamp]);
+        // } else {
+        //     console.log('use api');
+        //     var itemQuery = new AV.Query(Item);
+        //     itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
+        //     itemQuery.find().then(function(result) {
+        //         itemGetCache[pubTimeStamp] = result;
+        //         redisClient.setAsync(pubTimeStamp.toString(), JSON.stringify(result))
+        //     });
+        //     return itemQuery.find();
+        // }
     },
     equalTo: function(params, config) {
         var itemQuery = new AV.Query(Item);
@@ -74,14 +150,14 @@ var item = {
 
         item.set('wechat', params.wechat);
         return item.save().then(function() {
-            itemGetCache[itemTimeStamp] = null;
+            redisClient.setAsync(itemTimeStamp.toString(), 'updated');
         });
     },
     setStatus: function(objectId, status, itemTimeStamp) {
         var item = AV.Object.createWithoutData('Item', objectId);
         item.set('status', status);
         return item.save().then(function() {
-            itemGetCache[itemTimeStamp] = null;
+            redisClient.setAsync(itemTimeStamp.toString(), 'updated');
         });
     },
     getTodayNewItemAmount: function() {
@@ -202,7 +278,7 @@ var user = {
                 return fs.readFileAsync("./src/service/mail.html", "utf8");
             })
             .then(function(contents) {
-                return mail.send(mailAddress, "【复旦二手工坊账号验证】", contents.replace(/{{user_id}}/ig,objectId));
+                return mail.send(mailAddress, "【复旦二手工坊账号验证】", contents.replace(/{{user_id}}/ig, objectId));
             }, function(err) {
                 return err;
             })

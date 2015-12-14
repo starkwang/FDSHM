@@ -62,22 +62,24 @@ var item = {
     get: function(req, res) {
         if (req.query.id) {
             service.item.get(req.query.id)
-                .then(function(result) {
-                    var item = result[0];
-                    res.send({
-                        images: item.get('imgPaths'),
-                        name: item.get('name'),
-                        category: item.get('category'),
-                        tel: item.get('tel'),
-                        location: item.get('location'),
-                        price: item.get('price'),
-                        detail: item.get('detail').split('\n'),
-                        qq: item.get('qq'),
-                        wechat: item.get('wechat'),
-                        stuNo: item.get('stuNo'),
-                        noBargain: item.get('noBargain'),
-                        pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
-                    })
+                .then(function(item) {
+                    console.log(item);
+                    //item.detail = item.detail.split('\n');
+                    // res.send({
+                    //     images: item.get('imgPaths'),
+                    //     name: item.get('name'),
+                    //     category: item.get('category'),
+                    //     tel: item.get('tel'),
+                    //     location: item.get('location'),
+                    //     price: item.get('price'),
+                    //     detail: item.get('detail').split('\n'),
+                    //     qq: item.get('qq'),
+                    //     wechat: item.get('wechat'),
+                    //     stuNo: item.get('stuNo'),
+                    //     noBargain: item.get('noBargain'),
+                    //     //pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
+                    // })
+                    res.send(item);
                 }, function(err) {
                     sendErr(res, err);;
                 });
@@ -101,8 +103,9 @@ var item = {
     update: function(req, res) {
         if (req.session.login && req.body.itemTimeStamp && req.body.params.name && req.body.params.detail && req.body.params.price && req.body.params.tel && req.body.params.category) {
             service.item.get(req.body.itemTimeStamp).then(function(result) {
-                var publisher_id = result[0].get('publisher_id');
-                var objectId = result[0].id;
+                var publisher_id = result['publisher_id'];
+                var objectId = result.id;
+                console.log(objectId);
                 if (req.session.userid == publisher_id) {
                     service.item.update(objectId, req.body.params, req.body.itemTimeStamp).then(function(result) {
                         console.log(result);
@@ -125,8 +128,8 @@ var item = {
         console.log(req.session);
         if (req.session.login && req.body.itemTimeStamp && req.body.status) {
             service.item.get(req.body.itemTimeStamp).then(function(result) {
-                var publisher_id = result[0].get('publisher_id');
-                var objectId = result[0].id;
+                var publisher_id = result['publisher_id'];
+                var objectId = result.id;
                 if (req.session.userid == publisher_id) {
                     console.log('认证成功，修改！');
                     service.item.setStatus(objectId, req.body.status, req.body.itemTimeStamp).then(function(result) {

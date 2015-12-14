@@ -31,7 +31,7 @@ div(ng-controller="detailEditorController")
                         option(value="张江校区") 张江校区
                 div.input.col.s6
                     label(for="item-price") 商品价格（必填）（元）
-                    input#item-price.validate(type="text",ng-model="item.price",pattern="[0-9]*",required)
+                    input#item-price.validate(type="text",ng-model="item.price",required)
                     
                 div.input-field.col.s6
                     select.browser-default(ng-model="item.category",required)
