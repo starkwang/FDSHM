@@ -17,20 +17,21 @@ html(ng-app="starkAPP")
                     ul.slides
                         - for(var i =0;i<data.bannerItem.length;i++){
                             li
-                                img(src="#{data.bannerItem[i].coverImage}")
-                                //img(src="http://fudan.market/img/file-1450093564140.jpg") 
-                                - if(i%3==0)
-                                    div.caption.center-align
-                                        h3 #{data.bannerItem[i].name}
-                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                - if(i%3==1)
-                                    div.caption.right-align
-                                        h3 #{data.bannerItem[i].name}
-                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                - if(i%3==2)
-                                    div.caption.left-align
-                                        h3 #{data.bannerItem[i].name}
-                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
+                                    img(src="#{data.bannerItem[i].coverImage}")
+                                    //img(src="http://fudan.market/img/file-1450093564140.jpg") 
+                                    - if(i%3==0)
+                                        div.caption.center-align
+                                            h3 #{data.bannerItem[i].name}
+                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                    - if(i%3==1)
+                                        div.caption.right-align
+                                            h3 #{data.bannerItem[i].name}
+                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                    - if(i%3==2)
+                                        div.caption.left-align
+                                            h3 #{data.bannerItem[i].name}
+                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
                         - }
             div.index-title 
                 p 最新发布
