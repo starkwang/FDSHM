@@ -28,13 +28,13 @@ div.waterfoo.row(ng-controller="waterfooController",infinite-scroll="getItem()",
                 i.iconfont.left &#xe613;
                 em 已下架
             div.col.s3.btn-col(ng-show="item.status != 'saled'&&item.status != 'undercarriage'")
-                button.waves-effect.waves-light.btn.teal.accent-4(ng-click="itemSaled()")
+                button.waves-effect.waves-light.btn.red.lighten-1(ng-click="itemSaled()")
                     i.iconfont.left &#xe60e;
-                    em 已售出
+                    em 确认售出
                 button.waves-effect.waves-light.btn.cyan.darken-1(ng-click="showDetailEditor()")
                     i.iconfont.left &#xe608;
-                    em 修改商品信息
-                button.waves-effect.waves-light.btn.red.lighten-1(ng-click="itemUnderCarriage()")
+                    em 编辑商品
+                button.waves-effect.waves-light.btn.grey(ng-click="itemUnderCarriage()")
                     i.iconfont.left &#xe613;
                     em 下架商品
     div.no-item(ng-show="noItemIsShow")

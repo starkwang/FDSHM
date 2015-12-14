@@ -2,15 +2,36 @@ html(ng-app="starkAPP")
     head
         title 复旦二手市场
         link(rel='stylesheet',href='/static/pages/index/index.css')
-        script(type='text/javascript',src='/static/pages/index/index.bundle.js')
         script(type='text/javascript',src='/static/base/jquery.js')
+        script(type='text/javascript',src='/static/pages/index/index.bundle.js')
         script(type='text/javascript',src='/static/base/materialize.min.js')
+        script $(document).ready(function(){$('.slider').slider({full_width: true});});
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
     body(ng-view)
         include ../components/header/header.jade
         include ../components/back-to-top/back-to-top.jade
         include ../components/sidebar/sidebar.jade
         div.main-content(ng-controller="headerController")
+            div.slider-wapper
+                div.slider
+                    ul.slides
+                        - for(var i =0;i<data.bannerItem.length;i++){
+                            li
+                                img(src="#{data.bannerItem[i].coverImage}")
+                                //img(src="http://fudan.market/img/file-1450093564140.jpg") 
+                                - if(i%3==0)
+                                    div.caption.center-align
+                                        h3 #{data.bannerItem[i].name}
+                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                - if(i%3==1)
+                                    div.caption.right-align
+                                        h3 #{data.bannerItem[i].name}
+                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                - if(i%3==2)
+                                    div.caption.left-align
+                                        h3 #{data.bannerItem[i].name}
+                                        h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                        - }
             div.index-title 
                 p 最新发布
                 hr.hr1

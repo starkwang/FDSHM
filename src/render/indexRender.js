@@ -217,11 +217,28 @@ function render(req, res) {
                 cache = tmp_cache;
             }
         });
+        service.item.getBannerItem().then(function(results) {
+            var items = [];
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                items.push({
+                    coverImage: object.get('imgPaths')[0],
+                    name: object.get('name'),
+                    price: object.get('price'),
+                    pubTimeStamp: object.get('pubTimeStamp'),
+                })
+            }
+            tmp_cache.bannerItem = items;
+            if (statusCheck(tmp_cache)) {
+                renderer(req, res, tmp_cache);
+                cache = tmp_cache;
+            }
+        })
     }
 }
 
 function statusCheck(cache) {
-    if (cache.all && cache.digital && cache.ride && cache.commodity && cache.book && cache.makeup && cache.sport && cache.smallthing) {
+    if (cache.bannerItem && cache.all && cache.digital && cache.ride && cache.commodity && cache.book && cache.makeup && cache.sport && cache.smallthing) {
         return true;
     } else {
         return false;

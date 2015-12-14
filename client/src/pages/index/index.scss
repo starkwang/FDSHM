@@ -48,4 +48,38 @@
 }
 .main-content{
     margin-left: 200px;
+    padding-top: 26px;
+    .slider-wapper{
+        width: 940px;
+        margin:0 auto;
+        padding:10px;
+        h3{
+            font-size: 24px;
+        }
+        h5{
+            font-size: 20px;
+        }
+        h3,h5{
+            text-align: center;
+        }
+        .caption{
+            width: 30% !important;
+            left: 35% !important;
+            overflow: hidden;
+            padding: 10px;
+            background-color:rgba(0,0,0,0.3);
+        }
+        .indicators{
+            z-index: 2;
+            bottom:55px;
+            .indicator-item{
+                width: 10px;
+                height: 10px;
+                background-color:#fff;
+            }
+            .indicator-item.active{
+                background-color: #0bb9f8;
+            }
+        }
+    }
 }

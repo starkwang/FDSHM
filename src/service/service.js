@@ -183,6 +183,11 @@ var item = {
                 return amount;
             });
         }
+    },
+    getBannerItem:function(){
+        var itemQuery = new AV.Query(Item);
+        itemQuery.equalTo('isInBanner',true);
+        return itemQuery.find();
     }
 };
 
