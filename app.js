@@ -36,7 +36,7 @@ app.use(session({
     store: new RedisStore({
         "host": "127.0.0.1",
         "port": "6379",
-        "ttl": 60 * 60 * 24 * 30, //Session的有效期为30天
+        "ttl": 60 * 60 * 24 * 14, //Session的有效期为30天
     }),
     secret: 'wangweijia'
 }));
@@ -113,4 +113,3 @@ app.get('*', function(req, res){
 });
 app.listen(3000);
 console.log(alphabet('FUDAN', 'planar'));
-console.log(moment(1448249498353).format('YYYY/MM/DD HH:mm:ss'));
