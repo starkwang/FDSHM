@@ -76,35 +76,40 @@ var item = {
         return redisClient.getAsync(pubTimeStamp.toString()).then(function(value) {
             if (value && value != 'updated') {
                 console.log('use cache:' + pubTimeStamp);
-                var item = JSON.parse(value);
+                var item = value == 'none' ? false : JSON.parse(value);
                 return Promise.resolve(item);
             } else {
                 console.log('use api:' + pubTimeStamp);
                 var itemQuery = new AV.Query(Item);
                 itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
                 return itemQuery.find().then(function(result) {
-                    var item = {
-                        id: result[0].id,
-                        status: result[0].get('status'),
-                        images: result[0].get('imgPaths'),
-                        name: result[0].get('name'),
-                        tel: result[0].get('tel'),
-                        location: result[0].get('location'),
-                        price: result[0].get('price'),
-                        detail: result[0].get('detail').split('\n'),
-                        qq: result[0].get('qq'),
-                        wechat: result[0].get('wechat'),
-                        stuNo: result[0].get('stuNo'),
-                        noBargain: result[0].get('noBargain'),
-                        category: result[0].get('category'),
-                        //categoryEn: nameFliter.ch2en(result[0].get('category')),
-                        publisher_name: result[0].get('publisher_name'),
-                        publisher_id: result[0].get('publisher_id'),
-                        pubTime: moment(parseInt(result[0].get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
+                    if (result.length>0) {
+                        var item = {
+                            id: result[0].id,
+                            status: result[0].get('status'),
+                            images: result[0].get('imgPaths'),
+                            name: result[0].get('name'),
+                            tel: result[0].get('tel'),
+                            location: result[0].get('location'),
+                            price: result[0].get('price'),
+                            detail: result[0].get('detail').split('\n'),
+                            qq: result[0].get('qq'),
+                            wechat: result[0].get('wechat'),
+                            stuNo: result[0].get('stuNo'),
+                            noBargain: result[0].get('noBargain'),
+                            category: result[0].get('category'),
+                            //categoryEn: nameFliter.ch2en(result[0].get('category')),
+                            publisher_name: result[0].get('publisher_name'),
+                            publisher_id: result[0].get('publisher_id'),
+                            pubTime: moment(parseInt(result[0].get('pubTimeStamp'))).format('YYYY/MM/DD HH:mm:ss')
+                        }
+                        redisClient.setAsync(pubTimeStamp.toString(), JSON.stringify(item));
+                        redisClient.expire(pubTimeStamp.toString(), 600);
+                        return item;
+                    } else {
+                        redisClient.setAsync(pubTimeStamp.toString(), 'none');
+                        return false;
                     }
-                    redisClient.setAsync(pubTimeStamp.toString(), JSON.stringify(item));
-                    redisClient.expire(pubTimeStamp.toString(), 600);
-                    return item;
                 });
 
             }
@@ -184,9 +189,9 @@ var item = {
             });
         }
     },
-    getBannerItem:function(){
+    getBannerItem: function() {
         var itemQuery = new AV.Query(Item);
-        itemQuery.equalTo('isInBanner',true);
+        itemQuery.equalTo('isInBanner', true);
         return itemQuery.find();
     }
 };
