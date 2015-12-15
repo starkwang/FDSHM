@@ -60,14 +60,22 @@
             font-size: 20px;
         }
         h3,h5{
-            text-align: center;
+            text-align: left;
+            color: #000 !important;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: initial;
+        }
+        h4{
+            text-align: right;
         }
         .caption{
             width: 30% !important;
-            left: 35% !important;
+            left: 5% !important;
             overflow: hidden;
             padding: 10px;
-            background-color:rgba(0,0,0,0.3);
+            background-color:#fff;
         }
         a{
             display: block;
