@@ -13,32 +13,32 @@ html(ng-app="starkAPP")
         include ../components/back-to-top/back-to-top.jade
         include ../components/sidebar/sidebar.jade
         div.main-content(ng-controller="headerController")
-            div.slider-wapper
-                div.slider
-                    ul.slides
-                        - for(var i =0;i<data.bannerItem.length;i++){
-                            li
-                                img(src="#{data.bannerItem[i].coverImage}")
-                                //img(src="http://fudan.market/img/file-1450093564140.jpg") 
-                                - if(i%3==0)
-                                    div.caption.center-align
-                                        a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
-                                            h3 #{data.bannerItem[i].name}
-                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                            h4 立即查看 >
-                                - if(i%3==1)
-                                    div.caption.right-align
-                                        a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
-                                            h3 #{data.bannerItem[i].name}
-                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                            h4 立即查看 >
-                                - if(i%3==2)
-                                    div.caption.left-align
-                                        a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
-                                            h3 #{data.bannerItem[i].name}
-                                            h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                            h4 立即查看 >
-                        - }
+            - if(data.bannerItem.length>0)
+                div.slider-wapper
+                    div.slider
+                        ul.slides
+                            - for(var i =0;i<data.bannerItem.length;i++){
+                                li
+                                    img(src="#{data.bannerItem[i].coverImage}") 
+                                    - if(i%3==0)
+                                        div.caption.center-align
+                                            a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
+                                                h3 #{data.bannerItem[i].name}
+                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                h4 立即查看 >
+                                    - if(i%3==1)
+                                        div.caption.right-align
+                                            a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
+                                                h3 #{data.bannerItem[i].name}
+                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                h4 立即查看 >
+                                    - if(i%3==2)
+                                        div.caption.left-align
+                                            a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
+                                                h3 #{data.bannerItem[i].name}
+                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                h4 立即查看 >
+                            - }
             div.index-title 
                 p 最新发布
                 hr.hr1
@@ -63,20 +63,6 @@ html(ng-app="starkAPP")
             - for(category in fliter){
                 - if(category!='all'&&data[category].length >0)
                     div.index-title
-                        // - if(category == 'digital')
-                        //     i.iconfont.icon-digital
-                        // - if(category == 'ride')
-                        //     i.iconfont.icon-ride
-                        // - if(category == 'commodity')
-                        //     i.iconfont.icon-commodity
-                        // - if(category == 'book')
-                        //     i.iconfont.icon-book
-                        // - if(category == 'makeup')
-                        //     i.iconfont.icon-makeup
-                        // - if(category == 'sport')
-                        //     i.iconfont.icon-sport
-                        // - if(category == 'smallthing')
-                        //     i.iconfont.icon-smallthing
                         a(href="/category/#{category}") #{fliter[category]}
                         hr.hr1
                         hr.hr2
