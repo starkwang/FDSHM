@@ -1,8 +1,8 @@
 div.sidebar(ng-controller="sidebarController")
     li(ng-class="{true: 'active'}[isIndex]")
         a.index(href="/")
-            i.iconfont &#xe616;
-            em 主页
+            img(src="/static/img/index.png")
+            em 最新发布
     li(ng-class="{true: 'active'}[isDigital]")
         a.digital(href="/category/digital")
             img(src="/static/img/digital.png")
