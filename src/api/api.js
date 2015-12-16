@@ -40,7 +40,7 @@ var item = {
 
     // '/api/item/publish' POST
     publish: function(req, res) {
-        if (req.session.login && req.session.emailVerified && req.body.name && req.body.detail && req.body.price && req.body.tel && req.body.category && req.body.imgPaths.length > 0) {
+        if (req.session.login && req.session.emailVerified && req.body.name && req.body.detail && req.body.price && (req.body.tel || req.body.wechat || req.body.qq) && req.body.category && req.body.imgPaths.length > 0) {
             req.body.publisher_id = req.session.userid;
             req.body.publisher_name = req.session.name
             service.item.publish(req.body)
