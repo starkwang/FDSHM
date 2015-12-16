@@ -7,7 +7,7 @@ html(ng-app="starkAPP")
         script(type='text/javascript',src='/static/base/jquery.js')
         script(type='text/javascript',src='/static/base/materialize.min.js')
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
-    body(ng-view).login-page
+    body(ng-view,ng-cloak).login-page
         h1 复旦二手市场
         include ../components/login/login.jade
         include ../components/signup/signup.jade

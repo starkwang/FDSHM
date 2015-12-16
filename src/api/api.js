@@ -101,7 +101,7 @@ var item = {
         }
     },
     update: function(req, res) {
-        if (req.session.login && req.body.itemTimeStamp && req.body.params.name && req.body.params.detail && req.body.params.price && req.body.params.tel && req.body.params.category) {
+        if (req.session.login && req.body.itemTimeStamp && req.body.params.name && req.body.params.detail && req.body.params.price && (req.body.tel || req.body.wechat || req.body.qq) && req.body.params.category) {
             service.item.get(req.body.itemTimeStamp).then(function(result) {
                 var publisher_id = result['publisher_id'];
                 var objectId = result.id;

@@ -7,7 +7,7 @@ html(ng-app="starkAPP")
         script(type='text/javascript',src='/static/base/jquery.js')
         script(type='text/javascript',src='/static/base/materialize.min.js')
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
-    body(ng-view)
+    body(ng-view,ng-cloak)
         include ../components/header/header.jade
         include ../components/sidebar/sidebar.jade
         div.main-content

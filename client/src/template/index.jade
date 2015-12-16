@@ -8,7 +8,7 @@ html(ng-app="starkAPP")
         script(type='text/javascript',src='/static/base/materialize.min.js')
         script $(document).ready(function(){$('.slider').slider({full_width: true});});
         link(rel="stylesheet",href="/static/base/materialize-icon.css")
-    body(ng-view)
+    body(ng-view,ng-cloak)
         include ../components/header/header.jade
         include ../components/back-to-top/back-to-top.jade
         include ../components/sidebar/sidebar.jade
