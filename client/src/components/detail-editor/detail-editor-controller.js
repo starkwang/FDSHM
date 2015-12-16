@@ -26,13 +26,13 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             return;
         }
         BaseService.item.update(id, $scope.item).then(function(result){
-            if(result.data){
+            if(result.data.success){
                 $rootScope.$broadcast('alert', '修改成功！即将自动刷新页面。');
                 setTimeout(function(){
                     window.location.reload();
                 }, 2000);
             }else{
-                $rootScope.$broadcast('alert', '修改失败');
+                $rootScope.$broadcast('alert', result.data.message);
             }
         });
     }
