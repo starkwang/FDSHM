@@ -83,7 +83,7 @@ var item = {
                 var itemQuery = new AV.Query(Item);
                 itemQuery.equalTo("pubTimeStamp", parseInt(pubTimeStamp));
                 return itemQuery.find().then(function(result) {
-                    if (result.length>0) {
+                    if (result.length > 0) {
                         var item = {
                             id: result[0].id,
                             status: result[0].get('status'),
@@ -138,13 +138,12 @@ var item = {
         return itemQuery.find();
     },
     update: function(objectId, params, itemTimeStamp) {
-
         var item = AV.Object.createWithoutData('Item', objectId);
         item.set('name', params.name);
         item.set('category', params.category);
         item.set('noBargain', params.noBargain);
-        item.set('tel', params.tel);
-        item.set('qq', params.qq);
+        item.set('tel', params.tel || '');
+        item.set('qq', params.qq|| '');
         item.set('location', params.location);
         item.set('price', params.price);
         if (params.detail.join) {
@@ -153,7 +152,7 @@ var item = {
             item.set('detail', params.detail);
         }
 
-        item.set('wechat', params.wechat);
+        item.set('wechat', params.wechat|| '');
         return item.save().then(function() {
             redisClient.setAsync(itemTimeStamp.toString(), 'updated');
         });
