@@ -47,6 +47,9 @@ function en2ch(en) {
         case 'smallthing':
             return '票券小物';
             break;
+        case 'all':
+            return '最新发布';
+            break;
     }
 }
 module.exports = {
