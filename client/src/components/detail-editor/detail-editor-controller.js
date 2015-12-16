@@ -21,7 +21,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     };
 
     $scope.update = function() {
-        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && $scope.item.tel)) {
+        if (!($scope.item.name && $scope.item.detail && $scope.item.category && $scope.item.price && ($scope.item.tel || $scope.item.wechat || $scope.item.qq))) {
             $rootScope.$broadcast('alert', '有必要信息缺失哦~');
             return;
         }
