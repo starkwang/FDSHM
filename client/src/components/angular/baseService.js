@@ -27,11 +27,13 @@ angular.module('baseService', [])
                 publish: function(params) {
                     return POST('/api/item/publish', params);
                 },
-                uploadImg: function(file, callback) {
+                uploadImg: function(file, callback, error) {
                     var fd = new FormData();
                     fd.append("file", file);
                     var xhr = new XMLHttpRequest();
                     xhr.addEventListener("load", callback, false);
+                    xhr.upload.addEventListener("error", error, false);
+                    xhr.upload.addEventListener("abort", error, false);
                     xhr.open("POST", "/api/upload");
                     xhr.send(fd);
                 },
@@ -50,7 +52,7 @@ angular.module('baseService', [])
                         status: status
                     });
                 },
-                getTodayNewItemAmount:function(){
+                getTodayNewItemAmount: function() {
                     return GET('/api/item/get_today_new_item_amount');
                 }
             }
@@ -111,6 +113,11 @@ angular.module('baseService', [])
                     return POST('/api/user/reset_password', {
                         captcha: captcha,
                         newPassword: newPassword
+                    })
+                },
+                setName: function(name) {
+                    return POST('/api/user/set_name', {
+                        name: name
                     })
                 }
             }

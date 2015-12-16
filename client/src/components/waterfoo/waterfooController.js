@@ -82,7 +82,7 @@ module.exports = ['$scope', 'BaseService', '$location', '$rootScope', function($
         $rootScope.$broadcast('showDetailEditor', this.item.pubTimeStamp)
     };
     $scope.itemSaled = function(){
-        if(confirm('此操作会让商品下架，请慎重操作')){
+        if(confirm('恭喜你成功收出一个宝贝！其他用户将看不到此商品，是否确认售出？')){
             BaseService.item.setStatus(this.item.pubTimeStamp,'saled').then(function(result){
                 if(result.data.success){
                     $rootScope.$broadcast('alert', '成功！');

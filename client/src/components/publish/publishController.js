@@ -38,7 +38,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             $scope.publishLoaderIsShow = false;
             return;
         }
-        var total = $(".upload-img").length;
+        var total = $scope.total = $(".upload-img").length;
         var complete = 0;
         for (var i = 0; i < total; i++) {
 
@@ -57,13 +57,19 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
                 var result = JSON.parse(evt.target.responseText);
                 if (result.success) {
                     $scope.item.imgPaths.push(result.path);
+
                     complete++;
+                    $scope.complete = complete;
                     if (complete == total) {
                         second();
                     }
                 } else {
                     $rootScope.$broadcast('alert', '图片上传失败!');
                 }
+            }, function(err) {
+                console.log(err);
+                $rootScope.$broadcast('alert', '图片上传失败!');
+                $scope.publishLoaderIsShow = false;
             });
         }
     }
@@ -75,6 +81,8 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.deleteImg = function() {
         $scope.imgs.length = $scope.imgs.length - 1;
     }
-
+    $scope.cancel = function(){
+        $scope.publishLoaderIsShow = false;
+    }
 
 }]

@@ -27,4 +27,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             window.location.reload(true);
         });
     }
+    $scope.showChangeName = function(){
+        $rootScope.$broadcast('showChangeName');
+    }
 }]

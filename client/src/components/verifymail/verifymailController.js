@@ -13,11 +13,11 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.requestVerifyMail = function(){
         if($scope.mailAddress){
             $scope.loaderIsShow = true;
-            BaseService.user.requestMailVerify($scope.mailAddress+"@fudan.edu.cn").then(function(result){
+            BaseService.user.requestMailVerify($scope.mailAddress).then(function(result){
                 if(result.data.success){
                     $rootScope.$broadcast('alert', '我们向你的邮箱发送了一封验证邮件，快去查收哦~');
                 }else{
-                    $rootScope.$broadcast('alert', '哎呀失败了 T^T');
+                    $rootScope.$broadcast('alert', '哎呀发送失败了 T^T');
                 }
                 $scope.loaderIsShow = false;
             });

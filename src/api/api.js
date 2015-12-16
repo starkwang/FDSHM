@@ -234,6 +234,20 @@ var user = {
             success: true
         })
     },
+    setName: function(req, res) {
+        if (req.body.name && req.session.login) {
+            service.user.setName(req.session.userid, req.body.name).then(function(result) {
+                req.session.name = req.body.name;
+                res.send({
+                    success: true
+                })
+            },function(err){
+                sendErr(res, err);
+            })
+        } else {
+            sendErr(res, 'params error');
+        }
+    },
     getItem: function(req, res) {
 
     },
@@ -293,8 +307,8 @@ var user = {
         });
     },
     requestMailVerify: function(req, res) {
-        if (/^[0-9]{11}@fudan.edu.cn$/.test(req.body.mailAddress) && req.session.login) {
-            service.user.requestMailVerify(req.body.mailAddress, req.session.userid).then(function(result) {
+        if (req.body.mailAddress && req.session.login) {
+            service.user.requestMailVerify(req.body.mailAddress + "@fudan.edu.cn", req.session.userid).then(function(result) {
                 res.send({
                     success: true
                 });
@@ -302,7 +316,7 @@ var user = {
                 sendErr(res, err);
             })
         } else {
-            sendErr(res, 'not login or mailaddress erro');
+            sendErr(res, 'not login or params error');
         }
     },
     mailVerify: function(req, res) {

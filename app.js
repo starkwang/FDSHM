@@ -69,6 +69,7 @@ app.post('/api/user/request_mail_verify', api.user.requestMailVerify);
 app.get('/api/user/mail_verify/:objectId', api.user.mailVerify);
 app.post('/api/user/request_password_reset',api.user.requestPasswordReset);
 app.post('/api/user/reset_password',api.user.resetPassword);
+app.post('/api/user/set_name',api.user.setName);
 
 
 var storage = multer.diskStorage({

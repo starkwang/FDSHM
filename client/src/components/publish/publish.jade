@@ -2,7 +2,9 @@ div(ng-controller="publishController")
     div.publish#change-show(ng-show="publishIsShow",ng-click="changePublishShow($event)")
         div.publish-box.z-depth-4
             div.row
+                
                 div.col.s12.loader(ng-show="publishLoaderIsShow")
+                    p.text 已上传{{complete}}张图片，共{{total}}张...
                     div.preloader-wrapper.big.active
                         div.spinner-layer.spinner-red-only
                             div.circle-clipper.left
@@ -11,6 +13,7 @@ div(ng-controller="publishController")
                                 div.circle
                             div.circle-clipper.right
                                 div.circle
+                    p.cancel(ng-click="cancel()") 取消 
                 div.col.s12.title
                     h1 发布商品
                 div.input-field.col.s12

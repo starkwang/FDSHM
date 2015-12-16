@@ -12,7 +12,7 @@ div(ng-controller="signupController")
                             em 验证手机
                     div.login-area.col.s12(ng-show="checkTelIsShow")
                         em 已有账号？去
-                        a(ng-click="showLogin()") 登陆
+                        a(ng-click="showLogin()") 登录
                     div.input-field.col.s12(ng-show="captchaIsShow")
                         input.validate(type="text",ng-model="signupInfo.captcha",required)
                         label 验证码
@@ -24,7 +24,7 @@ div(ng-controller="signupController")
                         label 确认密码
                     div.input-field.col.s12(ng-show="captchaIsShow")
                         input.validate(type="text",ng-model="signupInfo.name",required)
-                        label 姓名
+                        label 昵称
                     button.waves-effect.waves-light.btn.signup-btn.red.lighten-1(ng-show="signupBtnIsShow",ng-click="signup()")
                         i.iconfont.left &#xe60b;
                         em 注册

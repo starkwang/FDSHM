@@ -19,4 +19,5 @@ starkAPP.controller('detailEditorController', require('../detail-editor/detail-e
 starkAPP.controller('alertController', require('../alert/alertController.js'));
 starkAPP.controller('verifyMailController', require('../verifymail/verifymailController.js'));
 starkAPP.controller('forgetController', require('../forget/forgetController.js'));
+starkAPP.controller('changeNameController', require('../change-name/changeNameController.js'));
 module.exports = starkAPP;

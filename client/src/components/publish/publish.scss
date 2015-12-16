@@ -45,6 +45,25 @@ div.publish {
                 margin-top: -32px;
                 margin-left: -32px;
             }
+            .text {
+                color: #fff;
+                position: absolute;
+                left: 25%;
+                width: 50%;
+                top: 20%;
+                font-size: 20px;
+                text-align: center;
+            }
+            .cancel {
+                position: absolute;
+                width: 50%;
+                left: 25%;
+                text-align: center;
+                bottom: 30%;
+                font-size: 25px;
+                color: #fff;
+                cursor: pointer;
+            }
         }
         div.s6 {
             height: 50px;

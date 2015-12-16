@@ -1,0 +1,12 @@
+div(ng-controller="changeNameController")
+    div.change-name#change-show(ng-show="changeNameIsShow",ng-click="changeChangeNameShow($event)")
+            div.publish-box.z-depth-4
+                div.row
+                    div.col.s12.title
+                        h1 修改用户名
+                    div.input-field.col.s12
+                        input.validate(type="text",ng-model="name",required)
+                        label 新用户名
+                    button.waves-effect.waves-light.btn.publish-btn.red.lighten-1(ng-click="setName()")
+                        i.iconfont.left &#xe60b;
+                        em 确认
