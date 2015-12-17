@@ -38,7 +38,10 @@ app.use(session({
         "port": "6379",
         "ttl": 60 * 60 * 24 * 14, //Session的有效期为30天
     }),
-    secret: 'wangweijia'
+    secret: 'wangweijia',
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 14
+    }
 }));
 app.use(bodyParser());
 
@@ -58,7 +61,7 @@ app.post('/api/item/equal_to', api.item.equalTo);
 app.get('/api/item/get', api.item.get);
 app.post('/api/item/update', api.item.update);
 app.post('/api/item/set_status', api.item.setStatus);
-app.get('/api/item/get_today_new_item_amount',api.item.getTodayNewItemAmount);
+app.get('/api/item/get_today_new_item_amount', api.item.getTodayNewItemAmount);
 
 app.post('/api/user/signup', api.user.signup);
 app.post('/api/user/request_tel_verify', api.user.requestTelVerify);
@@ -67,9 +70,9 @@ app.post('/api/user/logout', api.user.logout);
 app.post('/api/user/my_item', api.user.myItem);
 app.post('/api/user/request_mail_verify', api.user.requestMailVerify);
 app.get('/api/user/mail_verify/:objectId', api.user.mailVerify);
-app.post('/api/user/request_password_reset',api.user.requestPasswordReset);
-app.post('/api/user/reset_password',api.user.resetPassword);
-app.post('/api/user/set_name',api.user.setName);
+app.post('/api/user/request_password_reset', api.user.requestPasswordReset);
+app.post('/api/user/reset_password', api.user.resetPassword);
+app.post('/api/user/set_name', api.user.setName);
 
 
 var storage = multer.diskStorage({
@@ -109,7 +112,7 @@ app.post('/api/upload', upload.single('file'), function(req, res, next) {
 //     console.log(err);
 // });
 
-app.get('*', function(req, res){
+app.get('*', function(req, res) {
     res.redirect('/');
 });
 app.listen(3000);
