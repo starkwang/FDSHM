@@ -191,6 +191,7 @@ var item = {
     getBannerItem: function() {
         var itemQuery = new AV.Query(Item);
         itemQuery.equalTo('isInBanner', true);
+        itemQuery.descending("pubTimeStamp");
         return itemQuery.find();
     }
 };

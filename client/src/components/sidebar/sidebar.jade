@@ -1,6 +1,6 @@
 div.sidebar(ng-controller="sidebarController")
-    li(ng-class="{true: 'active'}[isIndex]")
-        a.index(href="/")
+    li(ng-class="{true: 'active'}[isAll]")
+        a.index(href="/category/all")
             img(src="/static/img/index.png")
             em 最新发布
     li(ng-class="{true: 'active'}[isDigital]")

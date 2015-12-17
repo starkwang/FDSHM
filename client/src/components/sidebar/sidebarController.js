@@ -1,7 +1,7 @@
 module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
     switch (window.location.pathname) {
-        case '/':
-            $scope.isIndex = true;
+        case '/category/all':
+            $scope.isAll = true;
             break;
         case '/category/digital':
             $scope.isDigital = true;
