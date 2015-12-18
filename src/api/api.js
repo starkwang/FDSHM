@@ -49,7 +49,7 @@ var item = {
                     console.log(result);
                     res.send({
                         success: true,
-                        //id: result.id
+                        pubTimeStamp: result.get('pubTimeStamp')
                     })
                 }, function(err) {
                     sendErr(res, err);;

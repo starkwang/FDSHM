@@ -25,7 +25,6 @@ var item = {
         params.randomStamp = Math.floor(Math.random() * 10000000000000000);
         params.pubTimeStamp = new Date().getTime();
         params.isVerified = false;
-
         return item.save(params);
     },
     collection: function(params) {

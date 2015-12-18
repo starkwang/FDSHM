@@ -18,6 +18,9 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
                     $scope.publishLoaderIsShow = false;
                     $scope.publishIsShow = false;
                     $rootScope.$broadcast('item-publish');
+                    setTimeout(function() {
+                        window.location.pathname = '/item/' + result.data.pubTimeStamp;
+                    },1500);
                 }
             });
 
@@ -81,7 +84,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
     $scope.deleteImg = function() {
         $scope.imgs.length = $scope.imgs.length - 1;
     }
-    $scope.cancel = function(){
+    $scope.cancel = function() {
         $scope.publishLoaderIsShow = false;
     }
 
