@@ -21,20 +21,7 @@ function render(req, res) {
             start: 0,
             amount: 9
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.all = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -47,20 +34,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.digital = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -72,20 +46,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.ride = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -97,20 +58,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.commodity = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -122,20 +70,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.book = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -147,20 +82,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.makeup = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -172,20 +94,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.sport = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -197,20 +106,7 @@ function render(req, res) {
             start: 0,
             amount: 6
         }).then(function(results) {
-            var items = [];
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                items.push({
-                    image: object.get('imgPaths'),
-                    price: object.get('price'),
-                    name: object.get('name'),
-                    location: object.get('location'),
-                    publisher_id: object.get('publisher_id'),
-                    publisher_name: object.get('publisher_name'),
-                    pubTimeStamp: object.get('pubTimeStamp'),
-                    pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                })
-            }
+            var items = results;
             tmp_cache.smallthing = items;
             if (statusCheck(tmp_cache)) {
                 renderer(req, res, tmp_cache);
@@ -259,19 +155,6 @@ function renderer(req, res, data) {
             smallthing: '票券小物'
         }
     }));
-    // res.render('index', {
-    //     session: req.session ? req.session : {},
-    //     data: data,
-    //     fliter: {
-    //         digital: '闲置数码',
-    //         ride: '校园代步',
-    //         commodity: '电器日用',
-    //         book: '图书教材',
-    //         makeup: '美妆衣物',
-    //         sport: '运动棋牌',
-    //         smallthing: '票券小物'
-    //     }
-    // })
 }
 
 

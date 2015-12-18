@@ -17,22 +17,23 @@ var item = {
     collection: function(req, res) {
         service.item.collection(req.query)
             .then(function(results) {
-                var items = [];
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    items.push({
-                        image: object.get('imgPaths'),
-                        price: object.get('price'),
-                        name: object.get('name'),
-                        location: object.get('location'),
-                        publisher_id: object.get('publisher_id'),
-                        publisher_name: object.get('publisher_name'),
-                        pubTimeStamp: object.get('pubTimeStamp'),
-                        pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                    })
-                }
-                res.send(items);
-                res.end();
+                res.send(results)
+                // var items = [];
+                // for (var i = 0; i < results.length; i++) {
+                //     var object = results[i];
+                //     items.push({
+                //         image: object.get('imgPaths'),
+                //         price: object.get('price'),
+                //         name: object.get('name'),
+                //         location: object.get('location'),
+                //         publisher_id: object.get('publisher_id'),
+                //         publisher_name: object.get('publisher_name'),
+                //         pubTimeStamp: object.get('pubTimeStamp'),
+                //         pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
+                //     })
+                // }
+                // res.send(items);
+                // res.end();
             }, function(err) {
                 sendErr(res, err);
             });

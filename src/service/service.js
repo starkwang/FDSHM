@@ -15,7 +15,12 @@ var fs = Promise.promisifyAll(require("fs"));
 var itemGetCache = {};
 var itemGetTodayNewItemAmountCache = false;
 setInterval(function() {
+    console.log('flush!!!!!!');
     itemGetTodayNewItemAmountCache = false;
+    // categories = ['all','digital','ride','commodity','sport','makeup','smallthing','book'];
+    // categories.forEach(function(category){
+    //     redisClient.setAsync(category, 'flushed');
+    // })   
 }, 60000);
 
 redisClient.setAsync('roban', 'this is an testing val').then(function(result) {
@@ -57,19 +62,58 @@ var item = {
         params.randomStamp = Math.floor(Math.random() * 10000000000000000);
         params.pubTimeStamp = new Date().getTime();
         params.isVerified = false;
+
         return item.save(params);
     },
     collection: function(params) {
-        var itemQuery = new AV.Query(Item);
-        itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
-        if (params.category != 'all') {
-            itemQuery.equalTo('category', params.category);
-        }
-        itemQuery.skip(params.start);
-        itemQuery.limit(params.amount);
-        itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
-        itemQuery.descending("pubTimeStamp");
-        return itemQuery.find();
+        var category = params.category;
+        var amount = parseInt(params.amount);
+        var start = parseInt(params.start);
+        return redisClient.getAsync(category).then(function(value) {
+            if (value) {
+                var collection = JSON.parse(value);
+                return Promise.resolve(collection.slice(start, start + amount));
+            } else {
+                console.log('api!!!!!!!!!!!!!!!!!!');
+                var itemQuery = new AV.Query(Item);
+                itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
+                if (category != 'all') {
+                    itemQuery.equalTo('category', category);
+                }
+                itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
+                itemQuery.descending("pubTimeStamp");
+                return itemQuery.find().then(function(results) {
+                    var items = [];
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        items.push({
+                            image: object.get('imgPaths'),
+                            price: object.get('price'),
+                            name: object.get('name'),
+                            location: object.get('location'),
+                            publisher_id: object.get('publisher_id'),
+                            publisher_name: object.get('publisher_name'),
+                            pubTimeStamp: object.get('pubTimeStamp'),
+                            pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
+                        })
+                    }
+                    redisClient.setAsync(category, JSON.stringify(items));
+                    redisClient.expire(category, 600);
+                    console.log(items);
+                    return items.slice(start, start + amount);
+                })
+            }
+        })
+        // var itemQuery = new AV.Query(Item);
+        // itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
+        // if (category != 'all') {
+        //     itemQuery.equalTo('category', category);
+        // }
+        // itemQuery.skip(params.start);
+        // itemQuery.limit(params.amount);
+        // itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
+        // itemQuery.descending("pubTimeStamp");
+        // return itemQuery.find();
     },
     get: function(pubTimeStamp) {
         //使用缓存
@@ -108,6 +152,7 @@ var item = {
                         return item;
                     } else {
                         redisClient.setAsync(pubTimeStamp.toString(), 'none');
+                        redisClient.expire(pubTimeStamp.toString(), 600);
                         return false;
                     }
                 });
@@ -143,7 +188,7 @@ var item = {
         item.set('category', params.category);
         item.set('noBargain', params.noBargain);
         item.set('tel', params.tel || '');
-        item.set('qq', params.qq|| '');
+        item.set('qq', params.qq || '');
         item.set('location', params.location);
         item.set('price', params.price);
         if (params.detail.join) {
@@ -152,7 +197,7 @@ var item = {
             item.set('detail', params.detail);
         }
 
-        item.set('wechat', params.wechat|| '');
+        item.set('wechat', params.wechat || '');
         return item.save().then(function() {
             redisClient.setAsync(itemTimeStamp.toString(), 'updated');
         });
