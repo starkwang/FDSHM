@@ -17,44 +17,7 @@ var itemGetTodayNewItemAmountCache = false;
 setInterval(function() {
     console.log('flush!!!!!!');
     itemGetTodayNewItemAmountCache = false;
-    // categories = ['all','digital','ride','commodity','sport','makeup','smallthing','book'];
-    // categories.forEach(function(category){
-    //     redisClient.setAsync(category, 'flushed');
-    // })   
 }, 60000);
-
-redisClient.setAsync('roban', 'this is an testing val').then(function(result) {
-    console.log(result);
-}).then(function() {
-    return redisClient.getAsync('roban');
-}).then(function(value) {
-    console.log(value);
-}).then(function() {
-    redisClient.expire('roban', 3);
-}).then(function() {
-    setTimeout(function() {
-        redisClient.getAsync('roban').then(function(value) {
-            console.log(value);
-        });
-    }, 1000)
-    setTimeout(function() {
-        redisClient.getAsync('roban').then(function(value) {
-            console.log(value);
-        });
-    }, 4000)
-})
-
-// redisClient.set('roban', 'this is an testing val', function(err, response) {
-//     if (err) {
-//         console.log('Failed to set key of roban, error:' + err);
-//         return false;
-//     }
-
-//     redisClient.get('roban',function(errGet,responseGet){
-//         console.log('Val:'+responseGet);
-//     });
-
-// });
 
 var item = {
     publish: function(params) {
@@ -98,7 +61,7 @@ var item = {
                         })
                     }
                     redisClient.setAsync(category, JSON.stringify(items));
-                    redisClient.expire(category, 600);
+                    redisClient.expire(category, 60);
                     console.log(items);
                     return items.slice(start, start + amount);
                 })
