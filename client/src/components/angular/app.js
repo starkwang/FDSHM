@@ -1,3 +1,10 @@
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b6cb5003addb8959e7e25b8fea13667e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 var angular = require('angular');
 require('./angular-animate.min');
 require('./baseService');
