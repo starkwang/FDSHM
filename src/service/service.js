@@ -1,5 +1,6 @@
 var login = require('./login');
 var mail = require('./mail');
+var comment = require('./commentService')
 var sms = require('./sms');
 var Promise = require('bluebird');
 var AV = require('avoscloud-sdk');
@@ -32,50 +33,50 @@ var item = {
         var amount = parseInt(params.amount);
         var start = parseInt(params.start);
         return redisClient.getAsync(category).then(function(value) {
-            if (value) {
-                var collection = JSON.parse(value);
-                return Promise.resolve(collection.slice(start, start + amount));
-            } else {
-                console.log('api!!!!!!!!!!!!!!!!!!');
-                var itemQuery = new AV.Query(Item);
-                itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
-                if (category != 'all') {
-                    itemQuery.equalTo('category', category);
-                }
-                itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
-                itemQuery.descending("pubTimeStamp");
-                return itemQuery.find().then(function(results) {
-                    var items = [];
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        items.push({
-                            image: object.get('imgPaths'),
-                            price: object.get('price'),
-                            name: object.get('name'),
-                            location: object.get('location'),
-                            publisher_id: object.get('publisher_id'),
-                            publisher_name: object.get('publisher_name'),
-                            pubTimeStamp: object.get('pubTimeStamp'),
-                            pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                        })
+                if (value) {
+                    var collection = JSON.parse(value);
+                    return Promise.resolve(collection.slice(start, start + amount));
+                } else {
+                    console.log('api!!!!!!!!!!!!!!!!!!');
+                    var itemQuery = new AV.Query(Item);
+                    itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
+                    if (category != 'all') {
+                        itemQuery.equalTo('category', category);
                     }
-                    redisClient.setAsync(category, JSON.stringify(items));
-                    redisClient.expire(category, 60);
-                    console.log(items);
-                    return items.slice(start, start + amount);
-                })
-            }
-        })
-        // var itemQuery = new AV.Query(Item);
-        // itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
-        // if (category != 'all') {
-        //     itemQuery.equalTo('category', category);
-        // }
-        // itemQuery.skip(params.start);
-        // itemQuery.limit(params.amount);
-        // itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
-        // itemQuery.descending("pubTimeStamp");
-        // return itemQuery.find();
+                    itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
+                    itemQuery.descending("pubTimeStamp");
+                    return itemQuery.find().then(function(results) {
+                        var items = [];
+                        for (var i = 0; i < results.length; i++) {
+                            var object = results[i];
+                            items.push({
+                                image: object.get('imgPaths'),
+                                price: object.get('price'),
+                                name: object.get('name'),
+                                location: object.get('location'),
+                                publisher_id: object.get('publisher_id'),
+                                publisher_name: object.get('publisher_name'),
+                                pubTimeStamp: object.get('pubTimeStamp'),
+                                pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
+                            })
+                        }
+                        redisClient.setAsync(category, JSON.stringify(items));
+                        redisClient.expire(category, 60);
+                        console.log(items);
+                        return items.slice(start, start + amount);
+                    })
+                }
+            })
+            // var itemQuery = new AV.Query(Item);
+            // itemQuery.greaterThan("createdAt", new Date("2015-06-26 18:37:09"));
+            // if (category != 'all') {
+            //     itemQuery.equalTo('category', category);
+            // }
+            // itemQuery.skip(params.start);
+            // itemQuery.limit(params.amount);
+            // itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
+            // itemQuery.descending("pubTimeStamp");
+            // return itemQuery.find();
     },
     get: function(pubTimeStamp) {
         //使用缓存
@@ -340,5 +341,6 @@ module.exports = {
     login: login,
     mail: mail,
     user: user,
-    sms: sms
+    sms: sms,
+    comment: comment
 }

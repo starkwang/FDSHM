@@ -13,6 +13,8 @@
     "gm": "^1.21.1",
     "jade": "^1.11.0",
     "moment": "^2.10.6",
+    "mongoose": "^4.3.4",
+    "mongoskin": "^2.0.3",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
     "nodemailer": "^1.9.0",

@@ -4,3 +4,13 @@
 @import '../../components/base/animate.scss';
 @import '../../components/material.css';
 @import '../../components/detail-editor/detail-editor.scss';
+@import '../../components/comment/comment.scss';
+
+.row.detail-area{
+    width: 960px;
+    margin: 20px auto;
+    position: relative;
+    >.s6{
+        padding: 0 !important;
+    }
+}
