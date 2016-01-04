@@ -1,7 +1,20 @@
-div.comment.z-depth-1
+div.comment.z-depth-1(ng-controller="commentController")
     h1.title 评论
     hr.hr1
     hr.hr2
-    div.comment-collection fasdsafsadfs
-    p.section 联系我的时候，请说明是在复旦二手工坊看见的哦~
-        
+    div.comment-collection 
+        div.comment-item(ng-repeat="comment in comments")
+            div.comment-main-content
+                em.name {{comment.publisherName}}：
+                em(ng-show="comment.isReply") 回复 
+                em.name(ng-show="comment.isReply") @{{comment.targetName}}：
+                em {{comment.content}}
+            div.comment-function
+                em.time {{comment.time}}
+                a.reply 回复
+    div.comment-add.row
+        div.input-field.col.s12
+            i.material-icons.prefix question_answer
+            input.validate(id="commentbox",type="text")
+            label(for="commentbox") 这里写下评论~
+            a.waves-effect.wave-light.btn.comment-submit 确认
