@@ -121,10 +121,22 @@ angular.module('baseService', [])
                     })
                 }
             }
+            var comment = {
+                getItemComment: function(itemID) {
+                    var params = {
+                        itemID : itemID
+                    }
+                    return GET('/api/comment/get_item_comment',params);
+                },
+                add:function(params){
+                    return POST('/api/comment/add',params);
+                }
+            }
             return {
                 waterfoo: waterfoo,
                 item: item,
-                user: user
+                user: user,
+                comment: comment
             };
         }
     ])

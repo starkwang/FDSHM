@@ -1,4 +1,4 @@
-.comment {
+.comment.stark-components {
     width: 475px;
     background-color: #f9f9f9;
     position: relative;
@@ -25,6 +25,10 @@
         width: 330px;
         border: none;
         border-top: 2px solid #d9d9d9;
+    }
+    .loading{
+        padding:20px;
+        padding-left:200px;
     }
     .comment-item {
         padding: 10px;

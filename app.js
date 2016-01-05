@@ -55,6 +55,7 @@ app.get('/usermanage/', render.usermanage);
 
 
 //API
+//商品API
 app.get('/api/item/collection', api.item.collection);
 app.post('/api/item/publish', api.item.publish);
 app.post('/api/item/equal_to', api.item.equalTo);
@@ -63,6 +64,7 @@ app.post('/api/item/update', api.item.update);
 app.post('/api/item/set_status', api.item.setStatus);
 app.get('/api/item/get_today_new_item_amount', api.item.getTodayNewItemAmount);
 
+//用户API
 app.post('/api/user/signup', api.user.signup);
 app.post('/api/user/request_tel_verify', api.user.requestTelVerify);
 app.post('/api/user/login', api.user.login);
@@ -73,6 +75,10 @@ app.get('/api/user/mail_verify/:objectId', api.user.mailVerify);
 app.post('/api/user/request_password_reset', api.user.requestPasswordReset);
 app.post('/api/user/reset_password', api.user.resetPassword);
 app.post('/api/user/set_name', api.user.setName);
+
+//评论API
+app.post('/api/comment/add', api.comment.add);
+app.get('/api/comment/get_item_comment', api.comment.getItemComment);
 
 
 var storage = multer.diskStorage({

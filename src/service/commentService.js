@@ -19,9 +19,10 @@ var commentSchema = mongoose.Schema({
     targetID: String,
 
     content: String,
-    time: String,
 
-    haveBeenRead:Boolean
+    haveBeenRead: Boolean,
+
+    timeStamp: String
 });
 var Comment = mongoose.model('Comment', commentSchema);
 
@@ -57,12 +58,14 @@ function add(commentParams) {
 }
 
 function find(params) {
+    console.log(params);
     return new Promise(function(resolve, reject) {
         Comment.find(params, function(err, result) {
             if (err) {
                 reject(err);
             }
             if (result) {
+                console.log(result);
                 resolve(result);
             }
         });

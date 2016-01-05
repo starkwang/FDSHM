@@ -1,7 +1,14 @@
-div.comment.z-depth-1(ng-controller="commentController")
+div.comment.stark-components.z-depth-1(ng-controller="commentController")
     h1.title 评论
     hr.hr1
     hr.hr2
+    div.loading(ng-hide="loadingComplete")
+        div.preloader-wrapper.big.active
+            div.spinner-layer.spinner-blue-only
+                div.left.circle-clipper
+                    div.circle
+                div.right.circle-clipper
+                    div.circle
     div.comment-collection 
         div.comment-item(ng-repeat="comment in comments")
             div.comment-main-content
@@ -15,6 +22,6 @@ div.comment.z-depth-1(ng-controller="commentController")
     div.comment-add.row
         div.input-field.col.s12
             i.material-icons.prefix question_answer
-            input.validate(id="commentbox",type="text")
+            input.validate(id="commentbox",type="text",ng-model="newComment")
             label(for="commentbox") 这里写下评论~
-            a.waves-effect.wave-light.btn.comment-submit 确认
+            a.waves-effect.wave-light.btn.comment-submit(ng-click="addComment()") 确认

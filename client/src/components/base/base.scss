@@ -257,7 +257,7 @@ textarea {
     content: "\e606";
 }
 
-.ng-hide-add {
+.stark-components.ng-hide-add {
     -webkit-animation: 0.5s fadeOut;
     -moz-animation: 0.5s fadeOut;
     -o-animation: 0.5s fadeOut;
@@ -265,7 +265,7 @@ textarea {
     z-index: 10;
 }
 
-.ng-hide-remove {
+.stark-components.ng-hide-remove {
     -webkit-animation: 0.7s fadeIn;
     -moz-animation: 0.7s fadeIn;
     -o-animation: 0.7s fadeIn;
@@ -286,5 +286,13 @@ textarea {
     -moz-animation: 0.5s bounceOut;
     -o-animation: 0.5s bounceOut;
     animation: 0.5s bounceOut;
+    z-index: 99999;
+}
+
+.comment .ng-enter{
+    -webkit-animation: 0.8s flipInX;
+    -moz-animation: 0.8s flipInX;
+    -o-animation: 0.8s flipInX;
+    animation: 0.8s flipInX;
     z-index: 99999;
 }

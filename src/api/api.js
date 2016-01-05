@@ -7,33 +7,12 @@ function sendErr(res, message) {
         message: message
     });
 }
-// service.user.setInfo(1448263981073,'name','starkwang').then(function(result){
-//     console.log('success');
-// },function(err){
-//     console.log(err);
-// });
 var item = {
     // '/api/item/collection' GET
     collection: function(req, res) {
         service.item.collection(req.query)
             .then(function(results) {
                 res.send(results)
-                // var items = [];
-                // for (var i = 0; i < results.length; i++) {
-                //     var object = results[i];
-                //     items.push({
-                //         image: object.get('imgPaths'),
-                //         price: object.get('price'),
-                //         name: object.get('name'),
-                //         location: object.get('location'),
-                //         publisher_id: object.get('publisher_id'),
-                //         publisher_name: object.get('publisher_name'),
-                //         pubTimeStamp: object.get('pubTimeStamp'),
-                //         pubTime: moment(parseInt(object.get('pubTimeStamp'))).fromNow()
-                //     })
-                // }
-                // res.send(items);
-                // res.end();
             }, function(err) {
                 sendErr(res, err);
             });
@@ -65,21 +44,6 @@ var item = {
             service.item.get(req.query.id)
                 .then(function(item) {
                     console.log(item);
-                    //item.detail = item.detail.split('\n');
-                    // res.send({
-                    //     images: item.get('imgPaths'),
-                    //     name: item.get('name'),
-                    //     category: item.get('category'),
-                    //     tel: item.get('tel'),
-                    //     location: item.get('location'),
-                    //     price: item.get('price'),
-                    //     detail: item.get('detail').split('\n'),
-                    //     qq: item.get('qq'),
-                    //     wechat: item.get('wechat'),
-                    //     stuNo: item.get('stuNo'),
-                    //     noBargain: item.get('noBargain'),
-                    //     //pubTime: item.createdAt.toLocaleDateString() + '  ' + item.createdAt.toLocaleTimeString()
-                    // })
                     res.send(item);
                 }, function(err) {
                     sendErr(res, err);;
@@ -242,7 +206,7 @@ var user = {
                 res.send({
                     success: true
                 })
-            },function(err){
+            }, function(err) {
                 sendErr(res, err);
             })
         } else {
@@ -359,7 +323,103 @@ var user = {
     }
 };
 
+var comment = {
+    add: function(req, res) {
+        if (req.body.underWhichItem && req.body.content && req.session.login) {
+
+            service.item.get(req.body.underWhichItem).then(function(result) {
+                if (result) {
+                    var commentModel = {
+                        underWhichItem: req.body.underWhichItem,
+                        ownerID: result.publisher_id,
+
+                        publisherName: req.session.name,
+                        publisherID: req.session.userid,
+
+                        isReply: req.body.isReply || false,
+                        targetName: req.body.targetName || '',
+                        targetID: req.body.targetID || '',
+
+                        content: req.body.content,
+
+                        haveBeenRead: false,
+
+                        timeStamp: new Date().getTime()
+                    }
+                    service.comment.add(commentModel).then(function(result) {
+                        res.send({
+                            success: true,
+                            comment: commentModel
+                        });
+                    }, function(err) {
+                        sendErr(res, err);
+                    })
+                } else {
+                    sendErr(res, "no such item");
+                }
+            })
+
+        } else {
+            sendErr(res, "params error");
+        }
+    },
+    getItemComment: function(req, res) {
+        if (req.query.itemID) {
+            var params = {
+                underWhichItem: req.query.itemID
+            }
+            service.comment.find(params).then(function(result) {
+                res.send({
+                    success: true,
+                    comments: result
+                });
+            }, function(err) {
+                sendErr(res, err);
+            })
+        } else {
+            sendErr(res, "params error");
+        }
+        // setTimeout(function() {
+        //     res.send({
+        //         success: true,
+        //         comments: [{
+        //             underWhichItem: '12312412124',
+        //             ownerID: '12345667',
+
+        //             publisherName: 'starkwang',
+        //             publisherID: '123123412413',
+
+        //             isReply: false,
+        //             targetName: '',
+        //             targetID: '',
+
+        //             content: '这是评论这是评论这是评论这是评论这是评论这是评论',
+        //             time: '2015-10-20 12:43:43',
+
+        //             haveBeenRead: false
+        //         }, {
+        //             underWhichItem: '12312412124',
+        //             ownerID: '12345667',
+
+        //             publisherName: 'starkwang',
+        //             publisherID: '123123412413',
+
+        //             isReply: true,
+        //             targetName: 'tony',
+        //             targetID: '',
+
+        //             content: '这是回复这是回复这是回复这是回复这是回复这是回复',
+        //             time: '2015-10-20 12:43:43',
+
+        //             haveBeenRead: false
+        //         }]
+        //     })
+        // })
+    }
+}
+
 module.exports = {
     item: item,
-    user: user
+    user: user,
+    comment: comment
 }
