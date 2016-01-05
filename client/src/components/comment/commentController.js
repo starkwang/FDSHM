@@ -48,6 +48,7 @@ module.exports = ['$scope', '$rootScope', 'BaseService', 'UserInfo', function($s
                     //result.data.comment.time = moment(parseInt(result.data.comment.timeStamp)).format('YYYY/MM/DD HH:mm:ss');
                     $scope.comments.push(result.data.comment);
                     flush();
+                    Materialize.toast('评论成功', 3000, 'rounded');
                     $scope.newComment = "";
                 }
             })
