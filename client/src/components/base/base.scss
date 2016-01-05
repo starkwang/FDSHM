@@ -296,3 +296,10 @@ textarea {
     animation: 0.8s flipInX;
     z-index: 99999;
 }
+.comment .ng-leave{
+    -webkit-animation: 0.8s flipOutX;
+    -moz-animation: 0.8s flipOutX;
+    -o-animation: 0.8s flipOutX;
+    animation: 0.8s flipOutX;
+    z-index: 99999;
+}

@@ -8,10 +8,12 @@ var _hmt = _hmt || [];
 var angular = require('angular');
 require('./angular-animate.min');
 require('./baseService');
+require('./userInfoService');
 require('../back-to-top/back-to-top.js');
 var starkAPP = angular.module('starkAPP', [
     'ngAnimate',
     'baseService',
+    'userInfo',
     'infinite-scroll',
     'angular.backtop'
 ]);

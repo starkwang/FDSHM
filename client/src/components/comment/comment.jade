@@ -18,7 +18,10 @@ div.comment.stark-components.z-depth-1(ng-controller="commentController")
                 em {{comment.content}}
             div.comment-function
                 em.time {{comment.time}}
-                a.reply 回复
+                a.reply-or-delete(ng-show="comment.isMyComment",ng-click="removeComment(this.comment.timeStamp)") 删除
+                a.reply-or-delete(ng-hide="comment.isMyComment",ng-click="replyComment()") 回复
+        div(ng-show="comments.indent")
+            a 显示全部评论
     div.comment-add.row
         div.input-field.col.s12
             i.material-icons.prefix question_answer

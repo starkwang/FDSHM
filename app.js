@@ -75,10 +75,12 @@ app.get('/api/user/mail_verify/:objectId', api.user.mailVerify);
 app.post('/api/user/request_password_reset', api.user.requestPasswordReset);
 app.post('/api/user/reset_password', api.user.resetPassword);
 app.post('/api/user/set_name', api.user.setName);
+app.get('/api/user/local_info', api.user.localInfo);
 
 //评论API
 app.post('/api/comment/add', api.comment.add);
 app.get('/api/comment/get_item_comment', api.comment.getItemComment);
+app.post('/api/comment/remove',api.comment.remove);
 
 
 var storage = multer.diskStorage({

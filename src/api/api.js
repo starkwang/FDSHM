@@ -320,6 +320,14 @@ var user = {
         } else {
             sendErr(res, 'params error');
         }
+    },
+    localInfo: function(req, res) {
+        var info = {
+            login: req.session.login || false,
+            userName: req.session.name || false,
+            userID: req.session.userid || false
+        }
+        res.send(info);
     }
 };
 
@@ -379,42 +387,24 @@ var comment = {
         } else {
             sendErr(res, "params error");
         }
-        // setTimeout(function() {
-        //     res.send({
-        //         success: true,
-        //         comments: [{
-        //             underWhichItem: '12312412124',
-        //             ownerID: '12345667',
+    },
+    remove: function(req, res) {
+        if (req.body.commentTimeStamp && req.session.login) {
+            service.comment.remove(req.body.commentTimeStamp, req.session.userid).then(function(result) {
+                if (result.success) {
+                    res.send({
+                        success: true
+                    })
+                } else {
+                    sendErr(res, 'err');
+                }
 
-        //             publisherName: 'starkwang',
-        //             publisherID: '123123412413',
-
-        //             isReply: false,
-        //             targetName: '',
-        //             targetID: '',
-
-        //             content: '这是评论这是评论这是评论这是评论这是评论这是评论',
-        //             time: '2015-10-20 12:43:43',
-
-        //             haveBeenRead: false
-        //         }, {
-        //             underWhichItem: '12312412124',
-        //             ownerID: '12345667',
-
-        //             publisherName: 'starkwang',
-        //             publisherID: '123123412413',
-
-        //             isReply: true,
-        //             targetName: 'tony',
-        //             targetID: '',
-
-        //             content: '这是回复这是回复这是回复这是回复这是回复这是回复',
-        //             time: '2015-10-20 12:43:43',
-
-        //             haveBeenRead: false
-        //         }]
-        //     })
-        // })
+            }, function(err) {
+                sendErr(res, err);
+            })
+        } else {
+            sendErr(res, "params error");
+        }
     }
 }
 

@@ -72,6 +72,32 @@ function find(params) {
     });
 }
 
+function remove(commentTimeStamp, userid) {
+    var params = {
+        timeStamp: commentTimeStamp
+    }
+    return find(params).then(function(result) {
+        var item = result[0];
+        if (item.publisherID == userid) {
+            return new Promise(function(resolve, reject) {
+                Comment.remove(params, function(err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve({
+                            success: true
+                        })
+                    }
+                })
+            })
+        } else {
+            return Promise.resolve({
+                success: false
+            });
+        }
+    });
+}
+
 // add({
 //     underWhichItem: '123',
 //     ownerID: 'String',
@@ -97,5 +123,6 @@ function find(params) {
 
 module.exports = {
     add: add,
-    find: find
+    find: find,
+    remove: remove
 }

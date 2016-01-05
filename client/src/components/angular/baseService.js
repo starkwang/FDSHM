@@ -124,19 +124,27 @@ angular.module('baseService', [])
             var comment = {
                 getItemComment: function(itemID) {
                     var params = {
-                        itemID : itemID
+                        itemID: itemID
                     }
-                    return GET('/api/comment/get_item_comment',params);
+                    return GET('/api/comment/get_item_comment', params);
                 },
-                add:function(params){
-                    return POST('/api/comment/add',params);
+                add: function(params) {
+                    return POST('/api/comment/add', params);
+                },
+                remove: function(commentTimeStamp) {
+                    var params = {
+                        commentTimeStamp: commentTimeStamp
+                    }
+                    return POST('/api/comment/remove', params);
                 }
             }
             return {
                 waterfoo: waterfoo,
                 item: item,
                 user: user,
-                comment: comment
+                comment: comment,
+                GET: GET,
+                POST: POST
             };
         }
     ])

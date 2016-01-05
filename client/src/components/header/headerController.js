@@ -1,4 +1,7 @@
-module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseService, $rootScope) {
+module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', function($scope, BaseService, $rootScope, UserInfo) {
+
+    UserInfo.init();
+
     if (window.location.pathname == '/usermanage/') {
         $scope.categoryIsHidden = true;
     }
@@ -27,7 +30,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             window.location.reload(true);
         });
     }
-    $scope.showChangeName = function(){
+    $scope.showChangeName = function() {
         $rootScope.$broadcast('showChangeName');
     }
 }]
