@@ -1,5 +1,5 @@
 .comment.stark-components {
-    width: 475px;
+    width: 960px;
     background-color: #f9f9f9;
     position: relative;
     padding: 0 !important;
@@ -22,16 +22,16 @@
     }
     .hr2 {
         display: inline-block;
-        width: 330px;
+        width: 830px;
         border: none;
         border-top: 2px solid #d9d9d9;
     }
-    .loading{
-        padding:20px;
-        padding-left:200px;
+    .loading {
+        padding: 20px;
+        padding-left: 200px;
     }
     .comment-item {
-        padding: 10px;
+        padding: 20px;
         border-bottom: 1px solid #ddd;
         font-size: 16px;
         line-height: 25px;
@@ -45,11 +45,26 @@
         .reply-or-delete {
             float: right;
             padding-right: 5px;
+            display: none;
+            cursor: pointer;
+        }
+    }
+    .comment-item:hover {
+        .reply-or-delete {
+            display: inline;
+        }
+    }
+    .comment-reply {
+        padding:0 200px;
+        .reply-submit {
+            float: right;
         }
     }
     .comment-add {
         position: relative;
-        padding-bottom:10px; 
+        padding-left: 200px;
+        padding-right: 200px;
+        padding-bottom: 10px;
         .comment-submit {
             float: right;
         }

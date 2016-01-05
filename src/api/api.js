@@ -405,7 +405,44 @@ var comment = {
         } else {
             sendErr(res, "params error");
         }
-    }
+    },
+    // reply: function(req, res) {
+    //     if (req.body.content && req.body.isReply && req.body.targetID && req.body.targetID && req.body.underWhichItem && req.session.login) {
+    //         service.item.get(req.body.underWhichItem).then(function(result) {
+    //             if (result) {
+    //                 var commentModel = {
+    //                     underWhichItem: req.body.underWhichItem,
+    //                     ownerID: result.publisher_id,
+
+    //                     publisherName: req.session.name,
+    //                     publisherID: req.session.userid,
+
+    //                     isReply: req.body.isReply || false,
+    //                     targetName: req.body.targetName || '',
+    //                     targetID: req.body.targetID || '',
+
+    //                     content: req.body.content,
+
+    //                     haveBeenRead: false,
+
+    //                     timeStamp: new Date().getTime()
+    //                 }
+    //                 service.comment.add(commentModel).then(function(result) {
+    //                     res.send({
+    //                         success: true,
+    //                         comment: commentModel
+    //                     });
+    //                 }, function(err) {
+    //                     sendErr(res, err);
+    //                 })
+    //             } else {
+    //                 sendErr(res, "no such item");
+    //             }
+    //         })
+    //     }else{
+    //         sendErr(res,"params error");
+    //     }
+    // }
 }
 
 module.exports = {

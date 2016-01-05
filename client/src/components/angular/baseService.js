@@ -136,6 +136,9 @@ angular.module('baseService', [])
                         commentTimeStamp: commentTimeStamp
                     }
                     return POST('/api/comment/remove', params);
+                },
+                reply: function(params) {
+                    return POST('/api/comment/add', params);
                 }
             }
             return {

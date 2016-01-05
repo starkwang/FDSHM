@@ -80,7 +80,8 @@ app.get('/api/user/local_info', api.user.localInfo);
 //评论API
 app.post('/api/comment/add', api.comment.add);
 app.get('/api/comment/get_item_comment', api.comment.getItemComment);
-app.post('/api/comment/remove',api.comment.remove);
+app.post('/api/comment/remove', api.comment.remove);
+//app.post('/api/comment/reply', api.comment.reply)
 
 
 var storage = multer.diskStorage({

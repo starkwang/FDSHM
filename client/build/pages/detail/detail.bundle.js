@@ -29317,6 +29317,9 @@
 	                        commentTimeStamp: commentTimeStamp
 	                    }
 	                    return POST('/api/comment/remove', params);
+	                },
+	                reply: function(params) {
+	                    return POST('/api/comment/add', params);
 	                }
 	            }
 	            return {
@@ -30152,7 +30155,6 @@
 	            if (result.data.success) {
 	                $scope.comments = result.data.comments;
 	                flush();
-	                console.log($scope);
 	            }
 	        });
 	    }
@@ -30177,6 +30179,10 @@
 	    })
 
 	    $scope.addComment = function() {
+	        if(!UserInfo.data.login){
+	            $rootScope.$broadcast('showLogin');
+	            return;
+	        }
 	        if ($scope.newComment) {
 	            var commentModel = {
 	                underWhichItem: window.location.pathname.split('/')[2],
@@ -30187,16 +30193,40 @@
 	                    //result.data.comment.time = moment(parseInt(result.data.comment.timeStamp)).format('YYYY/MM/DD HH:mm:ss');
 	                    $scope.comments.push(result.data.comment);
 	                    flush();
-	                    console.log($scope.comments);
 	                }
 	            })
 	        }
 	    }
 
+	    $scope.addReply = function() {
+	        if(!UserInfo.data.login){
+	            $rootScope.$broadcast('showLogin');
+	            return;
+	        }
+	        var _this = this
+	        if (this.reply) {
+	            var replyModel = {
+	                underWhichItem: window.location.pathname.split('/')[2],
+	                content: this.reply,
+
+	                isReply: true,
+	                targetName: this.comment.publisherName,
+	                targetID: this.comment.publisherID,
+	            }
+	            BaseService.comment.reply(replyModel).then(function(result){
+	                if (result.data.success) {
+	                    //result.data.comment.time = moment(parseInt(result.data.comment.timeStamp)).format('YYYY/MM/DD HH:mm:ss');
+	                    $scope.comments.push(result.data.comment);
+	                    flush();
+	                    _this.replyInputIsShow = false;
+	                }
+	                Materialize.toast('回复成功', 3000, 'rounded');
+	            })
+	        }
+	    }
+
 	    $scope.removeComment = function(commentTimeStamp) {
-	        console.log(commentTimeStamp);
 	        BaseService.comment.remove(commentTimeStamp).then(function(result) {
-	            console.log(result);
 	            if (result.data.success) {
 	                for (var i = 0; i < $scope.comments.length; i++) {
 	                    if ($scope.comments[i].timeStamp == commentTimeStamp) {
@@ -30206,6 +30236,16 @@
 	            }
 	        })
 	    }
+
+	    $scope.replyComment = function() {
+	        if (this.replyInputIsShow == true) {
+	            this.replyInputIsShow = false;
+	            return;
+	        }
+	        this.replyInputIsShow = true;
+	    }
+
+
 	}]
 
 
