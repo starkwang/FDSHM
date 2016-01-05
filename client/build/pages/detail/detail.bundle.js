@@ -30179,7 +30179,7 @@
 	    })
 
 	    $scope.addComment = function() {
-	        if(!UserInfo.data.login){
+	        if (!UserInfo.data.login) {
 	            $rootScope.$broadcast('showLogin');
 	            return;
 	        }
@@ -30193,13 +30193,14 @@
 	                    //result.data.comment.time = moment(parseInt(result.data.comment.timeStamp)).format('YYYY/MM/DD HH:mm:ss');
 	                    $scope.comments.push(result.data.comment);
 	                    flush();
+	                    $scope.newComment = "";
 	                }
 	            })
 	        }
 	    }
 
 	    $scope.addReply = function() {
-	        if(!UserInfo.data.login){
+	        if (!UserInfo.data.login) {
 	            $rootScope.$broadcast('showLogin');
 	            return;
 	        }
@@ -30213,14 +30214,15 @@
 	                targetName: this.comment.publisherName,
 	                targetID: this.comment.publisherID,
 	            }
-	            BaseService.comment.reply(replyModel).then(function(result){
+	            BaseService.comment.reply(replyModel).then(function(result) {
 	                if (result.data.success) {
 	                    //result.data.comment.time = moment(parseInt(result.data.comment.timeStamp)).format('YYYY/MM/DD HH:mm:ss');
 	                    $scope.comments.push(result.data.comment);
 	                    flush();
 	                    _this.replyInputIsShow = false;
+	                    Materialize.toast('回复成功', 3000, 'rounded');
+	                    _this.reply = "";
 	                }
-	                Materialize.toast('回复成功', 3000, 'rounded');
 	            })
 	        }
 	    }
