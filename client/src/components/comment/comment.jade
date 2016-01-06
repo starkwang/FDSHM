@@ -22,7 +22,7 @@ div.comment.stark-components.z-depth-1(ng-controller="commentController")
                 a.reply-or-delete(ng-hide="comment.isMyComment",ng-click="replyComment()") 回复
             div.comment-reply.row(ng-show="replyInputIsShow")
                 div.input-field.col.s12
-                    i.material-icons.prefix question_answer
+                    i.iconfont.prefix &#xe61d;
                     input.validate(id="replybox",type="text",ng-model="reply")
                     label(for="replybox") 回复
                     a.waves-effect.wave-light.btn.reply-submit(ng-click="addReply()") 确认
