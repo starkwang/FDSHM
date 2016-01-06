@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval', '$document',
     function($scope, BaseService, $rootScope, UserInfo, $interval, $document) {
 
@@ -23,15 +24,21 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
 
         var originalTitle = document.title;
 
+        function clearNewNotification(){
+            if (window.location.pathname.split('/')[1] == 'item') {
+                return BaseService.notification.clearNewNotification(window.location.pathname.split('/')[2]);
+            }else{
+                return Promise.resolve();
+            }
+        }
+
         function notificationInit() {
             // $timeout(function() {
             //     $scope.notification.isShow = true;
             //     $scope.notification.amount++;
             //     $document[0].title = "(" + $scope.notification.amount + "条新消息)" + originalTitle;
             // }, 2000);
-            if (window.location.pathname.split('/')[1] == 'item') {
-                BaseService.notification.clearNewNotification(window.location.pathname.split('/')[2])
-            }
+            
 
             BaseService.notification.getNewNotification().then(function(result) {
                 if (result.data.success) {
@@ -62,7 +69,10 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
         }
 
         //$interval(function(){
-        notificationInit();
+        clearNewNotification().then(function(){
+            notificationInit();
+        })
+        
         //},2000);
 
         $scope.showNotificationBox = function() {
@@ -71,7 +81,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
                 return;
             }
             $scope.notification.boxIsShow = true;
-            //BaseService.notification.clearNewNotification();
         }
 
         $scope.showPublish = function() {
