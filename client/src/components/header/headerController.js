@@ -72,6 +72,10 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
         clearNewNotification().then(function(){
             notificationInit();
         })
+
+        $interval(function(){
+            notificationInit();
+        },15000);
         
         //},2000);
 
