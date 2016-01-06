@@ -36,7 +36,7 @@ app.use(session({
     store: new RedisStore({
         "host": "127.0.0.1",
         "port": "6379",
-        "ttl": 60 * 60 * 24 * 14, //Session的有效期为30天
+        "ttl": 60 * 60 * 24 * 14, //Session的有效期为14天
     }),
     secret: 'wangweijia',
     cookie: {
@@ -81,7 +81,6 @@ app.get('/api/user/local_info', api.user.localInfo);
 app.post('/api/comment/add', api.comment.add);
 app.get('/api/comment/get_item_comment', api.comment.getItemComment);
 app.post('/api/comment/remove', api.comment.remove);
-//app.post('/api/comment/reply', api.comment.reply)
 
 
 var storage = multer.diskStorage({
@@ -108,18 +107,6 @@ app.post('/api/upload', upload.single('file'), function(req, res, next) {
     });
 });
 
-// AV.Cloud.requestSmsCode({
-//     mobilePhoneNumber: '13316919664',
-//     name: 'FDSHM',
-//     op: '某种操作',
-//     ttl: 10
-// }).then(function(result) {
-//     //发送成功
-//     console.log(result);
-// }, function(err) {
-//     //发送失败
-//     console.log(err);
-// });
 
 app.get('*', function(req, res) {
     res.redirect('/');
