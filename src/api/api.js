@@ -333,13 +333,16 @@ var user = {
 
 var comment = {
     add: function(req, res) {
-        if (req.body.underWhichItem && req.body.content && req.session.login) {
+        if (req.body.itemID && req.body.content && req.session.login) {
 
-            service.item.get(req.body.underWhichItem).then(function(result) {
+            service.item.get(req.body.itemID).then(function(result) {
                 if (result) {
                     var commentModel = {
-                        underWhichItem: req.body.underWhichItem,
+                        itemID: req.body.itemID,
+                        itemName: result.name,
+
                         ownerID: result.publisher_id,
+                        ownerName: result.publisher_name,
 
                         publisherName: req.session.name,
                         publisherID: req.session.userid,
@@ -374,7 +377,7 @@ var comment = {
     getItemComment: function(req, res) {
         if (req.query.itemID) {
             var params = {
-                underWhichItem: req.query.itemID
+                itemID: req.query.itemID
             }
             service.comment.find(params).then(function(result) {
                 res.send({
@@ -408,8 +411,48 @@ var comment = {
     }
 }
 
+var notification = {
+    getNewNotification: function(req, res) {
+
+        if (req.session.login) {
+            var works = [];
+            service.comment.getNewNotification(req.session.userid)
+                .then(function(result) {
+                    var notifications = [];
+
+                    result.forEach(function(item) {
+                        if (item.publisherID != req.session.userid) {
+                            notifications.push({
+                                type: item.isReply ? "reply" : "comment",
+                                sponsor: item.publisherName,
+
+                                itemName: item.itemName,
+                                itemID: item.itemID
+                            })
+                        }
+                    })
+                    res.send({
+                        success: true,
+                        notifications: notifications
+                    })
+                })
+        } else {
+            res.send({});
+        }
+
+    },
+    clearNewNotification: function(req, res) {
+        if (req.session.login) {
+            service.comment.clearNewNotification(req.session.userid);
+            res.send({});
+        }
+    }
+
+}
+
 module.exports = {
     item: item,
     user: user,
-    comment: comment
+    comment: comment,
+    notification: notification
 }

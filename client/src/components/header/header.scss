@@ -20,14 +20,14 @@
     .logo {
         margin-left: 60px;
         font-size: 28px;
-        font-family: "Microsoft YaHei","微软雅黑" ! important;
+        font-family: "Microsoft YaHei", "微软雅黑" ! important;
         font-weight: bolder;
-        .em1{
+        .em1 {
             color: #0bb9f8;
         }
-        .em3{
+        .em3 {
             font-size: 16px;
-            padding-left:10px;
+            padding-left: 10px;
         }
     }
     .publish-btn {
@@ -69,6 +69,44 @@
                 left: -100px;
                 li a {
                     color: #000 !important;
+                }
+            }
+        }
+        .notification {
+            color: #000;
+            width: 60px;
+            cursor: pointer;
+            position: relative;
+            i {
+                text-align: center;
+            }
+            .notification-amount {
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                color: #fff;
+                font-size: 12px;
+                text-align: center;
+                line-height: 20px;
+                font-weight: bold;
+                position: absolute;
+                bottom: 8px;
+                right: 5px;
+            }
+            .notification-box {
+                position: absolute;
+                width: 300px;
+                right: -60px;
+                background: #fff;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                li {
+                    width: 100%;
+                    font-size: 14px;
+                    padding: 14px 20px;
+                    height: 50px;
+                    line-height: 20px;
+                    border-bottom: 1px solid #ddd;
                 }
             }
         }
