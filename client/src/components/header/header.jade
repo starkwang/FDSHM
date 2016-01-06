@@ -29,7 +29,7 @@ div.header.stark-components.navbar-fixed(ng-controller="headerController")
                         div.notification-box.z-depth-1(ng-show="notification.boxIsShow")
                             ul.new
                                 li(ng-repeat="item in notification.newNotification") 
-                                    a(ng-href="/item/{{item.itemID}}",target="_blank") {{item.content}}
+                                    a(ng-href="/item/{{item.itemID}}") {{item.content}}
                             //- url.old
                             //-     li 评论评论评论评论评论评论评论评论
                             //-     li 评论评论评论评论评论评论评论评论

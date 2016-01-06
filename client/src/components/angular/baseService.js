@@ -145,8 +145,10 @@ angular.module('baseService', [])
                 getNewNotification: function() {
                     return GET('/api/notification/get_new_notification');
                 },
-                clearNewNotification:function(){
-                    return GET('/api/notification/clear_new_notification');
+                clearNewNotification: function(itemID) {
+                    return GET('/api/notification/clear_new_notification', {
+                        itemID: itemID
+                    });
                 }
             }
             return {

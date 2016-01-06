@@ -442,8 +442,8 @@ var notification = {
 
     },
     clearNewNotification: function(req, res) {
-        if (req.session.login) {
-            service.comment.clearNewNotification(req.session.userid);
+        if (req.session.login && req.query.itemID) {
+            service.comment.clearNewNotification(req.session.userid, req.query.itemID);
             res.send({});
         }
     }

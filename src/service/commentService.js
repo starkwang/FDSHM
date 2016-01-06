@@ -102,23 +102,23 @@ function remove(commentTimeStamp, userid) {
 }
 
 
-function clearNewNotification(userID) {
+function clearNewNotification(userID, itemID) {
     Comment.update({
-        ownerID: userID
+        ownerID: userID,
+        itemID: itemID
     }, {
         haveBeenRead: true
     }, {
         multi: true
-    }, function(err, success) {
-    });
+    }, function(err, success) {});
     Comment.update({
-        targetID: userID
+        targetID: userID,
+        itemID: itemID
     }, {
         haveBeenRead: true
     }, {
         multi: true
-    }, function(err, success) {
-    });
+    }, function(err, success) {});
 }
 
 function getNewNotification(userID) {

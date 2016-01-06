@@ -29,6 +29,10 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
             //     $scope.notification.amount++;
             //     $document[0].title = "(" + $scope.notification.amount + "条新消息)" + originalTitle;
             // }, 2000);
+            if (window.location.pathname.split('/')[1] == 'item') {
+                BaseService.notification.clearNewNotification(window.location.pathname.split('/')[2])
+            }
+
             BaseService.notification.getNewNotification().then(function(result) {
                 if (result.data.success) {
                     $scope.notification.amount = result.data.notifications.length;
@@ -67,7 +71,7 @@ module.exports = ['$scope', 'BaseService', '$rootScope', 'UserInfo', '$interval'
                 return;
             }
             $scope.notification.boxIsShow = true;
-            BaseService.notification.clearNewNotification();
+            //BaseService.notification.clearNewNotification();
         }
 
         $scope.showPublish = function() {
