@@ -141,11 +141,20 @@ angular.module('baseService', [])
                     return POST('/api/comment/add', params);
                 }
             }
+            var notification = {
+                getNewNotification: function() {
+                    return GET('/api/notification/get_new_notification');
+                },
+                clearNewNotification:function(){
+                    return GET('/api/notification/clear_new_notification');
+                }
+            }
             return {
                 waterfoo: waterfoo,
                 item: item,
                 user: user,
                 comment: comment,
+                notification: notification,
                 GET: GET,
                 POST: POST
             };

@@ -82,6 +82,10 @@ app.post('/api/comment/add', api.comment.add);
 app.get('/api/comment/get_item_comment', api.comment.getItemComment);
 app.post('/api/comment/remove', api.comment.remove);
 
+//消息API
+app.get('/api/notification/get_new_notification',api.notification.getNewNotification);
+app.get('/api/notification/clear_new_notification',api.notification.clearNewNotification);
+
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {

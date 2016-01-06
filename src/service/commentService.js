@@ -8,8 +8,11 @@ db.once('open', function() {
     console.log('mongodb connection success!');
 });
 var commentSchema = mongoose.Schema({
-    underWhichItem: String,
+    itemID: String,
+    itemName: String,
+
     ownerID: String,
+    ownerName: String,
 
     publisherName: String,
     publisherID: String,
@@ -98,6 +101,41 @@ function remove(commentTimeStamp, userid) {
     });
 }
 
+
+function clearNewNotification(userID) {
+    Comment.update({
+        ownerID: userID
+    }, {
+        haveBeenRead: true
+    }, {
+        multi: true
+    }, function(err, success) {
+    });
+    Comment.update({
+        targetID: userID
+    }, {
+        haveBeenRead: true
+    }, {
+        multi: true
+    }, function(err, success) {
+    });
+}
+
+function getNewNotification(userID) {
+    var works = [];
+    works.push(find({
+        ownerID: userID,
+        haveBeenRead: false
+    }));
+    works.push(find({
+        targetID: userID,
+        haveBeenRead: false
+    }));
+    return Promise.all(works).then(function(result) {
+        return result[0].concat(result[1]);
+    })
+}
+
 // add({
 //     underWhichItem: '123',
 //     ownerID: 'String',
@@ -124,5 +162,7 @@ function remove(commentTimeStamp, userid) {
 module.exports = {
     add: add,
     find: find,
-    remove: remove
+    remove: remove,
+    clearNewNotification: clearNewNotification,
+    getNewNotification: getNewNotification
 }

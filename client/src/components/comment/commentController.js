@@ -40,7 +40,7 @@ module.exports = ['$scope', '$rootScope', 'BaseService', 'UserInfo', function($s
         }
         if ($scope.newComment) {
             var commentModel = {
-                underWhichItem: window.location.pathname.split('/')[2],
+                itemID: window.location.pathname.split('/')[2],
                 content: $scope.newComment,
             }
             BaseService.comment.add(commentModel).then(function(result) {
@@ -63,7 +63,7 @@ module.exports = ['$scope', '$rootScope', 'BaseService', 'UserInfo', function($s
         var _this = this
         if (this.reply) {
             var replyModel = {
-                underWhichItem: window.location.pathname.split('/')[2],
+                itemID: window.location.pathname.split('/')[2],
                 content: this.reply,
 
                 isReply: true,

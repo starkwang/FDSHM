@@ -23,6 +23,18 @@ div.header.stark-components.navbar-fixed(ng-controller="headerController")
                         a(href="/usermanage/") 我发布的商品
                     li
                         a #{session.name}
+                    li.notification
+                        i.iconfont(ng-click="showNotificationBox()") &#xe60a;
+                        div.notification-amount.red.lighten-1(ng-show="notification.tagIsShow") {{notification.amount}} 
+                        div.notification-box.z-depth-1(ng-show="notification.boxIsShow")
+                            ul.new
+                                li(ng-repeat="item in notification.newNotification") 
+                                    a(ng-href="/item/{{item.itemID}}"){{item.content}}
+                            //- url.old
+                            //-     li 评论评论评论评论评论评论评论评论
+                            //-     li 评论评论评论评论评论评论评论评论
+                            //-     li 评论评论评论评论评论评论评论评论
+                            //-     li 评论评论评论评论评论评论评论评论
                     li
                         a(ng-click="changeMoreVertShow()")
                             i.iconfont &#xe615;
