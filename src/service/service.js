@@ -143,6 +143,7 @@ var item = {
         }
         itemQuery.skip(config.start);
         itemQuery.limit(config.amount);
+        itemQuery.descending("pubTimeStamp");
         return itemQuery.find();
     },
     update: function(objectId, params, itemTimeStamp) {
