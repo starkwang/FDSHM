@@ -101,15 +101,7 @@ var storage = multer.diskStorage({
 var upload = multer({
     storage: storage
 });
-app.post('/api/upload', upload.single('file'), function(req, res, next) {
-    // req.files is array of `photos` files
-    // req.body will contain the text fields, if there were any
-    console.log(req.file);
-    res.send({
-        success: true,
-        path: '/' + req.file.path
-    });
-});
+app.post('/api/upload', upload.single('file'), api.upload);
 
 
 app.get('*', function(req, res) {

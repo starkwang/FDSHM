@@ -7,10 +7,10 @@ module.exports = ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.showDetailEditor = function() {
         $rootScope.$broadcast('showDetailEditor', item_id);
     }
-    $scope.showLogin = function(){
+    $scope.showLogin = function() {
         $rootScope.$broadcast('showLogin');
     }
-    $scope.showSignup = function(){
+    $scope.showSignup = function() {
         $rootScope.$broadcast('showSignup');
     }
 }]
