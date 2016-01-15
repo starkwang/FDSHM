@@ -51,7 +51,7 @@ html(ng-app="starkAPP")
                         - for(var i =0;i<data.all.length;i++){
                             div.card.col
                                 a(href="/item/#{data.all[i].pubTimeStamp||0}")
-                                    div.card-image(style="background-image:url(#{data.all[i].image[0]})")
+                                    div.card-image(style="background-image:url(#{data.all[i].thumbnail[0]})")
                                         //- img(ng-src="{{item.image[0]}}")
                                     div.card-content.item-price ￥#{data.all[i].price}
                                     div.card-content.item-name
@@ -73,7 +73,7 @@ html(ng-app="starkAPP")
                             - for(var i =0;i<data[category].length;i++){
                                 div.card.col
                                     a(href="/item/#{data[category][i].pubTimeStamp||0}")
-                                        div.card-image(style="background-image:url(#{data[category][i].image[0]})")
+                                        div.card-image(style="background-image:url(#{data[category][i].thumbnail[0]})")
                                             //- img(ng-src="{{item.image[0]}}")
                                         div.card-content.item-price ￥#{data[category][i].price}
                                         div.card-content.item-name

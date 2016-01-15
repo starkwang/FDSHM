@@ -1,18 +1,21 @@
 div.waterfoo.stark-components.row(ng-controller="waterfooController",infinite-scroll="getItem()",infinite-scroll-distance="1",infinite-scroll-disabled="isBusy")
 
+    //- 普通瀑布流 
     div.item-wrapper.normal(ng-hide="waterfooListIsShow")
         div.card.col(ng-repeat="item in items")
             a(ng-href="/item/{{item.pubTimeStamp||0}}")
-                div.card-image(style="background-image:url({{item.image[0]}})")
+                div.card-image(style="background-image:url({{item.thumbnail[0]}})")
                 div.card-content.item-price ￥{{item.price}}
                 div.card-content.item-name
                     p {{item.name}}
                 div.card-content.item-location
                     p {{item.location}}
                     p {{item.pubTime}}
+
+    //- 列表
     div.item-wrapper.list(ng-show="waterfooListIsShow")
         div.card.row(ng-repeat="item in items")
-            div.card-image.col.s3(style="background-image:url({{item.image[0]}})")
+            div.card-image.col.s3(style="background-image:url({{item.thumbnail[0]}})")
                 a(ng-href="/item/{{item.pubTimeStamp||0}}")
                 //- img(ng-src="{{item.image[0]}}")
             div.main-info.col.s6

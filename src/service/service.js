@@ -49,8 +49,15 @@ var item = {
                         var items = [];
                         for (var i = 0; i < results.length; i++) {
                             var object = results[i];
+                            var thumbnail = [];
+                            object.get('imgPaths').forEach(function(path){
+                                // 'img/file-123214341' => 'img/small/file-123214341'
+                                var thumbnailPath = path.replace(/img\/file/g,'img/small/file');
+                                thumbnail.push(thumbnailPath);
+                            })
                             items.push({
                                 image: object.get('imgPaths'),
+                                thumbnail:thumbnail,
                                 price: object.get('price'),
                                 name: object.get('name'),
                                 location: object.get('location'),
