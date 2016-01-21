@@ -115,6 +115,12 @@ var user = {
                 var items = [];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
+                    var thumbnail = [];
+                    object.get('imgPaths').forEach(function(path) {
+                        // 'img/file-123214341' => 'img/small/file-123214341'
+                        var thumbnailPath = path.replace(/img\/file/g, 'img/small/file');
+                        thumbnail.push(thumbnailPath);
+                    })
                     items.push({
                         image: object.get('imgPaths'),
                         price: object.get('price'),
@@ -123,10 +129,11 @@ var user = {
                         publisher_id: object.get('publisher_id'),
                         publisher_name: object.get('publisher_name'),
                         pubTimeStamp: object.get('pubTimeStamp'),
-                        status: object.get('status')
+                        status: object.get('status'),
+                        thumbnail: thumbnail
                     })
                 }
-                res.send(items.reverse());
+                res.send(items);
                 res.end();
             }, function(err) {
                 sendErr(res, err);
