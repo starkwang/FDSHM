@@ -12,6 +12,7 @@
     "express-session": "^1.11.3",
     "gm": "^1.21.1",
     "jade": "^1.11.0",
+    "layzr.js": "^2.0.0",
     "moment": "^2.10.6",
     "mongoose": "^4.3.4",
     "mongoskin": "^2.0.3",
