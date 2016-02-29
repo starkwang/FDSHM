@@ -10,12 +10,6 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         }
     }
 
-    $rootScope.$broadcast('notice', {
-                        text: '验证邮件发送成功~',
-                        linkText: '现在登录邮箱，立刻激活 >',
-                        link: 'http://mail.fudan.edu.cn/'
-                    });
-
     $scope.requestVerifyMail = function() {
         if ($scope.mailAddress) {
             $scope.loaderIsShow = true;
