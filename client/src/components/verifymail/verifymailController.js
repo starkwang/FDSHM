@@ -10,21 +10,31 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
         }
     }
 
-    $scope.requestVerifyMail = function(){
-        if($scope.mailAddress){
+    $rootScope.$broadcast('notice', {
+                        text: '验证邮件发送成功~',
+                        linkText: '现在登录邮箱，立刻激活 >',
+                        link: 'http://mail.fudan.edu.cn/'
+                    });
+
+    $scope.requestVerifyMail = function() {
+        if ($scope.mailAddress) {
             $scope.loaderIsShow = true;
-            BaseService.user.requestMailVerify($scope.mailAddress).then(function(result){
-                if(result.data.success){
-                    $rootScope.$broadcast('alert', '我们向你的邮箱发送了一封验证邮件，快去查收哦~');
-                }else{
+            BaseService.user.requestMailVerify($scope.mailAddress).then(function(result) {
+                if (result.data.success) {
+                    $rootScope.$broadcast('notice', {
+                        text: '验证邮件发送成功~',
+                        linkText: '现在登录邮箱，立刻激活 >',
+                        link: 'http://mail.fudan.edu.cn/'
+                    });
+                } else {
                     $rootScope.$broadcast('alert', '哎呀发送失败了 T^T');
                 }
                 $scope.loaderIsShow = false;
             });
-        }else{
+        } else {
             $rootScope.$broadcast('alert', '请输入正确的复旦邮箱 0v0');
         }
-        
+
     }
 
 }]

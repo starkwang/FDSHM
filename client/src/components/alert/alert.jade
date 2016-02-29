@@ -1,8 +1,19 @@
 div(ng-controller="alertController")
-    div.alert.stark-components(ng-show="alertIsShow",ng-click="shake()")
-        div.publish-box.z-depth-4(class="{{shake}}")
+    div.alert.stark-components(ng-show="alertIsShow")
+        div.publish-box.z-depth-4
             div.row
                 div.col.s12.title.red.lighten-1
                     h1 提示
                 div.content.col.s12 {{text}}
-                a.waves-effect.btn-flat.close(ng-click="close()") 关闭
+                div.col.s12
+                    a.waves-effect.btn-flat.close(ng-click="close()") 关闭
+    div.notice.stark-components(ng-show="noticeIsShow")
+        div.publish-box.z-depth-4
+            div.row
+                div.col.s12.logo
+                div.content.col.s12 {{text}}
+                div.link.col.s12
+                    a(target="_blank",ng-hide="showVerifyMail",href="{{link}}") {{linkText}}
+                    a(ng-click="showVerify()",ng-show="showVerifyMail") {{linkText}}
+                div.col.s12.close-wrapper
+                    a.waves-effect.btn-flat.close(ng-click="close()") 关闭

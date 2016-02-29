@@ -1,4 +1,5 @@
-div.alert.stark-components {
+div.alert.stark-components,
+div.notice.stark-components {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,8 +8,8 @@ div.alert.stark-components {
     background: rgba(0, 0, 0, 0);
     z-index: 9999;
     .publish-box {
-        >.row{
-            margin:0;
+        >.row {
+            margin: 0;
         }
         z-index: 9999;
         width: 250px;
@@ -17,9 +18,10 @@ div.alert.stark-components {
         margin-left: -125px;
         top: 30%;
         background:#fff;
-        .content{
-            padding:.75em;
+        .content {
+            padding: .75em;
             font-size: 18px;
+            text-align: center;
         }
         .title {
             color: #fff;
@@ -27,9 +29,26 @@ div.alert.stark-components {
             font-size: 24px;
             text-align: center;
         }
-        .close{
-            float: right;
+        .logo {
+            height: 80px;
+            background: url(/static//img/title.png);
+            background-size: cover;
+        }
+        .link {
+            text-align: center;
+            a {
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+        .close-wrapper{
+            margin-top: 10px;
+        }
+        .close {
             font-size: 16px;
+            display: block;
+            margin: 0 auto;
+            width: 92px;
         }
     }
 }
