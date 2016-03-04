@@ -15,7 +15,7 @@ html(ng-app="starkAPP")
         include ../components/header/header.jade
         include ../components/back-to-top/back-to-top.jade
         include ../components/sidebar/sidebar.jade
-        div.main-content()
+        div.main-content
             - if(data.bannerItem.length>0)
                 div.slider-wapper
                     div.slider
@@ -27,20 +27,20 @@ html(ng-app="starkAPP")
                                         div.caption.center-align
                                             a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
                                                 h3 #{data.bannerItem[i].name}
-                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                                h4 立即查看 >
+                                                // h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                // h4 立即查看 >
                                     - if(i%3==1)
                                         div.caption.right-align
                                             a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
                                                 h3 #{data.bannerItem[i].name}
-                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                                h4 立即查看 >
+                                                // h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                // h4 立即查看 >
                                     - if(i%3==2)
                                         div.caption.left-align
                                             a(href="/item/#{data.bannerItem[i].pubTimeStamp}")
                                                 h3 #{data.bannerItem[i].name}
-                                                h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
-                                                h4 立即查看 >
+                                                // h5.light.grey-text.text-lighten-3 ￥#{data.bannerItem[i].price}
+                                                // h4 立即查看 >
                             - }
             div.index-title 
                 a(href="/category/all") 最新发布

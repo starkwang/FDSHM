@@ -61,7 +61,6 @@
         }
         h3,h5{
             text-align: left;
-            color: #000 !important;
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -75,7 +74,10 @@
             left: 5% !important;
             overflow: hidden;
             padding: 10px;
-            background-color:#fff;
+            background-color:rgba(0,0,0,0.7);
+            h3{
+                color: #fff;
+            }
         }
         a{
             display: block;

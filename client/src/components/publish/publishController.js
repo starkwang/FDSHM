@@ -31,6 +31,11 @@ module.exports = ['$scope', 'BaseService', '$rootScope', function($scope, BaseSe
             $scope.publishLoaderIsShow = false;
             return;
         }
+        if(!($scope.item.location)){
+            $rootScope.$broadcast('alert', '似乎忘记填交易地点了哦？');
+            $scope.publishLoaderIsShow = false;
+            return;
+        }
         if (!/^0$|^[1-9][0-9]{0,5}$|^[1-9][0-9]{0,5}\.[0-9]{1,2}$|^0\.[0-9]{1,2}$/.test($scope.item.price)) {
             $rootScope.$broadcast('alert', '商品价格不正确');
             $scope.publishLoaderIsShow = false;
