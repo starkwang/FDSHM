@@ -45,6 +45,7 @@ var item = {
                     }
                     itemQuery.notContainedIn("status", ["saled", "undercarriage"]);
                     itemQuery.descending("pubTimeStamp");
+                    itemQuery.limit(1000);
                     return itemQuery.find().then(function(results) {
                         var items = [];
                         for (var i = 0; i < results.length; i++) {

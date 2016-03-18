@@ -15,7 +15,6 @@ var notification = {
             service.comment.getNewNotification(req.session.userid)
                 .then(function(result) {
                     var notifications = [];
-
                     result.forEach(function(item) {
                         if (item.publisherID != req.session.userid) {
                             notifications.push({
