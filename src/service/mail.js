@@ -1,6 +1,5 @@
 var Promise = require('bluebird');
 var nodemailer = require('nodemailer');
-var service = require('./service');
 var setting = require('./setting');
 var user = setting.mail.username,
     pass = setting.mail.password;
@@ -9,7 +8,7 @@ var mail = {
     send: function(target, title, content) {
         return new Promise(function(resolve, reject) {
             var smtpTransport = nodemailer.createTransport({
-                host: "smtp.163.com",
+                host: "mail.fudan.edu.cn",
                 auth: {
                     user: user,
                     pass: pass
@@ -33,4 +32,5 @@ var mail = {
         })
     },
 }
+
 module.exports = mail;
